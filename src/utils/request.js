@@ -3,24 +3,20 @@ import globalConfig from './global';
 
 import Uris from '../constants/Uris';
 
-const API_ENDPOINT = Uris.main_url
+const API_ENDPOINT = Uris.main_url;
 const request = axios.create();
 
-const jwtRequiredList = [
-  //put the urls you want to use the token for request  
-];
+const jwtNotRequiredList = [Uris.signin];
 
 request.interceptors.request.use(
   config => {
     config.baseURL = API_ENDPOINT + Uris.api_url;
     const url = config.url;
-    console.log(API_ENDPOINT + Uris.api_url + url)
-    const checkJwt = jwtRequiredList.findIndex(jwt => url.includes(jwt));
-    //console.log(globalConfig.getToken(), checkJwt)
+    const checkJwt = !jwtNotRequiredList.findIndex(jwt => url.includes(jwt));
     if (checkJwt >= 0 && globalConfig.getToken()) {
       config.headers = {
-        Authorization: `Bearer ${globalConfig.getToken()}`,
-      }
+        Authorization: `${globalConfig.getToken()}`,
+      };
     }
     return config;
   },
@@ -36,7 +32,7 @@ request.interceptors.response.use(
     return response;
   },
   function (error) {
-    console.log("errrrr", error)
+    console.log('errrrr', error);
     if (error.response) {
       // The request was made and the server responded with a status code
       // that falls out of the range of 2xx

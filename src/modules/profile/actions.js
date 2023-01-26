@@ -1,43 +1,42 @@
 import * as Actions from './constants';
 
-export function getDBProfile(cb = () => { }) {
+export function getDBProfile(cb = () => {}) {
   return {
     type: Actions.GET_DB_PROFILE,
-    payload: { cb }
-  }
+    payload: {cb},
+  };
 }
 
 export function getProfile() {
   return {
-    type: Actions.GET_PROFILE
-  }
+    type: Actions.GET_PROFILE,
+  };
 }
 
 export function setProfilePhoto(photo) {
   return {
     type: Actions.SET_PROFILE_PHOTO,
-    photo
-  }
+    photo,
+  };
 }
 
 export function setProfile(profile) {
   return {
     type: Actions.SET_PROFILE,
-    profile
-  }
+    profile,
+  };
 }
 
 export function setApnsToken(token) {
   return {
     type: Actions.SET_APNS_TOKEN,
-    token
-  }
+    token,
+  };
 }
 
 export function setRegistrationToken(token) {
   return {
     type: Actions.SET_RREGISTRATION_TOKEN,
-    token
-  }
+    token,
+  };
 }
-

@@ -1,80 +1,63 @@
-import React, { useEffect } from 'react'
-import { moderateScale, ScaledSheet, verticalScale, scale } from 'react-native-size-matters';
-import Colors from '../constants/Colors';
-import { Platform, View, Image } from 'react-native';
-import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-import Icon from "react-native-vector-icons/MaterialIcons";
-import {
-  HomeScreen,
-  InfoScreen,
-  DevicesScreen
-} from '../screens'
-import images from '../assets/images'
+import React from 'react';
+import {View} from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import {createDrawerNavigator} from '@react-navigation/drawer';
+import DevicesScreen from '../screens/Home/DevicesScreen';
+import HomeScreen from '../screens/Home/HomeScreen';
+import InfoScreen from '../screens/Home/InfoScreen';
+import ProfileScreen from '../screens/Profile/profile-screen';
 
-const Tab = createMaterialBottomTabNavigator();
+const Drawer = createDrawerNavigator();
 
-const TabStackNavigator = ({ navigation }) => {
+const TabStackNavigator = ({navigation}) => {
   return (
-    <Tab.Navigator
-      initialRouteName="Home"
-      activeColor={Colors.tabBackground}
-      barStyle={{ backgroundColor: Colors.main_colors.tabBackground }}
-      labeled={false}
-      screenOptions={{
-        headerMode: 'screen',
-      }}>
-      <Tab.Screen
+    <Drawer.Navigator initialRouteName="Home">
+      <Drawer.Screen
         name="Home"
         component={HomeScreen}
         options={{
-          tabBarIcon: ({ focused, color }) => (
-            <View style={styles.tabItemStyle}>
-              {focused ? <Icon name="home" size={40} color={Colors.main_colors.secondaryDarkColor} /> : <Icon name="home" size={35} color={Colors.main_colors.whiteButtonColor} />}
-            </View>),
-        }} />
-      <Tab.Screen
+          drawerIcon: ({focused}) => (
+            <View>
+              {focused ? (
+                <Icon name="home" size={40} />
+              ) : (
+                <Icon name="home" size={35} />
+              )}
+            </View>
+          ),
+        }}
+      />
+      <Drawer.Screen
+        name={'Profile'}
+        component={ProfileScreen}
+        options={{
+          drawerIcon: () => <Icon name="person" size={35} />,
+        }}
+      />
+      <Drawer.Screen
         name="Devices"
         component={DevicesScreen}
         options={{
-          tabBarIcon: ({ focused, color }) => (
-            <View style={styles.tabItemStyle}>
-              {focused ? <Icon name="watch" size={40} color={Colors.main_colors.secondaryDarkColor} /> : <Icon name="watch" size={35} color={Colors.main_colors.whiteButtonColor} />}
-            </View>),
-        }} />
-      <Tab.Screen
+          drawerIcon: () => <Icon name="watch" size={35} />,
+        }}
+      />
+      <Drawer.Screen
         name="Info"
         component={InfoScreen}
         options={{
-          tabBarIcon: ({ focused, color }) => (
-            <View style={styles.tabItemStyle}>
-              {focused ? <Icon name="info-outline" size={40} color={Colors.main_colors.secondaryDarkColor} /> : <Icon name="info-outline" size={35} color={Colors.main_colors.whiteButtonColor} />}
-            </View>),
+          drawerIcon: ({focused}) => (
+            <View>
+              {focused ? (
+                <Icon name="info-outline" size={40} />
+              ) : (
+                <Icon name="info-outline" size={35} />
+              )}
+            </View>
+          ),
         }}
-      />     
-    </Tab.Navigator>
+      />
+    </Drawer.Navigator>
   );
 };
 
-export default TabStackNavigator
-
-const styles = ScaledSheet.create({
-  tabItemStyle: {
-    height: "35@vs", 
-    width: "35@s", 
-    alignItems: 'center'
-  },
-  drawerButtonStyle: { flexDirection: "row", alignItems: "center", justifyContent: "space-around" },
-  headerStyle: {
-    backgroundColor: Colors.main_colors.tabBackground,
-    shadowOpacity: 0,
-    elevation: 0,
-    height: Platform.select({ android: verticalScale(50), ios: verticalScale(75) }),
-  },
-  headerTitleStyle: {
-    fontWeight: 'bold',
-    fontSize: moderateScale(14),
-    color: Colors.textOnPrimaryColor,
-  },
-  headerRightStyle: { flexDirection: "row", alignItems: "center", justifyContent: "space-around" },
-  icon: {}
-})
+export default TabStackNavigator;

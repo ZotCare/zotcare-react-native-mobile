@@ -1,87 +1,83 @@
-import { CommonActions, StackActions } from '@react-navigation/native';
-//import LogManager from '../shared/utils/logging/LogManager';
+import {StackActions} from '@react-navigation/native';
 
 let _navigator;
 let modal;
 let activeRouteName = '';
 
 function setModal(modal) {
-	modal = modal;
+  modal = modal;
 }
 function showModal(visible) {
-	//alert(LogManager.parseJsonObjectToJsonString(modal));
-	// modal.open();
+  //alert(LogManager.parseJsonObjectToJsonString(modal));
+  // modal.open();
 }
 
 function setTopLevelNavigator(navigatorRef) {
-	_navigator = navigatorRef;
-
+  _navigator = navigatorRef;
 }
 
 function navigate(routeName, params) {
-	try {
-		_navigator && _navigator.navigate(routeName, params);
-	} catch (err) {
-	}
+  console.log(_navigator);
+  _navigator && _navigator.navigate(routeName, params);
 }
 
 function goBack() {
-	_navigator && _navigator.goBack()
+  _navigator && _navigator.goBack();
 }
 
 function pop() {
-	_navigator && _navigator.dispatch(StackActions.pop());
+  _navigator && _navigator.dispatch(StackActions.pop());
 }
 
 function replace(routeName, params) {
-	_navigator && _navigator.dispatch(StackActions.replace(routeName, params));
+  _navigator && _navigator.dispatch(StackActions.replace(routeName, params));
 }
 
 function setParams(params, key) {
-	_navigator && _navigator.setParams({ params, key });
+  _navigator && _navigator.setParams({params, key});
 }
 
 function popToTop() {
-	_navigator && _navigator.dispatch(StackActions.popToTop());
+  _navigator && _navigator.dispatch(StackActions.popToTop());
 }
 
 function resetRoot() {
-	_navigator && _navigator.resetRoot()
+  _navigator && _navigator.resetRoot();
 }
 
 function reset(input) {
-	_navigator && _navigator.reset(input);
+  _navigator && _navigator.reset(input);
 }
 
 function getNavigator() {
-	return _navigator;
+  return _navigator;
 }
 // add other navigation functions that you need and export them
 
 // gets the current screen from navigation state
 function getActiveRouteName() {
-	activeRouteName = _navigator && _navigator.getCurrentRoute().name;
-	return activeRouteName;
+  activeRouteName = _navigator && _navigator.getCurrentRoute().name;
+  return activeRouteName;
 }
 
 // gets the current screen from navigation state
 function getActiveRouteParams() {
-	return _navigator && _navigator.getCurrentRoute().params;
+  return _navigator && _navigator.getCurrentRoute().params;
 }
 
 export default {
-	navigate,
-	setTopLevelNavigator,
-	goBack,
-	setParams,
-	getNavigator,
-	pop,
-	popToTop,
-	setModal,
-	showModal,
-	getActiveRouteName,
-	getActiveRouteParams,
-	resetRoot,
-	reset,
-	replace
+  navigate,
+  setTopLevelNavigator,
+  goBack,
+  setParams,
+  getNavigator,
+  pop,
+  popToTop,
+  setModal,
+  showModal,
+  getActiveRouteName,
+  getActiveRouteParams,
+  resetRoot,
+  reset,
+  replace,
 };

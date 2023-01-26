@@ -1,29 +1,10 @@
-import React, {useEffect, useState, useRef} from 'react';
-import {
-  View,
-  Dimensions,
-  BackHandler,
-  SafeAreaView,
-  ScrollView,
-  Text,
-  Image,
-  ImageBackground,
-  TouchableOpacity,
-  Platform,
-} from 'react-native';
-import {
-  moderateScale,
-  scale,
-  ScaledSheet,
-  verticalScale,
-} from 'react-native-size-matters';
+import React from 'react';
+import {SafeAreaView, Platform} from 'react-native';
+import {ScaledSheet} from 'react-native-size-matters';
 import {useDispatch, useSelector} from 'react-redux';
-import {getUUID, getVIPPass} from '../../modules/profile/selectors';
-import mainStyles from '../../views/Styles';
-import HomeHeader from '../../components/HomeHeader';
+import {getUUID} from '../../modules/profile/selectors';
 import Colors from '../../constants/Colors';
 import Layout from '../../constants/Layout';
-import * as profileActions from '../../modules/profile/actions';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {getToken} from '../../modules/auth/selectors';
 import {useFocusEffect} from '@react-navigation/native';
@@ -32,24 +13,18 @@ if (Platform.OS === 'ios') {
   Icon.loadFont();
 }
 
-const DevicesScreen = ({navigation}) => {  
+const DevicesScreen = ({navigation}) => {
   const dispatch = useDispatch();
   const uuid = useSelector(state => getUUID(state));
   const token = useSelector(getToken);
-  
+
   useFocusEffect(
     React.useCallback(() => {
       return () => {};
     }, []),
   );
 
-  return (
-    <SafeAreaView style={[mainStyles.container]}>      
-      <HomeHeader text={"Devices"}/>
-      <ScrollView style={[mainStyles.scrollViewContainer]}>
-      </ScrollView>
-    </SafeAreaView>
-  );
+  return <SafeAreaView />;
 };
 
 export default DevicesScreen;

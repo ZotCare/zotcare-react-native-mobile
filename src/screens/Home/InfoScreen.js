@@ -1,39 +1,24 @@
-import React, {useEffect, useState, useRef} from 'react';
-import {
-  View,
-  Dimensions,
-  BackHandler,
-  SafeAreaView,
-  ScrollView,
-  Text,
-  Platform,
-} from 'react-native';
-import {
-  ScaledSheet,
-} from 'react-native-size-matters';
+import React, {useState} from 'react';
+import {ScaledSheet} from 'react-native-size-matters';
 import {useDispatch, useSelector} from 'react-redux';
 import {getUUID} from '../../modules/profile/selectors';
-import mainStyles from '../../views/Styles';
-import HomeHeader from '../../components/HomeHeader';
 import Colors from '../../constants/Colors';
 import Layout from '../../constants/Layout';
-import * as profileActions from '../../modules/profile/actions';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 import {getToken} from '../../modules/auth/selectors';
 import {useFocusEffect} from '@react-navigation/native';
-import CustomModal from '../../components/CustomModal'
-import { signOut } from '../../modules/auth/actions';
+import CustomModal from '../../components/CustomModal';
+import {signOut} from '../../modules/auth/actions';
+import {SafeAreaView} from 'react-native-safe-area-context';
+import {ScrollView} from 'react-native';
+import CustomButton from '../../components/CustomButton';
+import {Text} from 'react-native-paper';
 
-if (Platform.OS === 'ios') {
-  Icon.loadFont();
-}
-
-const HomeScreen = ({navigation}) => {  
+const HomeScreen = ({navigation}) => {
   const dispatch = useDispatch();
   const uuid = useSelector(state => getUUID(state));
   const token = useSelector(getToken);
   const [visibleLogout, setVisibleLogout] = useState(false);
-  
+
   useFocusEffect(
     React.useCallback(() => {
       return () => {};
@@ -41,27 +26,33 @@ const HomeScreen = ({navigation}) => {
   );
 
   return (
-    <SafeAreaView style={[mainStyles.container]}>      
-      <HomeHeader text={"Info"}/>
-      <ScrollView style={[mainStyles.scrollViewContainer]}>
+    <SafeAreaView>
+      <ScrollView>
         <CustomButton
-          text={"Logout"}
-          buttonColor={Colors.main_colors.secondaryColor} 
-          onPress={()=> {
-            setVisibleLogout(true)            
+          text={'Logout'}
+          buttonColor={Colors.main_colors.secondaryColor}
+          onPress={() => {
+            setVisibleLogout(true);
           }}
         />
       </ScrollView>
-      <CustomModal 
-        visible={visibleLogout} 
+      <CustomModal
+        visible={visibleLogout}
         hasButtons
-        onBackdropPress={() => setVisibleLogout(false)} 
-        component={<Text style={{fontSize: 17, fontWeight: Platform.OS == "ios" ? '900' : "bold", color: Colors.main_colors.whiteText, textAlign: "center"}}>{"Are you sure you want to logout?"}</Text>} 
-        whiteText={"No"} 
-        pinkText={"Yes"}
-        onPinkButtonPress={()=>dispatch(signOut())}
-        onWhiteButtonPress={()=>setVisibleLogout(false)}
-        />
+        onBackdropPress={() => setVisibleLogout(false)}
+        component={
+          <Text
+            style={{
+              textAlign: 'center',
+            }}>
+            {'Are you sure you want to logout?'}
+          </Text>
+        }
+        whiteText={'No'}
+        pinkText={'Yes'}
+        onPinkButtonPress={() => dispatch(signOut())}
+        onWhiteButtonPress={() => setVisibleLogout(false)}
+      />
     </SafeAreaView>
   );
 };
