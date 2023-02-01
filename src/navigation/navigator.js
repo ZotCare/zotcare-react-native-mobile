@@ -10,6 +10,7 @@ import {getUUID} from '../modules/profile/selectors';
 import AuthStack from './auth-stack';
 import {NavigationService, TabStackNavigator} from './index';
 import InteractionScreen from '../screens/Interaction/interaction-screen';
+import { SplashScreen } from '../components/SplashScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -34,23 +35,23 @@ export default RootNavigator = props => {
     );
   }, []);
 
-  // if (isLoading === true) {
-  //     return <Splash />;
-  // }
+ 
   return (
     <NavigationContainer>
-      {!token ? (
-        <AuthStack />
-      ) : (
-        <Stack.Navigator>
-          <Stack.Screen
-            options={{headerShown: false}}
-            name="tab"
-            component={TabStackNavigator}
-          />
-          <Stack.Screen name="interaction" component={InteractionScreen} />
-        </Stack.Navigator>
-      )}
+      <SplashScreen isAppReady={isLoading}>
+        {!token ? (
+          <AuthStack />
+        ) : (
+          <Stack.Navigator>
+            <Stack.Screen
+              options={{headerShown: false}}
+              name="tab"
+              component={TabStackNavigator}
+            />
+            <Stack.Screen name="interaction" component={InteractionScreen} />
+          </Stack.Navigator>
+        )}
+      </SplashScreen>
     </NavigationContainer>
   );
 };

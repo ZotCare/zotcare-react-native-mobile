@@ -104,36 +104,36 @@ const App = () => {
   };
   return (
     <SafeAreaProvider>
-      <Provider store={store}>
-        <PaperProvider theme={theme}>
-          <NotifierWrapper>
-            <QueryClientProvider client={queryClient}>
-              <RootNavigator />
-              <CustomModal
-                visible={visible}
-                onBackdropPress={() => setVisible(false)}
-                component={
-                  <View style={{justifyContent: 'center'}}>
-                    <Text
-                      style={{
-                        textAlign: 'center',
-                      }}>
-                      {'OOPS!'}
-                    </Text>
-                    <Text
-                      style={{
-                        fontSize: 14,
-                        textAlign: 'center',
-                      }}>
-                      {text}
-                    </Text>
-                  </View>
-                }
-              />
-            </QueryClientProvider>
-          </NotifierWrapper>
-        </PaperProvider>
-      </Provider>
+        <Provider store={store}>
+          <PaperProvider theme={theme}>
+            <NotifierWrapper>
+              <QueryClientProvider client={queryClient}>
+                <RootNavigator />
+                <CustomModal
+                  visible={visible}
+                  onBackdropPress={() => setVisible(false)}
+                  component={
+                    <View style={{justifyContent: 'center'}}>
+                      <Text
+                        style={{
+                          textAlign: 'center',
+                        }}>
+                        {'OOPS!'}
+                      </Text>
+                      <Text
+                        style={{
+                          fontSize: 14,
+                          textAlign: 'center',
+                        }}>
+                        {text}
+                      </Text>
+                    </View>
+                  }
+                />
+              </QueryClientProvider>
+            </NotifierWrapper>
+          </PaperProvider>
+        </Provider>
     </SafeAreaProvider>
   );
 };

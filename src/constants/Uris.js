@@ -1,5 +1,5 @@
 export default {
-  main_url: 'http://127.0.0.1:5000/',
+  main_url: 'https://zotcare.healthscitech.org/api/',
   api_url: '',
   signin: '/auth/login',
   interactions: '/interactions',
