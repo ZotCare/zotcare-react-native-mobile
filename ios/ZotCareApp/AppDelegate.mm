@@ -46,7 +46,7 @@ static NSString *const kRNConcurrentRoot = @"concurrentRoot";
   NSDictionary *initProps = [self prepareInitialProps];
   UIView *rootView = RCTAppSetupDefaultRootView(bridge, @"ZotCareApp", initProps);
 
-  rootView.backgroundColor = [UIColor colorWithRed:0.87843 green:0.72549 blue:0.73333 alpha:1.0];
+  rootView.backgroundColor = [UIColor colorWithRed:0.984 green:0.9882 blue:0.996 alpha:1.0];
 
   self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
   UIViewController *rootViewController = [UIViewController new];
