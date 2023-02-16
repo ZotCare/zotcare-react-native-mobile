@@ -1,6 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {Animated, StyleSheet} from 'react-native';
 import {useTheme} from 'react-native-paper';
+import images from '../assets/images';
 
 export function SplashScreen({children, isAppReady}) {
   return (
@@ -71,7 +72,7 @@ export const Splash = ({isAppReady}) => {
         {opacity: containerOpacity},
       ]}>
       <Animated.Image
-        source={require('../assets/images/logo.png')}
+        source={images.logo}
         fadeDuration={0}
         onLoad={() => {
           setState(FADE_IN_IMAGE);

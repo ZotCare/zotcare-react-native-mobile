@@ -70,7 +70,7 @@ const ProfileScreen = ({navigation}) => {
                 />
               );
             })}
-          <Button onPress={handleSubmit}>Submit</Button>
+          <Button onPress={handleSubmit}>Submit </Button>
         </View>
       </ScrollView>
     </SafeAreaView>

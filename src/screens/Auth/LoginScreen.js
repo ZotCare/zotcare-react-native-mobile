@@ -48,7 +48,7 @@ const LoginScreen = () => {
           onPress={() => {
             dispatch(signIn({username, password, login_type: 'app'}));
           }}>
-          Log in
+          Log in &nbsp;
         </Button>
       </View>
     </SafeAreaView>

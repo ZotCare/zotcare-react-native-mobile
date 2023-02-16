@@ -18,7 +18,7 @@ const Question = props => {
       case 'checkboxes':
         return (
           <View>
-            {rest.title && <Markdown>{rest.title}</Markdown>}
+            {rest.title && <ThemedMarkdown>{rest.title}</ThemedMarkdown>}
             <Checkboxes
               options={rest.options}
               default={rest.value || rest.default}
@@ -30,7 +30,7 @@ const Question = props => {
       case 'radiobutton':
         return (
           <View>
-            {rest.title && <Markdown>{rest.title}</Markdown>}
+            {rest.title && <ThemedMarkdown>{rest.title}</ThemedMarkdown>}
             <Radiobuttons
               options={rest.options}
               default={rest.value || rest.default}
@@ -42,7 +42,7 @@ const Question = props => {
       case 'textbox':
         return (
           <View>
-            {rest.title && <Markdown>{rest.title}</Markdown>}
+            {rest.title && <ThemedMarkdown>{rest.title}</ThemedMarkdown>}
             <TextInput
               placeholder={rest.placeholder}
               value={rest.value || rest.default}
@@ -54,7 +54,7 @@ const Question = props => {
       case 'slider':
         return (
           <View>
-            {rest.title && <Markdown>{rest.title}</Markdown>}
+            {rest.title && <ThemedMarkdown>{rest.title}</ThemedMarkdown>}
             {rest.indicator && (
               <Indicator
                 items={rest.indicator.items}
@@ -74,7 +74,7 @@ const Question = props => {
       case 'datetime':
         return (
           <View>
-            {rest.title && <Markdown>{rest.title}</Markdown>}
+            {rest.title && <ThemedMarkdown>{rest.title}</ThemedMarkdown>}
             <DatetimePicker
               mode={rest.mode}
               default={rest.value || rest.default}

@@ -2,8 +2,9 @@ import 'react-native-gesture-handler';
 import React, {useEffect, useRef, useState} from 'react';
 import {
   AppState,
+  AppStateStatus,
   LogBox,
-  NativeModules,
+  Platform,
   Text,
   View,
 } from 'react-native';
@@ -25,7 +26,7 @@ import handleError from './utils/error';
 
 import * as authConstant from './modules/auth/constants';
 import paper_theme from './constants/paper_theme';
-import {QueryClient, QueryClientProvider} from 'react-query';
+import {focusManager, QueryClient, QueryClientProvider} from 'react-query';
 
 setJSExceptionHandler((error, isFatal) => {
   //postReq('/monitoring', { exceptionType: 0, exceptionString: JSON.parse(error) }, res => { });
@@ -34,7 +35,7 @@ setNativeExceptionHandler(exceptionString => {
   //postReq('/monitoring', { exceptionType: 1, exceptionString }, res => { });
 });
 LogBox.ignoreAllLogs(true);
-window.navigator.userAgent = 'ReactNative';
+(window as any).navigator.userAgent = 'ReactNative';
 
 const {store} = createStore(rootReducers, sagas);
 export {store};
@@ -44,18 +45,28 @@ const theme = {
   colors: paper_theme.colors,
 };
 
+// onlineManager.setEventListener(setOnline => {
+//   return NetInfo.addEventListener(state => {
+//     setOnline(state.isConnected == null ? undefined : state.isConnected);
+//   });
+// });
+function onAppStateChange(status: AppStateStatus) {
+  if (Platform.OS !== 'web') {
+    focusManager.setFocused(status === 'active');
+  }
+}
 const queryClient = new QueryClient();
 
 const App = () => {
   const appState = useRef(AppState.currentState);
   const [appStateVisible, setAppStateVisible] = useState(appState.current);
   const [visible, setVisible] = useState(false);
-  const [id, setId] = useState(null);
   const [text, setText] = useState('');
-  const [spinner, setSpinner] = useState(false);
-  // const [loaded] = Font.useFonts({
-  //   'brown-regular': require('./assets/fonts/Brown-Regular.ttf'),
-  // });
+
+  useEffect(() => {
+    const subscription = AppState.addEventListener('change', onAppStateChange);
+    return () => subscription.remove();
+  }, []);
 
   useEffect(() => {
     store.subscribe(() => {
@@ -102,38 +113,39 @@ const App = () => {
     setAppStateVisible(appState.current);
     //console.log("AppState", appState.current);
   };
+
   return (
     <SafeAreaProvider>
-        <Provider store={store}>
-          <PaperProvider theme={theme}>
-            <NotifierWrapper>
-              <QueryClientProvider client={queryClient}>
-                <RootNavigator />
-                <CustomModal
-                  visible={visible}
-                  onBackdropPress={() => setVisible(false)}
-                  component={
-                    <View style={{justifyContent: 'center'}}>
-                      <Text
-                        style={{
-                          textAlign: 'center',
-                        }}>
-                        {'OOPS!'}
-                      </Text>
-                      <Text
-                        style={{
-                          fontSize: 14,
-                          textAlign: 'center',
-                        }}>
-                        {text}
-                      </Text>
-                    </View>
-                  }
-                />
-              </QueryClientProvider>
-            </NotifierWrapper>
-          </PaperProvider>
-        </Provider>
+      <Provider store={store}>
+        <PaperProvider theme={theme}>
+          <NotifierWrapper>
+            <QueryClientProvider client={queryClient}>
+              <RootNavigator />
+              <CustomModal
+                visible={visible}
+                onBackdropPress={() => setVisible(false)}
+                component={
+                  <View style={{justifyContent: 'center'}}>
+                    <Text
+                      style={{
+                        textAlign: 'center',
+                      }}>
+                      {'OOPS!'}
+                    </Text>
+                    <Text
+                      style={{
+                        fontSize: 14,
+                        textAlign: 'center',
+                      }}>
+                      {text}
+                    </Text>
+                  </View>
+                }
+              />
+            </QueryClientProvider>
+          </NotifierWrapper>
+        </PaperProvider>
+      </Provider>
     </SafeAreaProvider>
   );
 };

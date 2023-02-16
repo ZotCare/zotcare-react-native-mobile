@@ -2,6 +2,9 @@ import axios from 'axios';
 import globalConfig from './global';
 
 import Uris from '../constants/Uris';
+import {signOut} from '../modules/auth/actions';
+import {useDispatch} from 'react-redux';
+import {store} from '../App';
 
 const API_ENDPOINT = Uris.main_url;
 const request = axios.create();
@@ -15,6 +18,8 @@ request.interceptors.request.use(
     const checkJwt = !jwtNotRequiredList.findIndex(jwt => url.includes(jwt));
     if (checkJwt >= 0 && globalConfig.getToken()) {
       config.headers = {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
         Authorization: `${globalConfig.getToken()}`,
       };
     }
@@ -27,15 +32,16 @@ request.interceptors.request.use(
 
 request.interceptors.response.use(
   function (response) {
-    // console.log("respooooonse", response.headers["total-pages"])
-    // return response.data;
     return response;
   },
   function (error) {
-    console.log('errrrr', error);
+    console.error('Network Error: ', error);
     if (error.response) {
       // The request was made and the server responded with a status code
       // that falls out of the range of 2xx
+      if (error.response.status === 401) {
+        store.dispatch(signOut());
+      }
       return Promise.reject(error.response.data);
     } else if (error.request) {
       // The request was made but no response was received
@@ -49,6 +55,7 @@ request.interceptors.response.use(
   },
 );
 
-// request.defaults.headers['Content-Type'] = 'application/json;charset=utf-8';
+request.defaults.headers['Content-Type'] = 'application/json;charset=utf-8';
+request.defaults.headers.Accept = 'application/json';
 
 export default request;
