@@ -1,8 +1,9 @@
 import 'react-native';
-import {Checkbox, useTheme} from 'react-native-paper';
+
 import PropTypes from 'prop-types';
 import {useState} from 'react';
-import {View} from 'react-native';
+import {Platform, View} from 'react-native';
+import {Checkbox, useTheme} from 'react-native-paper';
 import {ScaledSheet} from 'react-native-size-matters';
 
 function listToState(options, def) {
@@ -49,7 +50,17 @@ const Checkboxes = props => {
     <View style={styles.matrixContainer}>
       {options.map((option, index) => {
         return (
-          <View style={[styles.item, {borderColor: theme.colors.primary}]}>
+          <View
+            key={
+              typeof option === 'string'
+                ? option + '_view'
+                : option.value + '_view'
+            }
+            style={[
+              styles.item,
+              {borderColor: theme.colors.primary},
+              Platform.OS === 'android' && styles.itemAndroid,
+            ]}>
             <Checkbox
               key={typeof option === 'string' ? option : option.value}
               labelVariant="bodySmall"
@@ -94,5 +105,10 @@ const styles = ScaledSheet.create({
     textAlign: 'center',
     borderRadius: 18,
     borderWidth: 1,
+  },
+  itemAndroid: {
+    textAlign: 'center',
+    borderRadius: 18,
+    borderWidth: 0,
   },
 });

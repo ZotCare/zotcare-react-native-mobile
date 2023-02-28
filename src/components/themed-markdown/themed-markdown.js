@@ -1,6 +1,6 @@
-import {useTheme} from 'react-native-paper';
-import Markdown from 'react-native-markdown-display';
 import {Platform} from 'react-native';
+import Markdown from 'react-native-markdown-display';
+import {useTheme} from 'react-native-paper';
 
 const ThemedMarkdown = props => {
   const theme = useTheme();

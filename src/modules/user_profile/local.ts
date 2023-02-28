@@ -1,20 +1,26 @@
-import {useEffect, useState} from 'react';
 import {useAsyncStorage} from '@react-native-async-storage/async-storage';
+import {useEffect, useState} from 'react';
 
-const useLocalProfile = () => {
-  const [profile, setStateProfile] = useState(null);
-  const [loading, setLoading] = useState(true);
+type ProfileHook = {
+  profile: any;
+  loading: boolean;
+  setProfile: (newProfile: any) => Promise<void>;
+};
+
+const useLocalProfile = (): ProfileHook => {
+  const [profile, setStateProfile] = useState<any>(null);
+  const [loading, setLoading] = useState<boolean>(true);
   const {getItem: getStoredProfile, setItem: setStoredProfile} =
     useAsyncStorage('@profile');
 
   useEffect(() => {
     getStoredProfile().then(storedProfile => {
-      setStateProfile(JSON.parse(storedProfile));
+      setStateProfile(JSON.parse(storedProfile || '{}'));
       setLoading(false);
     });
   }, []);
 
-  const setProfile = async newProfile => {
+  const setProfile = async (newProfile: any) => {
     try {
       await setStoredProfile(JSON.stringify(newProfile));
       setStateProfile(newProfile);

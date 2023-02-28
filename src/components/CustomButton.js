@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from 'react';
-import {View, TextInput} from 'react-native';
-import {ScaledSheet} from 'react-native-size-matters';
+import {TextInput, View} from 'react-native';
 import {Button} from 'react-native-paper';
+import {ScaledSheet} from 'react-native-size-matters';
+
 import Layout from '../constants/Layout';
 
 export default CustomButton = ({

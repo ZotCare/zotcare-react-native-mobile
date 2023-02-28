@@ -1,8 +1,10 @@
 import 'react';
+
+import {useNavigation} from '@react-navigation/native';
 import PropTypes from 'prop-types';
 import {Button, Card} from 'react-native-paper';
+
 import {NavigationService} from '../../../../navigation';
-import {useNavigation} from "@react-navigation/native";
 
 const InteractionCard = props => {
   const {name, id, description, image, available} = props;

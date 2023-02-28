@@ -1,5 +1,5 @@
 export default {
-	wrongPasswordConfirm: "Wrong confirmation number!",
-	ok: "OK",
-	edit: "Edit",
-}
+  wrongPasswordConfirm: 'Wrong confirmation number!',
+  ok: 'OK',
+  edit: 'Edit',
+};

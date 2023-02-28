@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import {View} from 'react-native';
-import {
-  ScaledSheet,
-  moderateScale,
-  verticalScale,
-} from 'react-native-size-matters';
 import Modal from 'react-native-modal';
 import {Surface} from 'react-native-paper';
+import {
+  moderateScale,
+  ScaledSheet,
+  verticalScale,
+} from 'react-native-size-matters';
 
 export default CustomModal = ({
   hasButtons,

@@ -1,6 +1,8 @@
 apply plugin: "com.android.application"
 apply plugin: "com.facebook.react"
 apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
+apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
 
 import com.android.build.OutputFile
 
@@ -94,9 +96,9 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace "com.zotcareapp"
+    namespace "org.healthscitech.zotcare"
     defaultConfig {
-        applicationId "com.zotcareapp"
+        applicationId "org.healthscitech.zotcare"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

@@ -1,28 +1,23 @@
-import React, { useState } from 'react';
-import {
-  View,
-  Platform,
-  SafeAreaView,
-} from 'react-native';
-import {
-  ScaledSheet
-} from 'react-native-size-matters';
+import React, {useState} from 'react';
+import {Platform, SafeAreaView, View} from 'react-native';
+import {ScaledSheet} from 'react-native-size-matters';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import mainStyles from '../../views/Styles'
-import CustomTextInput from '../../components/CustomTextInput'
-import CustomButton from '../../components/CustomButton'
-import Colors from "../../constants/Colors"
-import { Header } from "../../components";
-import Layout from '../../constants/Layout'
-import { useDispatch } from 'react-redux';
-import { forgotPassword } from '../../modules/auth/actions';
+import {useDispatch} from 'react-redux';
+
+import {Header} from '../../components';
+import CustomButton from '../../components/CustomButton';
+import CustomTextInput from '../../components/CustomTextInput';
+import Colors from '../../constants/Colors';
+import Layout from '../../constants/Layout';
+import {forgotPassword} from '../../modules/auth/actions';
+import mainStyles from '../../views/Styles';
 
 if (Platform.OS === 'ios') {
   Icon.loadFont();
 }
 
 const ForgotPasswordScreen = props => {
-  const [email, setEmail] = useState("")
+  const [email, setEmail] = useState('');
   const dispatch = useDispatch();
 
   return (
@@ -32,12 +27,12 @@ const ForgotPasswordScreen = props => {
         <CustomTextInput
           value={email}
           placeholder="Email address"
-          onChangeText={(text)=>setEmail(text)}
-        />          
+          onChangeText={text => setEmail(text)}
+        />
         <CustomButton
-          text={"Send password"}
-          type={"pink"} 
-          onPress={()=>dispatch(forgotPassword(email))}
+          text={'Send password'}
+          type={'pink'}
+          onPress={() => dispatch(forgotPassword(email))}
           style={styles.signupButton}
         />
       </View>
@@ -45,42 +40,42 @@ const ForgotPasswordScreen = props => {
   );
 };
 
-export default ForgotPasswordScreen
+export default ForgotPasswordScreen;
 
 const styles = ScaledSheet.create({
   topMargin: {
-    marginTop: "20@vs"
-  },    
+    marginTop: '20@vs',
+  },
   text: {
-    fontSize: "30@ms",
+    fontSize: '30@ms',
     fontWeight: '900',
-    marginVertical: "25@vs"
+    marginVertical: '25@vs',
   },
   signupButton: {
-    marginVertical: "10@vs"
+    marginVertical: '10@vs',
   },
   hintTextView: {
-    marginTop: "20@vs",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center"
+    marginTop: '20@vs',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   hintTextClickable: {
     color: Colors.main_colors.yellowText,
-    fontWeight: "900",
-    fontSize: "15@ms",
+    fontWeight: '900',
+    fontSize: '15@ms',
   },
   hintText: {
-    fontSize: "15@ms",
-    color: Colors.main_colors.whiteText
+    fontSize: '15@ms',
+    color: Colors.main_colors.whiteText,
   },
   forgotView: {
-    width: "100%",
+    width: '100%',
     paddingHorizontal: Layout.paddingHorizontal,
   },
   forgotText: {
-    textAlign: "right",
+    textAlign: 'right',
     color: Colors.main_colors.forgotTextColor,
-    fontWeight: "900"
-  }
+    fontWeight: '900',
+  },
 });

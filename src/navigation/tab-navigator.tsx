@@ -1,15 +1,23 @@
+import {createDrawerNavigator} from '@react-navigation/drawer';
 import React from 'react';
 import {View} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import {createDrawerNavigator} from '@react-navigation/drawer';
+
 import DevicesScreen from '../screens/Home/DevicesScreen';
 import HomeScreen from '../screens/Home/HomeScreen';
 import InfoScreen from '../screens/Home/InfoScreen';
 import ProfileScreen from '../screens/Profile/profile-screen';
 
-const Drawer = createDrawerNavigator();
+export type TabNavigatorParams = {
+  Home: undefined;
+  Profile: undefined;
+  Devices: undefined;
+  Info: undefined;
+};
 
-const TabStackNavigator = ({navigation}) => {
+const Drawer = createDrawerNavigator<TabNavigatorParams>();
+
+const TabStackNavigator = () => {
   return (
     <Drawer.Navigator initialRouteName="Home">
       <Drawer.Screen

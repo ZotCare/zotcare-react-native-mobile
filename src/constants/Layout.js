@@ -1,5 +1,5 @@
-import { Dimensions } from 'react-native';
-import { scale } from 'react-native-size-matters';
+import {Dimensions} from 'react-native';
+import {scale} from 'react-native-size-matters';
 
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
@@ -14,5 +14,5 @@ export default {
     //fontFamily: 'OpenSans-Regular'
   },
   paddingHorizontal: scale(15),
-  marginHorizontal: scale(15)
+  marginHorizontal: scale(15),
 };

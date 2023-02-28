@@ -1,6 +1,7 @@
-import { combineReducers } from 'redux';
-import profileReducer from './modules/profile/reducer'
-import authReducer from './modules/auth/reducer'
+import {combineReducers} from 'redux';
+
+import authReducer from './modules/auth/reducer';
+import profileReducer from './modules/profile/reducer';
 
 /**
  * Root reducer

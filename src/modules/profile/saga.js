@@ -1,101 +1,96 @@
-import { call, delay, put, select, takeLatest } from 'redux-saga/effects';
-import * as SagaActions from './constants';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { createImageFormData } from '../../libs/utils'
+import {call, delay, put, select, takeLatest} from 'redux-saga/effects';
 
-import {
-  uploadPhoto,
-  setProfile,
-  getProfile,
-} from './service';
-import { getUUID } from './selectors';
-import { SET_TOURNAMENT } from '../tournament/constants';
+import {createImageFormData} from '../../libs/utils';
+import * as SagaActions from './constants';
+import {getUUID} from './selectors';
+import {getProfile, setProfile, uploadPhoto} from './service';
 
-function* setProfileSaga({ profile }) {
+function* setProfileSaga({profile}) {
   try {
-    const uuid = yield select(getUUID)
+    const uuid = yield select(getUUID);
     yield call(setProfile, {...profile, id: uuid});
-    if(!!profile.name)
+    if (profile.name) {
       yield call(AsyncStorage.setItem, 'name', profile.name);
+    }
     yield put({
       type: SagaActions.SET_PROFILE_SUCCESS,
-      payload: profile
-    })
-    yield delay(1000)
+      payload: profile,
+    });
+    yield delay(1000);
     yield put({
       type: SagaActions.SET_PROFILE_SUCCESS_FINISH,
-    })
+    });
   } catch (e) {
     yield put({
       type: SagaActions.SET_PROFILE_SUCCESS_FINISH,
-    })
+    });
     yield put({
-      type: SagaActions.SET_PROFILE_ERROR, message: e 
-    })
+      type: SagaActions.SET_PROFILE_ERROR,
+      message: e,
+    });
   }
 }
 
 function* getProfileSaga() {
   try {
-    const uuid = yield select(getUUID)
+    const uuid = yield select(getUUID);
     const resp = yield call(getProfile, uuid);
 
     yield put({
       type: SagaActions.GET_PROFILE_SUCCESS,
-      payload: { ...resp.data.response.user, uuid: resp.data.response.user.id, avatar: resp.data.response.user.image.small, ...resp.data.response.game_profile }
-    })
+      payload: {
+        ...resp.data.response.user,
+        uuid: resp.data.response.user.id,
+        avatar: resp.data.response.user.image.small,
+        ...resp.data.response.game_profile,
+      },
+    });
     yield put({
       type: SagaActions.SET_PROFILE_SUCCESS_FINISH,
-    })
-    if(!!resp.data.response.tournament)
-      yield put({
-        type: SET_TOURNAMENT,
-        payload: resp.data.response.tournament
-      })
-
+    });
   } catch (e) {
     yield put({
-      type: SagaActions.GET_PROFILE_ERROR, message: e 
-    })
+      type: SagaActions.GET_PROFILE_ERROR,
+      message: e,
+    });
   }
 }
 
 function* setProfilePhotoSaga({photo}) {
   // //console.log("herrrrr", photo)
-  try{
+  try {
     yield put({
       type: SagaActions.SET_PROFILE_SUCCESS,
-      payload: { avatar: photo.path, image: { small: photo.path, large: photo.path } }
-    })
+      payload: {
+        avatar: photo.path,
+        image: {small: photo.path, large: photo.path},
+      },
+    });
 
-    const uuid = yield select(getUUID)
+    const uuid = yield select(getUUID);
     const _body = yield call(createImageFormData, photo, {uuid});
     // //console.log("herer", _body)
-    const resp = yield call(uploadPhoto, _body)
+    const resp = yield call(uploadPhoto, _body);
     //console.log(resp)
-    yield call(AsyncStorage.setItem, "avatar", photo.path);
-    yield delay(1000)
+    yield call(AsyncStorage.setItem, 'avatar', photo.path);
+    yield delay(1000);
     yield put({
       type: SagaActions.SET_PROFILE_SUCCESS_FINISH,
-    })
+    });
   } catch (e) {
-    
     yield put({
-      type: SagaActions.SET_PROFILE_ERROR, message: e 
-    })
+      type: SagaActions.SET_PROFILE_ERROR,
+      message: e,
+    });
   }
 }
 
-function* getDBProfileSaga({ payload }) {
-  const { cb } = payload;
+function* getDBProfileSaga({payload}) {
+  const {cb} = payload;
 
-  getStorate = async () => await AsyncStorage.multiGet([
-    'uuid',
-    'name',
-    'email',
-    'avatar',
-    'token',
-  ])
+  const getStorate = async () =>
+    await AsyncStorage.multiGet(['uuid', 'name', 'email', 'avatar', 'token']);
   const data = yield call(getStorate);
 
   let profile = {};
@@ -108,8 +103,8 @@ function* getDBProfileSaga({ payload }) {
   // cb(profile)
   yield put({
     type: SagaActions.SET_PROFILE_SUCCESS,
-    payload: profile
-  })
+    payload: profile,
+  });
 }
 
 export default function* profileSaga() {

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "851226873498",
+    "project_id": "zotcare",
+    "storage_bucket": "zotcare.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:851226873498:android:c98178a35544c4744b1923",
+        "android_client_info": {
+          "package_name": "org.healthscitech.zotcare"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "851226873498-b906ce3q7gvie3jvs83po77v21ba4vln.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA5Aq7BpB05-klv-Hf0qAAA9smi1uU8ox8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "851226873498-b906ce3q7gvie3jvs83po77v21ba4vln.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

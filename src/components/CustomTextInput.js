@@ -1,6 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {View, Text, TextInput, StyleSheet, Platform} from 'react-native';
+import {Platform, StyleSheet, Text, TextInput, View} from 'react-native';
 import {ScaledSheet} from 'react-native-size-matters';
+
 import Layout from '../constants/Layout';
 
 export default CustomTextInput = ({

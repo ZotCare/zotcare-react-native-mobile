@@ -1,32 +1,44 @@
 import 'react-native-gesture-handler';
+
+import messaging from '@react-native-firebase/messaging';
 import React, {useEffect, useRef, useState} from 'react';
 import {
   AppState,
   AppStateStatus,
   LogBox,
+  PermissionsAndroid,
   Platform,
   Text,
   View,
 } from 'react-native';
-import RootNavigator from './navigation/navigator';
-import {Provider as PaperProvider, DefaultTheme} from 'react-native-paper';
-import {Provider} from 'react-redux';
-import createStore from './createStore';
-import rootReducers from './reducers';
-import sagas from './sagas';
 import {
   setJSExceptionHandler,
   setNativeExceptionHandler,
 } from 'react-native-exception-handler';
 import {NotifierWrapper} from 'react-native-notifier';
-import CustomModal from './components/CustomModal';
+import {DefaultTheme, Provider as PaperProvider} from 'react-native-paper';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
-import {getErrors, getErrorMessages, getLoadings} from './libs/utils';
-import handleError from './utils/error';
-
-import * as authConstant from './modules/auth/constants';
-import paper_theme from './constants/paper_theme';
 import {focusManager, QueryClient, QueryClientProvider} from 'react-query';
+import {Provider} from 'react-redux';
+
+import CustomModal from './components/CustomModal';
+import paper_theme from './constants/paper_theme';
+import createStore from './createStore';
+import {getErrorMessages, getErrors, getLoadings} from './libs/utils';
+import * as authConstant from './modules/auth/constants';
+import RootNavigator from './navigation/navigator';
+import rootReducers from './reducers';
+import sagas from './sagas';
+import handleError from './utils/error';
+import {
+  handleForegroundNotification,
+  handlePress,
+  sendToken,
+} from './utils/firebase';
+
+messaging().setBackgroundMessageHandler(async remoteMessage => {
+  console.log('Message handled in the background!', remoteMessage);
+});
 
 setJSExceptionHandler((error, isFatal) => {
   //postReq('/monitoring', { exceptionType: 0, exceptionString: JSON.parse(error) }, res => { });
@@ -39,6 +51,15 @@ LogBox.ignoreAllLogs(true);
 
 const {store} = createStore(rootReducers, sagas);
 export {store};
+
+let sentToken = false;
+store.subscribe(async () => {
+  const token = store.getState()?.auth.token;
+  if (token && !sentToken) {
+    await sendToken();
+    sentToken = true;
+  }
+});
 
 const theme = {
   ...DefaultTheme,
@@ -105,6 +126,36 @@ const App = () => {
     }
   }, [visible]);
 
+  useEffect(() => {
+    if (Platform.OS === 'android') {
+      PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS,
+      );
+    } else if (Platform.OS === 'ios') {
+      async function requestUserPermission() {
+        const authStatus = await messaging().requestPermission();
+        const enabled =
+          authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
+          authStatus === messaging.AuthorizationStatus.PROVISIONAL;
+
+        if (enabled) {
+          console.log('Authorization status:', authStatus);
+        }
+      }
+      requestUserPermission();
+    }
+  }, []);
+
+  useEffect(() => {
+    return messaging().onMessage(handleForegroundNotification);
+  }, []);
+
+  useEffect(() => {
+    return messaging().onNotificationOpenedApp(remoteMessage =>
+      handlePress(remoteMessage.data),
+    );
+  }, []);
+
   const _handleAppStateChange = nextAppState => {
     // if (appState.current.match(/inactive|background/) && nextAppState === "active") {
 
@@ -117,8 +168,8 @@ const App = () => {
   return (
     <SafeAreaProvider>
       <Provider store={store}>
-        <PaperProvider theme={theme}>
-          <NotifierWrapper>
+        <NotifierWrapper>
+          <PaperProvider theme={theme}>
             <QueryClientProvider client={queryClient}>
               <RootNavigator />
               <CustomModal
@@ -143,8 +194,8 @@ const App = () => {
                 }
               />
             </QueryClientProvider>
-          </NotifierWrapper>
-        </PaperProvider>
+          </PaperProvider>
+        </NotifierWrapper>
       </Provider>
     </SafeAreaProvider>
   );

@@ -1,4 +1,4 @@
-package com.zotcareapp;
+package org.healthscitech.zotcare;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;

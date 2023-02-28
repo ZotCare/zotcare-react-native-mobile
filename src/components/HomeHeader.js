@@ -1,18 +1,19 @@
 import * as React from 'react';
-import {View, Image, Pressable, Text} from 'react-native';
-import {Appbar, Title, Avatar} from 'react-native-paper';
-import Colors from '../constants/Colors';
+import {Image, Pressable, Text, View} from 'react-native';
+import {Appbar, Avatar, Title} from 'react-native-paper';
 import {
   moderateScale,
   scale,
   ScaledSheet,
   verticalScale,
 } from 'react-native-size-matters';
-import {NavigationService} from '../navigation';
+import {useSelector} from 'react-redux';
+
 import images from '../assets/images';
+import Colors from '../constants/Colors';
 import Layout from '../constants/Layout';
 import {getProfile} from '../modules/profile/selectors';
-import {useSelector} from 'react-redux';
+import {NavigationService} from '../navigation';
 
 export default HomeHeader = ({text, link}) => {
   const profile = useSelector(state => getProfile(state));

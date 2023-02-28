@@ -1,6 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {Animated, StyleSheet} from 'react-native';
 import {useTheme} from 'react-native-paper';
+
 import images from '../assets/images';
 
 export function SplashScreen({children, isAppReady}) {

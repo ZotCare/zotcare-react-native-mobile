@@ -1,7 +1,7 @@
+import PropTypes from 'prop-types';
+import {Image, View} from 'react-native';
 import {Text} from 'react-native-paper';
 import {ScaledSheet} from 'react-native-size-matters';
-import {View, Image} from 'react-native';
-import PropTypes from 'prop-types';
 
 const Indicator = props => {
   const {items, mode} = props;
@@ -42,7 +42,7 @@ const Indicator = props => {
   );
 };
 
-Indicator.PropTypes = {
+Indicator.propTypes = {
   items: PropTypes.array.isRequired,
   mode: PropTypes.string,
 };

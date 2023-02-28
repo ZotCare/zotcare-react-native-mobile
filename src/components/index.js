@@ -1,11 +1,6 @@
 import AvatarImage from './Avatar';
+import Header from './Header';
 import List from './List';
-import Header from './Header'
-import ProfileHeader from './Profiles/ProfileHeader'
+import ProfileHeader from './Profiles/ProfileHeader';
 
-export {
-    List,
-    AvatarImage,
-    Header,
-    ProfileHeader,
-}
+export {AvatarImage, Header, List, ProfileHeader};

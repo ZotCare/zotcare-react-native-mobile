@@ -1,16 +1,16 @@
-import React from 'react';
-import {StyleSheet, View, Text, PixelRatio} from 'react-native';
 import PropTypes from 'prop-types';
-import Touchable from 'react-native-platform-touchable';
-import {connect} from 'react-redux';
+import React from 'react';
+import {PixelRatio, StyleSheet, Text, View} from 'react-native';
 import {Notifier} from 'react-native-notifier';
+import Touchable from 'react-native-platform-touchable';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import sharedStyles from '../../views/Styles';
-import Colors from '../../constants/Colors';
+import {connect} from 'react-redux';
 
+import Colors from '../../constants/Colors';
 import {useOrientation} from '../../dimensions';
 import {NavigationService} from '../../navigation';
+import sharedStyles from '../../views/Styles';
 
 export const ROW_HEIGHT = 75 * PixelRatio.getFontScale();
 const AVATAR_SIZE = 48;

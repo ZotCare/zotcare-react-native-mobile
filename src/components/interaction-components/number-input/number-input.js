@@ -1,6 +1,6 @@
-import {TextInput} from 'react-native-paper';
-import {useState} from 'react';
 import PropTypes from 'prop-types';
+import {useState} from 'react';
+import {TextInput} from 'react-native-paper';
 
 const NumberInput = props => {
   const {default: def, disabled, onChange} = props;

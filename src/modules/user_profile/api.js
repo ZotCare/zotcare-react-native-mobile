@@ -1,6 +1,6 @@
-import request from '../../utils/request';
 import Uris from '../../constants/Uris';
 import type {Interaction} from '../../models/interaction';
+import request from '../../utils/request';
 
 export const fetchProfile = async (): Promise => {
   const response = await request.get(`${Uris.profile}/my`);

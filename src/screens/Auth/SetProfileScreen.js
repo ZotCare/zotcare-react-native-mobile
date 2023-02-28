@@ -1,25 +1,20 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, Platform, BackHandler } from 'react-native';
-import { ScaledSheet, verticalScale, scale } from 'react-native-size-matters';
-import Colors from "../../constants/Colors";
-import { registerProfile } from '../../modules/auth/actions';
-import { connect } from 'react-redux';
-import * as ProfileActions from '../../modules/profile/constants';
-import {
-  Button,
-  Surface,
-  TextInput,
-  HelperText
-} from 'react-native-paper';
+import moment from 'moment';
+import React, {useEffect, useState} from 'react';
+import {BackHandler, Platform, Text, View} from 'react-native';
+import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
+import {Button, HelperText, Surface, TextInput} from 'react-native-paper';
+import {scale, ScaledSheet, verticalScale} from 'react-native-size-matters';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
-import moment from "moment"
-import { NavigationService } from '../../navigation';
+import {connect} from 'react-redux';
 
+import Colors from '../../constants/Colors';
+import {registerProfile} from '../../modules/auth/actions';
+import * as ProfileActions from '../../modules/profile/constants';
+import {NavigationService} from '../../navigation';
 
-const SetProfileScreen = (props) => {
+const SetProfileScreen = props => {
   const [show, setShow] = useState(Platform.OS === 'ios');
-  const [step, setStep] = useState(1)
+  const [step, setStep] = useState(1);
 
   useEffect(() => {
     //console.log(props.profile)
@@ -31,40 +26,49 @@ const SetProfileScreen = (props) => {
       BackHandler.addEventListener('hardwareBackPress', () => {
         NavigationService.getNavigator().goBack();
         return true;
-      })
+      });
     });
 
     props.navigation.addListener('blur', () =>
       BackHandler.removeEventListener('hardwareBackPress', () => {
         NavigationService.getNavigator().goBack();
         return true;
-      })
+      }),
     );
   }, []);
 
   const hasErrors = () => {
-    let resp = 0
-    if (props.profile.email.startsWith("#init") || props.profile.email == "" || !props.profile.email.includes("@"))
-      resp |= 1
-    if (props.profile.username.startsWith("#init") || props.profile.username == "")
-      resp |= 2
-    if (props.profile.first_name == "")
-      resp |= 4
-    if (props.profile.last_name == "")
-      resp |= 8
-    if (!props.profile.dob)
-      resp |= 16
+    let resp = 0;
+    if (
+      props.profile.email.startsWith('#init') ||
+      props.profile.email === '' ||
+      !props.profile.email.includes('@')
+    ) {
+      resp |= 1;
+    }
+    if (
+      props.profile.username.startsWith('#init') ||
+      props.profile.username == ''
+    ) {
+      resp |= 2;
+    }
+    if (props.profile.first_name == '') {
+      resp |= 4;
+    }
+    if (props.profile.last_name == '') {
+      resp |= 8;
+    }
+    if (!props.profile.dob) {
+      resp |= 16;
+    }
 
     //console.log("resp", resp, resp & 4)
-    return resp
-  }
+    return resp;
+  };
 
   return (
-
     <View style={[styles.container]}>
-      <ScrollView>
-        
-      </ScrollView>
+      <ScrollView />
     </View>
   );
 };
@@ -80,17 +84,13 @@ const mapDispatchToProps = dispatch => {
     registerProfile: () => {
       dispatch(registerProfile());
     },
-    setProfile: (profile) => {
-      dispatch({ type: ProfileActions.SET_PROFILE_SUCCESS, payload: profile })
-    }
+    setProfile: profile => {
+      dispatch({type: ProfileActions.SET_PROFILE_SUCCESS, payload: profile});
+    },
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(SetProfileScreen);
-
+export default connect(mapStateToProps, mapDispatchToProps)(SetProfileScreen);
 
 const styles = ScaledSheet.create({
   surface: {

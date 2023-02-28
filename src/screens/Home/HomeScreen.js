@@ -1,7 +1,8 @@
 import React from 'react';
 import {View} from 'react-native';
-import {ScaledSheet} from 'react-native-size-matters';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import {ScaledSheet} from 'react-native-size-matters';
+
 import {useInteractions} from '../../modules/interactions/service';
 import InteractionCard from './components/interaction-card/interaction-card';
 

@@ -1,13 +1,13 @@
 import React, {useState} from 'react';
-import {View, Text, Image} from 'react-native';
-import {ScaledSheet, verticalScale, scale} from 'react-native-size-matters';
+import {Image, Text, View} from 'react-native';
 import {Button, TextInput} from 'react-native-paper';
-import CustomButton from '../../components/CustomButton';
-import Layout from '../../constants/Layout';
-import {useDispatch} from 'react-redux';
-import {signIn} from '../../modules/auth/actions';
-import images from '../../assets/images';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import {scale, ScaledSheet, verticalScale} from 'react-native-size-matters';
+import {useDispatch} from 'react-redux';
+
+import images from '../../assets/images';
+import Layout from '../../constants/Layout';
+import {signIn} from '../../modules/auth/actions';
 
 const LoginScreen = () => {
   const [username, setUsername] = useState('');

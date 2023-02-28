@@ -1,18 +1,23 @@
-import {ScaledSheet} from 'react-native-size-matters';
-import {SafeAreaView} from 'react-native-safe-area-context';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import React, {useState} from 'react';
 import {ScrollView, View} from 'react-native';
+import {Notifier, NotifierComponents} from 'react-native-notifier';
+import {Button} from 'react-native-paper';
+import {SafeAreaView} from 'react-native-safe-area-context';
+import {ScaledSheet} from 'react-native-size-matters';
+
+import ProfileField from '../../components/interaction-components/profile-field/profile-field';
+import useLocalProfile from '../../modules/user_profile/local';
 import {
   useMutateProfile,
   useProfile,
   useProfileKeys,
 } from '../../modules/user_profile/service';
-import {Button} from 'react-native-paper';
-import React, {useState} from 'react';
-import ProfileField from '../../components/interaction-components/profile-field/profile-field';
-import useLocalProfile from '../../modules/user_profile/local';
-import {Notifier} from 'react-native-notifier';
+import {TabNavigatorParams} from '../../navigation/tab-navigator';
 
-const ProfileScreen = ({navigation}) => {
+type Props = NativeStackScreenProps<TabNavigatorParams, 'Profile'>;
+
+const ProfileScreen = ({navigation}: Props) => {
   const {data: profileKeys, status} = useProfileKeys();
   const {data: profile, status: profileStatus} = useProfile();
   const {mutateAsync: mutateProfile} = useMutateProfile();
@@ -24,7 +29,7 @@ const ProfileScreen = ({navigation}) => {
     loading: localLoading,
   } = useLocalProfile();
 
-  const handleAnswer = (key, local) => value => {
+  const handleAnswer = (key: string, local: boolean) => (value: any) => {
     if (local) {
       setNewLocalProfile({...newLocalProfile, [key]: value});
     } else {
@@ -32,7 +37,7 @@ const ProfileScreen = ({navigation}) => {
     }
   };
 
-  const getDefault = key => {
+  const getDefault = (key: string) => {
     if (localProfile[key]) {
       return localProfile[key];
     }
@@ -48,7 +53,10 @@ const ProfileScreen = ({navigation}) => {
     Notifier.showNotification({
       title: 'Profile Updated',
       description: 'Your profile has been updated',
-      type: 'success',
+      Component: NotifierComponents.Alert,
+      componentProps: {
+        alertType: 'success',
+      },
     });
     navigation.navigate('Home');
   };
@@ -59,8 +67,8 @@ const ProfileScreen = ({navigation}) => {
         <View style={styles.container}>
           {status === 'success' &&
             profileStatus === 'success' &&
-            localLoading === false &&
-            profileKeys.map((field, index) => {
+            !localLoading &&
+            profileKeys.map((field: any, index: number) => {
               return (
                 <ProfileField
                   key={index.toString()}

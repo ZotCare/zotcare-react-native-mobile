@@ -1,1 +1,1 @@
-export const getCommon = state => state.common
+export const getCommon = state => state.common;

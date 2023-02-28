@@ -5,6 +5,6 @@
 // export default async () => {
 //     const realm = await Realm.open({ schema: [] })
 //     //console.log("realm stablished")
-    
+
 //     return realm
 // }

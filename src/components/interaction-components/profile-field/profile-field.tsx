@@ -1,20 +1,20 @@
-import ThemedMarkdown from '../../themed-markdown/themed-markdown';
 import {View} from 'react-native';
-import Markdown from 'react-native-markdown-display';
-import Radiobuttons from '../radiobuttons/radiobuttons';
 import {TextInput} from 'react-native-paper';
+
+import ThemedMarkdown from '../../themed-markdown/themed-markdown';
 import DatetimePicker from '../datetime-picker/datetime-picker';
 import NumberInput from '../number-input/number-input';
+import Radiobuttons from '../radiobuttons/radiobuttons';
 
-const ProfileField = props => {
+const ProfileField = (props: any) => {
   const {type, ...rest} = props;
   // TODO: 'date', 'time', 'datetime'
-  return (() => {
+  return ((): JSX.Element => {
     switch (type) {
       case 'select':
         return (
           <View>
-            {rest.title && <Markdown>{rest.title}</Markdown>}
+            {rest.title && <ThemedMarkdown>{rest.title}</ThemedMarkdown>}
             <Radiobuttons
               options={rest.items}
               disabled={rest.editable === false}
@@ -26,7 +26,7 @@ const ProfileField = props => {
       case 'text':
         return (
           <View>
-            {rest.title && <Markdown>{rest.title}</Markdown>}
+            {rest.title && <ThemedMarkdown>{rest.title}</ThemedMarkdown>}
             <TextInput
               disabled={rest.editable === false}
               defaultValue={rest.value || rest.default}
@@ -37,7 +37,7 @@ const ProfileField = props => {
       case 'number':
         return (
           <View>
-            {rest.title && <Markdown>{rest.title}</Markdown>}
+            {rest.title && <ThemedMarkdown>{rest.title}</ThemedMarkdown>}
             <NumberInput
               disabled={rest.editable === false}
               default={rest.value || rest.default}
@@ -48,7 +48,7 @@ const ProfileField = props => {
       case 'date':
         return (
           <View>
-            {rest.title && <Markdown>{rest.title}</Markdown>}
+            {rest.title && <ThemedMarkdown>{rest.title}</ThemedMarkdown>}
             <DatetimePicker
               mode="date"
               default={rest.value || rest.default}
@@ -59,7 +59,7 @@ const ProfileField = props => {
       case 'time':
         return (
           <View>
-            {rest.title && <Markdown>{rest.title}</Markdown>}
+            {rest.title && <ThemedMarkdown>{rest.title}</ThemedMarkdown>}
             <DatetimePicker
               mode="time"
               default={rest.value || rest.default}
@@ -67,6 +67,8 @@ const ProfileField = props => {
             />
           </View>
         );
+      default:
+        return <View />;
     }
   })();
 };

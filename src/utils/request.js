@@ -1,10 +1,10 @@
 import axios from 'axios';
-import globalConfig from './global';
+import {useDispatch} from 'react-redux';
 
+import {store} from '../App';
 import Uris from '../constants/Uris';
 import {signOut} from '../modules/auth/actions';
-import {useDispatch} from 'react-redux';
-import {store} from '../App';
+import globalConfig from './global';
 
 const API_ENDPOINT = Uris.main_url;
 const request = axios.create();

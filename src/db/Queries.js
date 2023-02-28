@@ -10,4 +10,3 @@
 // 		result.push(JSON.parse(JSON.stringify(data[d])))
 // 	return result
 // }
-

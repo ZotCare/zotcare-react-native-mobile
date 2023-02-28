@@ -1,5 +1,5 @@
-import request from '../../utils/request';
 import Uris from '../../constants/Uris';
+import request from '../../utils/request';
 
 export const setProfile = user =>
   request.put(Uris.set_user_profile + '/' + user.id, user);

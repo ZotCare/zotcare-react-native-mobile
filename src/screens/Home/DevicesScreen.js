@@ -1,13 +1,14 @@
+import {useFocusEffect} from '@react-navigation/native';
 import React from 'react';
-import {SafeAreaView, Platform} from 'react-native';
+import {Platform, SafeAreaView} from 'react-native';
 import {ScaledSheet} from 'react-native-size-matters';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import {useDispatch, useSelector} from 'react-redux';
-import {getUUID} from '../../modules/profile/selectors';
+
 import Colors from '../../constants/Colors';
 import Layout from '../../constants/Layout';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 import {getToken} from '../../modules/auth/selectors';
-import {useFocusEffect} from '@react-navigation/native';
+import {getUUID} from '../../modules/profile/selectors';
 
 if (Platform.OS === 'ios') {
   Icon.loadFont();

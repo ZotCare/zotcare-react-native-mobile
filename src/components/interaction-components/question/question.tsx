@@ -1,17 +1,17 @@
-import Markdown from 'react-native-markdown-display';
-import {View} from 'react-native';
-import {TextInput} from 'react-native-paper';
 import Slider from '@react-native-community/slider';
 import React from 'react';
-import Checkboxes from '../checkboxes/checkboxes';
-import Radiobuttons from '../radiobuttons/radiobuttons';
-import DatetimePicker from '../datetime-picker/datetime-picker';
-import ThemedMarkdown from '../../themed-markdown/themed-markdown';
-import Indicator from '../indicators/indicator';
+import {View} from 'react-native';
+import {TextInput} from 'react-native-paper';
 
-const Question = props => {
+import ThemedMarkdown from '../../themed-markdown/themed-markdown';
+import Checkboxes from '../checkboxes/checkboxes';
+import DatetimePicker from '../datetime-picker/datetime-picker';
+import Indicator from '../indicators/indicator';
+import Radiobuttons from '../radiobuttons/radiobuttons';
+
+const Question = (props: any) => {
   const {type, ...rest} = props;
-  return (() => {
+  return ((): JSX.Element => {
     switch (type) {
       case 'text':
         return <ThemedMarkdown>{rest.content}</ThemedMarkdown>;
@@ -84,6 +84,8 @@ const Question = props => {
         );
       case 'indicator':
         return <Indicator items={rest.items} />;
+      default:
+        return <></>;
     }
   })();
 };

@@ -1,10 +1,11 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {put, call, select, takeLatest} from 'redux-saga/effects';
+import {call, put, select, takeLatest} from 'redux-saga/effects';
+
+import globalConfig from '../../utils/global';
+import * as AuthActions from '../auth/constants';
 import * as ProfileActions from '../profile/constants';
 import * as SagaActions from './constants';
 import {signIn} from './service';
-import globalConfig from '../../utils/global';
-import * as AuthActions from '../auth/constants';
 
 function* storeProfile(user) {
   yield call(AsyncStorage.setItem, 'username', user.username);

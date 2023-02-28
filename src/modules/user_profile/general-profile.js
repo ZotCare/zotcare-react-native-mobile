@@ -1,5 +1,5 @@
-import {useProfile} from './service';
 import useLocalProfile from './local';
+import {useProfile} from './service';
 
 const useGeneralProfile = () => {
   const {data: cloudProfile, status: cloudProfileStatus} = useProfile();

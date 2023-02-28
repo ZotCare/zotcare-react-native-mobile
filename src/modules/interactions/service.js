@@ -1,4 +1,5 @@
 import {useQuery, useQueryClient} from 'react-query';
+
 import {fetchInteractionById, fetchInteractions} from './api';
 
 export const useInteractions = () =>

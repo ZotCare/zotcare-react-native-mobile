@@ -1,4 +1,5 @@
 import {useMutation, useQuery, useQueryClient} from 'react-query';
+
 import {fetchProfile, fetchProfileKeys, modifyProfile} from './api';
 
 export const useProfile = () => useQuery(['profile'], fetchProfile);

@@ -1,4 +1,4 @@
-package com.zotcareapp;
+package org.healthscitech.zotcare;
 
 import android.app.Application;
 import com.facebook.react.PackageList;

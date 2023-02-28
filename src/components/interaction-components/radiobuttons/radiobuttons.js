@@ -1,9 +1,10 @@
 import 'react-native';
-import {RadioButton, useTheme} from 'react-native-paper';
+
 import PropTypes from 'prop-types';
 import {useState} from 'react';
+import {Platform, View} from 'react-native';
+import {RadioButton, useTheme} from 'react-native-paper';
 import {ScaledSheet} from 'react-native-size-matters';
-import {View} from 'react-native';
 
 const Radiobuttons = props => {
   const {options, default: def, onChange, disabled, mode} = props;
@@ -39,7 +40,11 @@ const Radiobuttons = props => {
         {options.map((option, index) => (
           <View
             key={index}
-            style={[styles.item, {borderColor: theme.colors.primary}]}>
+            style={[
+              styles.item,
+              {borderColor: theme.colors.primary},
+              Platform.OS === 'android' && styles.itemAndroid,
+            ]}>
             <RadioButton
               key={index}
               value={typeof option === 'string' ? option : option.value}
@@ -80,5 +85,10 @@ const styles = ScaledSheet.create({
     textAlign: 'center',
     borderRadius: 18,
     borderWidth: 1,
+  },
+  itemAndroid: {
+    textAlign: 'center',
+    borderRadius: 18,
+    borderWidth: 0,
   },
 });

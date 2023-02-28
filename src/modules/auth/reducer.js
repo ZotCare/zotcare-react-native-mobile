@@ -31,7 +31,6 @@ export default function auth(state = initState, action = {}) {
     case Actions.SET_TOKEN:
       return {...state, token: action.token};
     case Actions.RESET_AUTH:
-      console.log('testt');
       return initState;
     case Actions.CLEAR_ERRORS:
       return {

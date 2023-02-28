@@ -1,1 +1,1 @@
-export const ERROR = 'common/ERROR'
+export const ERROR = 'common/ERROR';
