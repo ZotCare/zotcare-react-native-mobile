@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>851226873498-2skdltd51s2kqurrftpltvvnhjjqev82.apps.googleusercontent.com</string>
+	<string>851226873498-9sjgi9edhtgb2gk4g3crkvbrpb294n1e.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.851226873498-2skdltd51s2kqurrftpltvvnhjjqev82</string>
+	<string>com.googleusercontent.apps.851226873498-9sjgi9edhtgb2gk4g3crkvbrpb294n1e</string>
 	<key>API_KEY</key>
 	<string>AIzaSyAbdnt6CbUPWs8hlPbip01EuJ_ovVvwSXU</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +13,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>org.healthscitech.zotcare</string>
+	<string>org.healthscitech.sleepin</string>
 	<key>PROJECT_ID</key>
 	<string>zotcare</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:851226873498:ios:0904b13f90df8bd94b1923</string>
+	<string>1:851226873498:ios:3dca36ed5713d3284b1923</string>
 </dict>
 </plist>

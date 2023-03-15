@@ -26,9 +26,9 @@ export const useCondition = answers => {
       case 'lte':
         return cmp <= condition.value;
       case 'in':
-        return cmp.includes(condition.value);
+        return condition.value.includes(cmp);
       case 'nin':
-        return !cmp.includes(condition.value);
+        return !condition.value.includes(cmp);
       default:
         return condition.default || false;
     }

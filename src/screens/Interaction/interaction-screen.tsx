@@ -1,5 +1,5 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import React, {useEffect} from 'react';
+import React, {useEffect, useRef} from 'react';
 import {useState} from 'react';
 import {View} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
@@ -14,12 +14,14 @@ import {useCondition} from './conditions';
 
 type Props = NativeStackScreenProps<NavigatorParams, 'interaction'>;
 
-const InteractionScreen = ({route}: Props) => {
+const InteractionScreen = ({route, navigation}: Props) => {
   const {id} = route.params;
   const {data: interaction, status} = useInteraction(id);
-  const [answers, setAnswers] = useState<any>({});
+  const answersRef = useRef<any>({});
   const [defaults, setDefaults] = useState<any>({});
-  const {check_or_and_collection: checkConditions} = useCondition(answers);
+  const {check_or_and_collection: checkConditions} = useCondition(
+    answersRef.current,
+  );
   const [missedKeys, setMissedKeys] = useState<string[]>([]);
 
   const findNextPage = (start: number) => {
@@ -38,18 +40,23 @@ const InteractionScreen = ({route}: Props) => {
       int_page.fields.forEach(field => {
         if (field.default) {
           setDefaults((prev: any) => ({...prev, [field.key]: field.default}));
-          setAnswers((prev: any) => ({...prev, [field.key]: field.default}));
+          answersRef.current[field.key] = field.default;
         }
       });
     });
   }, [interaction]);
 
-  const handleAnswer = (questionKey: string) => (answer: any) => {
-    if (missedKeys.includes(questionKey)) {
-      setMissedKeys(prev => prev.filter(key => key !== questionKey));
-    }
-    setAnswers({...answers, [questionKey]: answer});
-  };
+  const handleAnswer =
+    (questionKey: string) =>
+    async (answer: any, skip: boolean = false) => {
+      if (missedKeys.includes(questionKey)) {
+        setMissedKeys(prev => prev.filter(key => key !== questionKey));
+      }
+      answersRef.current[questionKey] = answer;
+      if (skip) {
+        handleSubmit();
+      }
+    };
 
   const isRequired = (key: string) => {
     return missedKeys.includes(key);
@@ -62,9 +69,10 @@ const InteractionScreen = ({route}: Props) => {
       .map((field: {key: any}) => field.key);
     const missingKeys = requiredKeys.filter(
       (key: string) =>
-        answers[key] === undefined ||
-        answers[key] === '' ||
-        (Array.isArray(answers[key]) && answers[key].length === 0),
+        answersRef.current[key] === undefined ||
+        answersRef.current[key] === '' ||
+        (Array.isArray(answersRef.current[key]) &&
+          answersRef.current[key].length === 0),
     );
     setMissedKeys(missingKeys);
     if (missingKeys.length > 0) {
@@ -78,7 +86,7 @@ const InteractionScreen = ({route}: Props) => {
       });
       return;
     }
-    setDefaults((prev: any) => ({...prev, ...answers}));
+    setDefaults((prev: any) => ({...prev, ...answersRef.current}));
     if (nextPage === -1) {
       Notifier.showNotification({
         title: 'Interaction finished',
@@ -88,15 +96,16 @@ const InteractionScreen = ({route}: Props) => {
           alertType: 'success',
         },
       });
+      navigation.navigate('tab');
     } else {
       setPage(nextPage);
     }
   };
 
   return status === 'success' ? (
-    <View>
-      <ScrollView>
-        <View style={styles.container}>
+    <ScrollView style={{flex: 1}} contentContainerStyle={{flexGrow: 1}}>
+      <View style={styles.container}>
+        <View style={{flex: 1}}>
           {interaction.data.pages[page].fields.map(
             (field: any, index: number) => {
               field.id = field.key;
@@ -119,10 +128,10 @@ const InteractionScreen = ({route}: Props) => {
               );
             },
           )}
-          <Button onPress={handleSubmit}>Next</Button>
         </View>
-      </ScrollView>
-    </View>
+        <Button onPress={handleSubmit}>Next</Button>
+      </View>
+    </ScrollView>
   ) : (
     <Text>Error</Text>
   );

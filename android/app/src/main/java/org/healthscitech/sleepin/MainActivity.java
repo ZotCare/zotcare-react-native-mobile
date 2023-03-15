@@ -1,4 +1,4 @@
-package org.healthscitech.zotcare;
+package org.healthscitech.sleepin;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;

@@ -5,6 +5,7 @@ import {TextInput} from 'react-native-paper';
 
 import ThemedMarkdown from '../../themed-markdown/themed-markdown';
 import Checkboxes from '../checkboxes/checkboxes';
+import Custom1 from '../custom1/custom1';
 import DatetimePicker from '../datetime-picker/datetime-picker';
 import Indicator from '../indicators/indicator';
 import Radiobuttons from '../radiobuttons/radiobuttons';
@@ -84,6 +85,8 @@ const Question = (props: any) => {
         );
       case 'indicator':
         return <Indicator items={rest.items} />;
+      case 'custom1':
+        return <Custom1 {...rest} onEnd={rest.handleAnswer(rest.id)} />;
       default:
         return <></>;
     }

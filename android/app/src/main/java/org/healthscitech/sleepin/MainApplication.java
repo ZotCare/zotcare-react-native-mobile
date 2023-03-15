@@ -1,4 +1,4 @@
-package org.healthscitech.zotcare;
+package org.healthscitech.sleepin;
 
 import android.app.Application;
 import com.facebook.react.PackageList;

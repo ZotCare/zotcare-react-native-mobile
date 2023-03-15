@@ -1,5 +1,5 @@
 import React from 'react';
-import {View} from 'react-native';
+import {ScrollView, View} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {ScaledSheet} from 'react-native-size-matters';
 
@@ -10,8 +10,8 @@ const HomeScreen = ({navigation}) => {
   const {data: interactions, status} = useInteractions();
 
   return (
-    <SafeAreaView>
-      <View style={styles.container}>
+    <ScrollView contentInsetAdjustmentBehavior="automatic">
+      <SafeAreaView style={styles.container}>
         {status === 'success' &&
           interactions.map(interaction => (
             <InteractionCard
@@ -20,8 +20,8 @@ const HomeScreen = ({navigation}) => {
               key={interaction.id}
             />
           ))}
-      </View>
-    </SafeAreaView>
+      </SafeAreaView>
+    </ScrollView>
   );
 };
 

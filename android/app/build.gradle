@@ -96,9 +96,9 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace "org.healthscitech.zotcare"
+    namespace "org.healthscitech.sleepin"
     defaultConfig {
-        applicationId "org.healthscitech.zotcare"
+        applicationId "org.healthscitech.sleepin"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

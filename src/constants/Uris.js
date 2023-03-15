@@ -1,5 +1,5 @@
 export default {
-  main_url: 'http://localhost:5000',
+  main_url: 'https://zotcare.healthscitech.org/api',
   api_url: '',
   signin: '/auth/login',
   interactions: '/interactions',
