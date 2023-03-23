@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {View} from 'react-native';
 import {Button, ProgressBar, Text} from 'react-native-paper';
 import {ScaledSheet} from 'react-native-size-matters';
@@ -18,7 +18,7 @@ const FingerTapTest = (props: any) => {
     setTimeout(() => {
       onEnd(input.current, strokes.current);
     }, duration * 1000);
-  }, []);
+  }, [duration, onEnd]);
 
   const addValue = (value: number) => () => {
     input.current += value;

@@ -17,7 +17,7 @@ const useGeneralProfile = (): GeneralProfile => {
     setProfile: setLocalProfile,
   } = useLocalProfile();
 
-  const getItem = key => {
+  const getItem = (key: string) => {
     if (key in cloudProfile) {
       return cloudProfile[key];
     } else if (key in localProfile) {
@@ -27,12 +27,13 @@ const useGeneralProfile = (): GeneralProfile => {
     }
   };
 
-  const setItem = async (key, value) => {
+  const setItem = async (key: string, value: any) => {
     profileKeys
-      .filter(pk => pk.key === key)
-      .forEach(async pk => {
-        console.log('writing to', pk);
-        if (pk.editable === false) {
+      .filter((pk: {key: string}) => {
+        return pk.key === key;
+      })
+      .forEach(async (pk: {editable: boolean; local: any}) => {
+        if (!pk.editable) {
           return;
         }
         if (pk.local) {

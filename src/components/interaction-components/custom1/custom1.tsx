@@ -1,5 +1,5 @@
 import {useAsyncStorage} from '@react-native-async-storage/async-storage';
-import {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {View} from 'react-native';
 import {Notifier, NotifierComponents} from 'react-native-notifier';
 
@@ -113,6 +113,7 @@ const Custom1 = (props: any) => {
         }
       }
     })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sequence]);
 
   return (

@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {View} from 'react-native';
 import {Text} from 'react-native-paper';
 import {ScaledSheet} from 'react-native-size-matters';
@@ -96,7 +96,7 @@ const Countdown = (props: any) => {
     return () => {
       clearInterval(timerId);
     };
-  }, []);
+  }, [onCountdownEnd]);
 
   return (
     <View style={styles.container}>

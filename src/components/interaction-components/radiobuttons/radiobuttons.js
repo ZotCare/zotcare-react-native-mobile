@@ -1,7 +1,7 @@
 import 'react-native';
 
 import PropTypes from 'prop-types';
-import {useState} from 'react';
+import React, {useState} from 'react';
 import {Platform, View} from 'react-native';
 import {RadioButton, useTheme} from 'react-native-paper';
 import {ScaledSheet} from 'react-native-size-matters';
