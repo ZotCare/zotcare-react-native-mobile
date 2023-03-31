@@ -22,6 +22,7 @@ const InteractionScreen = ({route}: Props) => {
   const {check_or_and_collection: checkConditions} = useCondition(answers);
   const [missedKeys, setMissedKeys] = useState<string[]>([]);
 
+
   const findNextPage = (start: number) => {
     for (let i = start; i < interaction.data.pages.length; i++) {
       if (checkConditions(interaction.data.pages[i].conditions)) {

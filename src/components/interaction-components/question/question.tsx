@@ -8,9 +8,12 @@ import Checkboxes from '../checkboxes/checkboxes';
 import DatetimePicker from '../datetime-picker/datetime-picker';
 import Indicator from '../indicators/indicator';
 import Radiobuttons from '../radiobuttons/radiobuttons';
+import ImageImport from '../image-import/ImageImport';
+import { Image } from 'react-native-svg';
 
 const Question = (props: any) => {
   const {type, ...rest} = props;
+  console.log(rest)
   return ((): JSX.Element => {
     switch (type) {
       case 'text':
@@ -83,7 +86,9 @@ const Question = (props: any) => {
           </View>
         );
       case 'indicator':
-        return <Indicator items={rest.items} />;
+        return <Indicator items={rest.items} />
+      case 'custom1':
+        return <ImageImport title={rest.title} />
       default:
         return <></>;
     }
