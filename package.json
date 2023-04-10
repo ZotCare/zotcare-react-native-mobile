@@ -20,6 +20,7 @@
     "@react-navigation/material-bottom-tabs": "^6.2.5",
     "@react-navigation/native": "^6.0.14",
     "@react-navigation/native-stack": "^6.9.2",
+    "@types/react-native-vector-icons": "^6.4.13",
     "axios": "^1.2.0",
     "moment": "^2.29.4",
     "prop-types": "^15.8.1",

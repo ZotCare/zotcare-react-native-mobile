@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, {useEffect, useRef, useState} from 'react';
 import {View} from 'react-native';
-import {Button} from 'react-native-paper';
+import {Button, Text} from 'react-native-paper';
 import {ScaledSheet} from 'react-native-size-matters';
 
 import shuffle from '../../../utils/shuffle';
@@ -49,37 +49,47 @@ const WpaTest = (props: any) => {
           swap={isSwappedRef.current[index]}
         />
       </View>
-      <View style={styles.buttons}>
+      <View>
         {!confidence ? (
-          <>
-            <Button key="OLD" onPress={onChoice(true)} mode="contained">
-              OLD
-            </Button>
-            <Button key="NEW" onPress={onChoice(false)} mode="contained">
-              NEW
-            </Button>
-          </>
+          <View style={styles.questionBox}>
+            <Text style={styles.textCenter} variant="titleSmall">
+              Is the order of the pair the:
+            </Text>
+            <View style={styles.buttons}>
+              <Button key="OLD" onPress={onChoice(true)} mode="contained">
+                SAME
+              </Button>
+              <Button key="NEW" onPress={onChoice(false)} mode="contained">
+                SWITCHED
+              </Button>
+            </View>
+          </View>
         ) : (
-          <>
-            <Button
-              key="LOW"
-              onPress={onSelectConfidence('LOW')}
-              mode="contained">
-              LOW
-            </Button>
-            <Button
-              key="MODERATE"
-              onPress={onSelectConfidence('MODERATE')}
-              mode="contained">
-              MODERATE
-            </Button>
-            <Button
-              key="HIGH"
-              onPress={onSelectConfidence('HIGH')}
-              mode="contained">
-              HIGH
-            </Button>
-          </>
+          <View style={styles.questionBox}>
+            <Text style={styles.textCenter} variant="titleSmall">
+              How confident are you in your answer?
+            </Text>
+            <View style={styles.buttons}>
+              <Button
+                key="LOW"
+                onPress={onSelectConfidence('LOW')}
+                mode="contained">
+                LOW
+              </Button>
+              <Button
+                key="MODERATE"
+                onPress={onSelectConfidence('MODERATE')}
+                mode="contained">
+                MODERATE
+              </Button>
+              <Button
+                key="HIGH"
+                onPress={onSelectConfidence('HIGH')}
+                mode="contained">
+                HIGH
+              </Button>
+            </View>
+          </View>
         )}
       </View>
     </View>
@@ -104,5 +114,12 @@ const styles = ScaledSheet.create({
     justifyContent: 'space-evenly',
     alignContent: 'center',
     alignItems: 'center',
+  },
+  textCenter: {
+    textAlign: 'center',
+  },
+  questionBox: {
+    flex: 1,
+    rowGap: '10@s',
   },
 });

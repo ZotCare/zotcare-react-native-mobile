@@ -25,6 +25,7 @@ const Radiobuttons = props => {
           label={typeof option === 'string' ? option : option.label}
           labelVariant="bodySmall"
           value={typeof option === 'string' ? option : option.value}
+          mode={'android'}
         />
       ))}
     </RadioButton.Group>

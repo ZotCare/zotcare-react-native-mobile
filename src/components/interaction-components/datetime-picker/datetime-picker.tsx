@@ -9,16 +9,16 @@ import {Button, Text} from 'react-native-paper';
 import {ScaledSheet} from 'react-native-size-matters';
 
 const DatetimePicker = (props: any) => {
-  const {mode, onValueChange, default: def, min, max} = props;
-  const [value, setValue] = useState(def || new Date());
+  const {mode, onValueChange, default: def, min, max, disabled} = props;
+  const [value, setValue] = useState(new Date(def) || new Date());
   const [show, setShow] = useState(false);
 
   const onChange = (event: DateTimePickerEvent, date?: Date) => {
-    if (event.type === 'set') {
-      setValue(date);
-      onValueChange(date);
-    }
     setShow(false);
+    if (event.type === 'set' && date) {
+      setValue(date);
+      onValueChange(date?.getTime());
+    }
   };
 
   const chosenValue = () => {
@@ -34,7 +34,10 @@ const DatetimePicker = (props: any) => {
       {Platform.OS === 'android' && (
         <>
           <Text>Selected: {chosenValue()}</Text>
-          <Button mode="outlined" onPress={() => setShow(true)}>
+          <Button
+            disabled={disabled}
+            mode="outlined"
+            onPress={() => setShow(true)}>
             Change
           </Button>
         </>
@@ -55,14 +58,16 @@ const DatetimePicker = (props: any) => {
 DatetimePicker.propTypes = {
   mode: PropTypes.oneOf(['date', 'time']),
   onValueChange: PropTypes.func.isRequired,
-  default: PropTypes.instanceOf(Date),
+  default: PropTypes.number,
   min: PropTypes.number,
   max: PropTypes.number,
+  disabled: PropTypes.bool,
 };
 
 DatetimePicker.defaultProps = {
   mode: 'date',
-  default: new Date(),
+  default: new Date().getTime(),
+  disabled: false,
 };
 
 export default DatetimePicker;

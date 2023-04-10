@@ -5,50 +5,12 @@ import {Notifier, NotifierComponents} from 'react-native-notifier';
 
 import Countdown from '../../cognitive_tasks/finger-tapping/countdown';
 import FingerTapTest from '../../cognitive_tasks/finger-tapping/Finger-tap-test';
+import sequences from './sequences';
 
 enum State {
   off,
   on,
 }
-
-const sequences = [
-  '12134',
-  '12413',
-  '12431',
-  '13142',
-  '13243',
-  '13423',
-  '14132',
-  '14213',
-  '14231',
-  '23143',
-  '23241',
-  '23142',
-  '21434',
-  '21342',
-  '21234',
-  '24132',
-  '24314',
-  '24231',
-  '31242',
-  '31421',
-  '31243',
-  '32413',
-  '32431',
-  '32314',
-  '34121',
-  '34213',
-  '34124',
-  '41324',
-  '41423',
-  '41213',
-  '42312',
-  '42314',
-  '42132',
-  '43142',
-  '43421',
-  '43124',
-];
 
 const Custom1 = (props: any) => {
   const {sequence, repeat, duration, onEnd} = props;
@@ -57,11 +19,8 @@ const Custom1 = (props: any) => {
   const allInputsRef = useRef<string[]>([]);
   const allStrokesRef = useRef<number[][]>([]);
   const [isFinished, setIsFinished] = useState<boolean>(false);
-  const {getItem: getSequence, setItem: setSequence} = useAsyncStorage(
-    '@ftt_trained_sequence',
-  );
-  const {getItem: getRepeatedSequence, setItem: setRepeatedSequence} =
-    useAsyncStorage('@ftt_repeat');
+  const {getItem: getSequenceIndex, setItem: setSequenceIndex} =
+    useAsyncStorage('@ftt_trained_sequence_index');
   const [finalSequence, setFinalSequence] = useState<string>(sequence);
 
   const onCounterFinish = () => {
@@ -86,21 +45,20 @@ const Custom1 = (props: any) => {
   useEffect(() => {
     (async () => {
       if (sequence === 'training') {
-        const getRepeated = JSON.parse((await getRepeatedSequence()) || '[]');
-        let randomSequence = null;
-        while (randomSequence == null || getRepeated.includes(randomSequence)) {
-          randomSequence =
-            sequences[Math.floor(Math.random() * sequences.length)];
+        const sequenceIndex = await getSequenceIndex();
+        let randomSequenceIndex = null;
+        if (sequenceIndex === null) {
+          randomSequenceIndex = Math.floor(Math.random() * sequences.length);
+        } else {
+          randomSequenceIndex = (+sequenceIndex + 1) % sequences.length;
         }
-        setFinalSequence(randomSequence);
-        await setSequence(randomSequence);
-        await setRepeatedSequence(
-          JSON.stringify([...getRepeated, randomSequence]),
-        );
+        console.log('randomSequenceIndex', randomSequenceIndex);
+        await setSequenceIndex(randomSequenceIndex.toString());
+        setFinalSequence(sequences[randomSequenceIndex]);
       } else if (sequence === 'testing') {
-        const trainedSequence = await getSequence();
-        if (trainedSequence) {
-          setFinalSequence(trainedSequence);
+        const trainedSequenceIndex = await getSequenceIndex();
+        if (trainedSequenceIndex) {
+          setFinalSequence(sequences[+trainedSequenceIndex]);
         } else {
           Notifier.showNotification({
             title: 'No trained sequence found',
@@ -113,7 +71,6 @@ const Custom1 = (props: any) => {
         }
       }
     })();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sequence]);
 
   return (

@@ -1,4 +1,7 @@
-export default {
+import {configureFonts, MD3LightTheme, MD3Theme} from 'react-native-paper';
+
+const theme: MD3Theme = {
+  ...MD3LightTheme,
   colors: {
     primary: 'rgb(0, 104, 124)',
     onPrimary: 'rgb(255, 255, 255)',
@@ -41,4 +44,15 @@ export default {
     onSurfaceDisabled: 'rgba(25, 28, 29, 0.38)',
     backdrop: 'rgba(41, 50, 53, 0.4)',
   },
+  fonts: configureFonts({
+    config: {
+      labelLarge: {
+        lineHeight: 22,
+        fontSize: 17,
+      },
+    },
+    isV3: true,
+  }),
 };
+
+export default theme;

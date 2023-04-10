@@ -8,6 +8,7 @@ import Checkboxes from '../checkboxes/checkboxes';
 import Custom1 from '../custom1/custom1';
 import Custom2 from '../custom2/custom2';
 import Custom3 from '../custom3/custom3';
+import Custom4 from '../custom4/custom4';
 import DatetimePicker from '../datetime-picker/datetime-picker';
 import Indicator from '../indicators/indicator';
 import Radiobuttons from '../radiobuttons/radiobuttons';
@@ -61,6 +62,7 @@ const Question = (props: any) => {
             {rest.indicator && (
               <Indicator
                 items={rest.indicator.items}
+                // items={rest.indicator}
                 mode={rest.indicator.mode}
               />
             )}
@@ -93,6 +95,8 @@ const Question = (props: any) => {
         return <Custom2 {...rest} onEnd={rest.handleAnswer(rest.id)} />;
       case 'custom3':
         return <Custom3 {...rest} onEnd={rest.handleAnswer(rest.id)} />;
+      case 'custom4':
+        return <Custom4 {...rest} onEnd={rest.handleAnswer(rest.id)} />;
       default:
         return <></>;
     }

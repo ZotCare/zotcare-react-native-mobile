@@ -33,6 +33,7 @@ const TabStackNavigator = () => {
               )}
             </View>
           ),
+          title: 'HowRU',
         }}
       />
       <Drawer.Screen

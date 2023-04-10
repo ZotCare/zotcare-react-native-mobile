@@ -39,25 +39,25 @@ const FingerTapTest = (props: any) => {
           style={styles.actionButton}
           mode={'elevated'}
           onPress={addValue(1)}>
-          1
+          <Text variant="titleLarge">1</Text>
         </Button>
         <Button
           style={styles.actionButton}
           mode={'elevated'}
           onPress={addValue(2)}>
-          2
+          <Text variant="titleLarge">2</Text>
         </Button>
         <Button
           style={styles.actionButton}
           mode={'elevated'}
           onPress={addValue(3)}>
-          3
+          <Text variant="titleLarge">3</Text>
         </Button>
         <Button
           style={styles.actionButton}
           mode={'elevated'}
           onPress={addValue(4)}>
-          4
+          <Text variant="titleLarge">4</Text>
         </Button>
       </View>
     </View>
@@ -83,7 +83,7 @@ const styles = ScaledSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    columnGap: 25,
+    columnGap: '50@vs',
   },
   actionButton: {
     width: 100,

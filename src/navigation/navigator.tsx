@@ -7,6 +7,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {SplashScreen} from '../components/SplashScreen';
 import {getDBToken, loadDataFromDB} from '../modules/auth/actions';
 import {getDBProfile} from '../modules/profile/actions';
+import CategoryScreen from '../screens/Home/CategoryScreen';
 import InteractionScreen from '../screens/Interaction/interaction-screen';
 import AuthStack from './auth-stack';
 import {NavigationService, TabStackNavigator} from './index';
@@ -14,6 +15,7 @@ import {NavigationService, TabStackNavigator} from './index';
 export type NavigatorParams = {
   tab: undefined;
   interaction: {id: string};
+  category: {id: string};
 };
 
 const Stack = createNativeStackNavigator<NavigatorParams>();
@@ -53,7 +55,12 @@ export default () => {
               name="tab"
               component={TabStackNavigator}
             />
-            <Stack.Screen name="interaction" component={InteractionScreen} />
+            <Stack.Screen
+              name="interaction"
+              options={{headerShown: false}}
+              component={InteractionScreen}
+            />
+            <Stack.Screen name="category" component={CategoryScreen} />
           </Stack.Navigator>
         )}
       </SplashScreen>

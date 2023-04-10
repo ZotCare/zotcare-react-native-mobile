@@ -1,5 +1,5 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import React, {useEffect, useRef} from 'react';
+import React, {Fragment, useEffect, useRef} from 'react';
 import {useState} from 'react';
 import {View} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
@@ -8,6 +8,7 @@ import {Button, HelperText, Text} from 'react-native-paper';
 import {ScaledSheet} from 'react-native-size-matters';
 
 import Question from '../../components/interaction-components/question/question';
+import {submitInteraction} from '../../modules/interactions/api';
 import {useInteraction} from '../../modules/interactions/service';
 import {NavigatorParams} from '../../navigation/navigator';
 import {useCondition} from './conditions';
@@ -23,6 +24,8 @@ const InteractionScreen = ({route, navigation}: Props) => {
     answersRef.current,
   );
   const [missedKeys, setMissedKeys] = useState<string[]>([]);
+  const [page, setPage] = useState(0);
+  const [hideNext, setHideNext] = useState(false);
 
   const findNextPage = (start: number) => {
     for (let i = start; i < interaction.data.pages.length; i++) {
@@ -33,17 +36,19 @@ const InteractionScreen = ({route, navigation}: Props) => {
     return -1;
   };
 
-  const [page, setPage] = useState(findNextPage(0));
-
   useEffect(() => {
-    interaction.data.pages.forEach((int_page: {fields: any[]}) => {
-      int_page.fields.forEach(field => {
-        if (field.default) {
-          setDefaults((prev: any) => ({...prev, [field.key]: field.default}));
-          answersRef.current[field.key] = field.default;
-        }
+    if (status === 'success') {
+      navigation.setOptions({title: interaction.name});
+      setPage(findNextPage(0));
+      interaction.data.pages.forEach((int_page: {fields: any[]}) => {
+        int_page.fields.forEach(field => {
+          if (field.default) {
+            setDefaults((prev: any) => ({...prev, [field.key]: field.default}));
+            answersRef.current[field.key] = field.default;
+          }
+        });
       });
-    });
+    }
   }, [interaction]);
 
   const handleAnswer =
@@ -62,7 +67,13 @@ const InteractionScreen = ({route, navigation}: Props) => {
     return missedKeys.includes(key);
   };
 
-  const handleSubmit = () => {
+  const handleOptions = (page: number) => {
+    setHideNext(
+      interaction.data.pages[page]?.options?.hide_next_button ?? false,
+    );
+  };
+
+  const handleSubmit = async () => {
     const nextPage = findNextPage(page + 1);
     const requiredKeys = interaction.data.pages[page].fields
       .filter((field: {required: any}) => field.required)
@@ -88,6 +99,7 @@ const InteractionScreen = ({route, navigation}: Props) => {
     }
     setDefaults((prev: any) => ({...prev, ...answersRef.current}));
     if (nextPage === -1) {
+      await submitInteraction(id, answersRef.current);
       Notifier.showNotification({
         title: 'Interaction finished',
         description: 'You have finished the interaction',
@@ -99,39 +111,42 @@ const InteractionScreen = ({route, navigation}: Props) => {
       navigation.navigate('tab');
     } else {
       setPage(nextPage);
+      handleOptions(nextPage);
     }
   };
 
   return status === 'success' ? (
     <ScrollView style={{flex: 1}} contentContainerStyle={{flexGrow: 1}}>
       <View style={styles.container}>
-        <View style={{flex: 1}}>
+        <View style={styles.fieldsContainer}>
           {interaction.data.pages[page].fields.map(
             (field: any, index: number) => {
               field.id = field.key;
               return (
-                <>
+                <Fragment key={index.toString()}>
                   <Question
-                    key={(index + 1).toString()}
                     handleAnswer={handleAnswer}
                     value={defaults[field.id]}
                     {...field}
                   />
-                  {isRequired(field.key) && (
-                    <HelperText
-                      type="error"
-                      key={(-1 * (index + 1)).toString()}>
-                      This field is required
-                    </HelperText>
+                  {isRequired(field.id) && (
+                    <HelperText type="error">This field is required</HelperText>
                   )}
-                </>
+                  <View style={styles.fieldMargin} />
+                </Fragment>
               );
             },
           )}
         </View>
-        <Button onPress={handleSubmit}>Next</Button>
+        {!hideNext && (
+          <Button mode="contained-tonal" onPress={handleSubmit}>
+            Next
+          </Button>
+        )}
       </View>
     </ScrollView>
+  ) : status === 'loading' ? (
+    <Text>Loading</Text>
   ) : (
     <Text>Error</Text>
   );
@@ -144,5 +159,11 @@ const styles = ScaledSheet.create({
     flex: 1,
     paddingLeft: 20,
     paddingRight: 20,
+  },
+  fieldsContainer: {
+    flex: 1,
+  },
+  fieldMargin: {
+    marginBottom: '10@s',
   },
 });

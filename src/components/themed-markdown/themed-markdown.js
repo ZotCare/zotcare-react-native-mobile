@@ -11,7 +11,7 @@ const ThemedMarkdown = props => {
       mergeStyle={true}
       style={{
         body: {
-          fontSize: theme.fonts.bodyMedium.fontSize,
+          fontSize: theme.fonts.titleMedium.fontSize,
         },
         heading1: {
           flexDirection: 'row',
