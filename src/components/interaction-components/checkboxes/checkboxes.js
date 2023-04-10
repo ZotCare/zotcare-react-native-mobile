@@ -1,7 +1,7 @@
 import 'react-native';
 
 import PropTypes from 'prop-types';
-import {useState} from 'react';
+import React, {useState} from 'react';
 import {Platform, View} from 'react-native';
 import {Checkbox, useTheme} from 'react-native-paper';
 import {ScaledSheet} from 'react-native-size-matters';
@@ -105,6 +105,9 @@ const styles = ScaledSheet.create({
     textAlign: 'center',
     borderRadius: 18,
     borderWidth: 1,
+    width: '60@vs',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   itemAndroid: {
     textAlign: 'center',

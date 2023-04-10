@@ -53,6 +53,7 @@ const ProfileField = (props: any) => {
               mode="date"
               default={rest.value || rest.default}
               onValueChange={rest.handleAnswer}
+              disabled={rest.editable === false}
             />
           </View>
         );
@@ -64,6 +65,7 @@ const ProfileField = (props: any) => {
               mode="time"
               default={rest.value || rest.default}
               onValueChange={rest.handleAnswer}
+              disabled={rest.editable === false}
             />
           </View>
         );

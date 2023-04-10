@@ -1,7 +1,7 @@
 import 'react-native';
 
 import PropTypes from 'prop-types';
-import {useState} from 'react';
+import React, {useState} from 'react';
 import {Platform, View} from 'react-native';
 import {RadioButton, useTheme} from 'react-native-paper';
 import {ScaledSheet} from 'react-native-size-matters';
@@ -11,7 +11,7 @@ const Radiobuttons = props => {
   const [value, setValue] = useState(def);
   const theme = useTheme();
 
-  return mode === 'horizontal' ? (
+  return mode === 'vertical' ? (
     <RadioButton.Group
       disabled={disabled}
       onValueChange={newValue => {
@@ -25,6 +25,7 @@ const Radiobuttons = props => {
           label={typeof option === 'string' ? option : option.label}
           labelVariant="bodySmall"
           value={typeof option === 'string' ? option : option.value}
+          mode={'android'}
         />
       ))}
     </RadioButton.Group>
@@ -61,7 +62,7 @@ Radiobuttons.propTypes = {
   default: PropTypes.string,
   onChange: PropTypes.func,
   disabled: PropTypes.bool,
-  mode: PropTypes.oneOf(['horizontal', 'matrix']),
+  mode: PropTypes.oneOf(['vertical', 'matrix']),
 };
 
 Radiobuttons.defaultProps = {
@@ -69,7 +70,7 @@ Radiobuttons.defaultProps = {
   default: undefined,
   onChange: () => {},
   disabled: false,
-  mode: 'horizontal',
+  mode: 'vertical',
 };
 
 export default Radiobuttons;
@@ -85,6 +86,9 @@ const styles = ScaledSheet.create({
     textAlign: 'center',
     borderRadius: 18,
     borderWidth: 1,
+    width: '55@vs',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   itemAndroid: {
     textAlign: 'center',

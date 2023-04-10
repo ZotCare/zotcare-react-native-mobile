@@ -63,7 +63,7 @@ store.subscribe(async () => {
 
 const theme = {
   ...DefaultTheme,
-  colors: paper_theme.colors,
+  ...paper_theme,
 };
 
 // onlineManager.setEventListener(setOnline => {
