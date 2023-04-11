@@ -94,10 +94,23 @@ const InteractionScreen = ({route}: Props) => {
     }
   };
 
+  const findIndicators = () => {
+    const indexArray: Array<number> = []
+    for (let i = 0; i < interaction.data.pages[page].fields.length; ++i) {
+      if (interaction.data.pages[page].fields[i].type === "indicator" &&
+          interaction.data.pages[page].fields[i].sticky)
+        indexArray.push(i)
+    }
+    return indexArray
+  }
+
   return status === 'success' ? (
+
     <View>
-      <ScrollView>
-        <View style={styles.container}>
+      <ScrollView 
+        stickyHeaderIndices={ findIndicators() }
+        >
+          
           {interaction.data.pages[page].fields.map(
             (field: any, index: number) => {
               field.id = field.key;
@@ -121,7 +134,7 @@ const InteractionScreen = ({route}: Props) => {
             },
           )}
           <Button onPress={handleSubmit}>Next</Button>
-        </View>
+        
       </ScrollView>
     </View>
   ) : (
@@ -137,4 +150,17 @@ const styles = ScaledSheet.create({
     paddingLeft: 20,
     paddingRight: 20,
   },
+  headerStyle : {
+    backgroundColor: '#e5e5e5',
+    height: 20
+  },
+  myShadowStyle: {
+    elevation: 3,
+    shadowOpacity: 0.2,
+    shadowRadius: 6,
+    shadowOffset: {
+      height: 3,
+      width: 0,
+    }
+  }
 });

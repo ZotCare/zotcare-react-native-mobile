@@ -13,7 +13,7 @@ import { Image } from 'react-native-svg';
 
 const Question = (props: any) => {
   const {type, ...rest} = props;
-  console.log(rest)
+
   return ((): JSX.Element => {
     switch (type) {
       case 'text':

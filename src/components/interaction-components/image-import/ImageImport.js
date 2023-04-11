@@ -65,9 +65,9 @@ const ImageImport = ( {title} ) => {
                 </Text>
                 <Button title="Choose from Library..." onPress={uploadFromGallery} />
                 <Button title="Take a Picture" onPress={takePhotoFromCamera}/>
-                {imageSelected && <Image style={{ width: 200, height: 200, alignSelf:"center" }}
+                {imageSelected && <Image style={{ width: 200, height: 200, alignSelf:"center", borderRadius: 16 }}
                          source={{uri: image}} />}
-                {imageSelected && <Text style={styles.filePath}> File Name: {image} </Text>}
+                {imageSelected && <Text style={styles.filePath}>File Name: {image} </Text>}
             </View> 
         </SafeAreaView>
     )
