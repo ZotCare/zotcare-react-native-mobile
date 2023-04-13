@@ -15,9 +15,10 @@ const FingerTapTest = (props: any) => {
   const [progress, setProgress] = useState<number>(0);
 
   useEffect(() => {
-    setTimeout(() => {
+    const timeout = setTimeout(() => {
       onEnd(input.current, strokes.current);
     }, duration * 1000);
+    return () => clearTimeout(timeout);
   }, [duration, onEnd]);
 
   const addValue = (value: number) => () => {

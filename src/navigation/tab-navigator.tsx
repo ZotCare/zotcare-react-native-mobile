@@ -44,13 +44,6 @@ const TabStackNavigator = () => {
         }}
       />
       <Drawer.Screen
-        name="Devices"
-        component={DevicesScreen}
-        options={{
-          drawerIcon: () => <Icon name="watch" size={35} />,
-        }}
-      />
-      <Drawer.Screen
         name="Info"
         component={InfoScreen}
         options={{

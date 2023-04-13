@@ -5,7 +5,7 @@ import {Button} from 'react-native-paper';
 import {ScaledSheet} from 'react-native-size-matters';
 
 type RstPresentProps = {
-  object: string;
+  object: any;
   position: 'left' | 'right';
   onPress: (position: 'left' | 'right') => () => void;
 };
@@ -20,12 +20,7 @@ const rstPresent = (props: RstPresentProps) => {
           styles.imagesRow,
           {flexDirection: position === 'right' ? 'row-reverse' : 'row'},
         ]}>
-        <Image
-          style={styles.image}
-          source={{
-            uri: object,
-          }}
-        />
+        <Image style={styles.image} source={object} />
       </View>
       <View style={styles.buttonsRow}>
         <Button
@@ -46,7 +41,7 @@ const rstPresent = (props: RstPresentProps) => {
 };
 
 rstPresent.propTypes = {
-  object: PropTypes.string.isRequired,
+  object: PropTypes.node.isRequired,
   position: PropTypes.oneOf(['left', 'right']).isRequired,
   onPress: PropTypes.func.isRequired,
 };
@@ -73,6 +68,6 @@ const styles = ScaledSheet.create({
     flexDirection: 'row',
   },
   button: {
-    width: '30%',
+    width: 120,
   },
 });

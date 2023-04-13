@@ -1,5 +1,5 @@
 import React from 'react';
-import {ScrollView, View} from 'react-native';
+import {View} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {ScaledSheet} from 'react-native-size-matters';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
@@ -38,22 +38,20 @@ const HomeScreen = ({navigation}) => {
   };
 
   return (
-    <ScrollView contentInsetAdjustmentBehavior="automatic">
-      <SafeAreaView style={styles.container}>
-        <View style={styles.cardsWrapper}>
-          {categories.map((category, index) => {
-            return (
-              <CategoryItem
-                key={index.toString()}
-                title={category.name}
-                Icon={category.icon}
-                onPress={navigateCategories(category.id)}
-              />
-            );
-          })}
-        </View>
-      </SafeAreaView>
-    </ScrollView>
+    <SafeAreaView style={styles.container}>
+      <View style={styles.cardsWrapper}>
+        {categories.map((category, index) => {
+          return (
+            <CategoryItem
+              key={index.toString()}
+              title={category.name}
+              Icon={category.icon}
+              onPress={navigateCategories(category.id)}
+            />
+          );
+        })}
+      </View>
+    </SafeAreaView>
   );
 };
 
@@ -61,10 +59,10 @@ export default HomeScreen;
 
 const styles = ScaledSheet.create({
   container: {
-    padding: '20@s',
+    paddingHorizontal: '10@s',
+    paddingTop: '20@vs',
   },
   cardsWrapper: {
-    flex: 1,
     gap: 10,
     flexDirection: 'row',
     flexWrap: 'wrap',

@@ -1,6 +1,7 @@
 import messaging, {
   FirebaseMessagingTypes,
 } from '@react-native-firebase/messaging';
+import {Platform} from 'react-native';
 import {getUniqueId} from 'react-native-device-info';
 import {Notifier} from 'react-native-notifier';
 
@@ -32,7 +33,9 @@ export const handleForegroundNotification = async (
 };
 
 export const sendToken = async () => {
-  await messaging().registerDeviceForRemoteMessages();
+  if (Platform.OS === 'android') {
+    await messaging().registerDeviceForRemoteMessages();
+  }
   const fcmToken = await messaging().getToken();
   const deviceId = await getUniqueId();
   const timezoneOffset = new Date().getTimezoneOffset();

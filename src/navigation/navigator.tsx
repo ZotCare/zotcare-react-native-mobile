@@ -55,11 +55,7 @@ export default () => {
               name="tab"
               component={TabStackNavigator}
             />
-            <Stack.Screen
-              name="interaction"
-              options={{headerShown: false}}
-              component={InteractionScreen}
-            />
+            <Stack.Screen name="interaction" component={InteractionScreen} />
             <Stack.Screen name="category" component={CategoryScreen} />
           </Stack.Navigator>
         )}

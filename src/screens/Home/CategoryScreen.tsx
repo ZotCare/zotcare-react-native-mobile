@@ -215,7 +215,7 @@ export default CategoryScreen;
 
 const styles = ScaledSheet.create({
   container: {
-    padding: '20@s',
+    padding: 20,
   },
   cardsWrapper: {
     flex: 1,
@@ -225,6 +225,6 @@ const styles = ScaledSheet.create({
     justifyContent: 'center',
   },
   card: {
-    width: '48%',
+    width: 150,
   },
 });

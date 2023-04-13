@@ -14,12 +14,13 @@ const RstFeedback = (props: RstFeedbackProps) => {
   const {mode, isCorrect, onEnd} = props;
 
   useEffect(() => {
-    setTimeout(
+    const timer = setTimeout(
       () => {
         onEnd();
       },
       mode === 'practice' ? 3000 : 1000,
     );
+    return () => clearTimeout(timer);
   }, []);
 
   return (

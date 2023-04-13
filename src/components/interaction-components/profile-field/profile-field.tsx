@@ -8,7 +8,7 @@ import Radiobuttons from '../radiobuttons/radiobuttons';
 
 const ProfileField = (props: any) => {
   const {type, ...rest} = props;
-  // TODO: 'date', 'time', 'datetime'
+  // TODO: 'datetime'
   return ((): JSX.Element => {
     switch (type) {
       case 'select':

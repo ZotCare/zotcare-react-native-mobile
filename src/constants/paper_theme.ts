@@ -42,7 +42,7 @@ const theme: MD3Theme = {
     },
     surfaceDisabled: 'rgba(25, 28, 29, 0.12)',
     onSurfaceDisabled: 'rgba(25, 28, 29, 0.38)',
-    backdrop: 'rgba(41, 50, 53, 0.4)',
+    backdrop: 'rgba(41,50,53,0.2)',
   },
   fonts: configureFonts({
     config: {

@@ -65,10 +65,10 @@ const styles = ScaledSheet.create({
   },
   firstItem: {
     flex: 1,
-    textAlign: 'left',
+    textAlign: 'center',
   },
   lastItem: {
     flex: 1,
-    textAlign: 'right',
+    textAlign: 'center',
   },
 });

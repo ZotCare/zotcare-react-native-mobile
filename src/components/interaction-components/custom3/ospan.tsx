@@ -95,12 +95,13 @@ const Ospan = (props: Props) => {
     setStage(nextStage);
     setShowButtons(true);
     if (nextStage === 'equation' || nextStage === 'letter') {
-      setTimeout(
+      const timeout = setTimeout(
         () => {
           onStageEnd();
         },
         nextStage === 'equation' ? equationTime * 1000 : letterTime * 1000,
       );
+      return () => clearTimeout(timeout);
     }
   };
   const onStageEnd = () => {

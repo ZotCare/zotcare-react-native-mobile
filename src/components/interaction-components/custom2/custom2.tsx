@@ -44,7 +44,6 @@ const Custom2 = (props: any) => {
         } else {
           startIndex = (+startIndex + length * 2) % words.length;
         }
-        console.log('start index', startIndex);
         await setStartIndex(startIndex.toString());
         pairsRef.current = getPairs(length, startIndex);
         setState('present');
@@ -53,7 +52,6 @@ const Custom2 = (props: any) => {
       } else if (mode === 'test') {
         const shuffleSeq = JSON.parse((await getShuffleIndexes()) || '[]');
         const startIndex = +((await getStartIndex()) || -1);
-        console.log('start index', startIndex);
         const pairs = getPairs(length, startIndex);
         const shuffledPairs = [];
         for (let i = start; i < end; i++) {
