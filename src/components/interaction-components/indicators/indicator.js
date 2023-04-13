@@ -58,7 +58,7 @@ const styles = ScaledSheet.create({
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    backgroundColor: "grey",
+    backgroundColor: "#769FB6",
   },
   item: {
     flex: 1,
@@ -66,10 +66,10 @@ const styles = ScaledSheet.create({
   },
   firstItem: {
     flex: 1,
-    textAlign: 'left',
+    textAlign: 'center',
   },
   lastItem: {
     flex: 1,
-    textAlign: 'right',
+    textAlign: 'center',
   },
 });

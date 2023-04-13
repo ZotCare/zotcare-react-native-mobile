@@ -1,5 +1,5 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import React, {useEffect} from 'react';
+import React, {Fragment, useEffect, useRef} from 'react';
 import {useState} from 'react';
 import {View} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
@@ -8,20 +8,24 @@ import {Button, HelperText, Text} from 'react-native-paper';
 import {ScaledSheet} from 'react-native-size-matters';
 
 import Question from '../../components/interaction-components/question/question';
+import {submitInteraction} from '../../modules/interactions/api';
 import {useInteraction} from '../../modules/interactions/service';
 import {NavigatorParams} from '../../navigation/navigator';
 import {useCondition} from './conditions';
 
 type Props = NativeStackScreenProps<NavigatorParams, 'interaction'>;
 
-const InteractionScreen = ({route}: Props) => {
+const InteractionScreen = ({route, navigation}: Props) => {
   const {id} = route.params;
   const {data: interaction, status} = useInteraction(id);
-  const [answers, setAnswers] = useState<any>({});
+  const answersRef = useRef<any>({});
   const [defaults, setDefaults] = useState<any>({});
-  const {check_or_and_collection: checkConditions} = useCondition(answers);
+  const {check_or_and_collection: checkConditions} = useCondition(
+    answersRef.current,
+  );
   const [missedKeys, setMissedKeys] = useState<string[]>([]);
-
+  const [page, setPage] = useState(0);
+  const [hideNext, setHideNext] = useState(false);
 
   const findNextPage = (start: number) => {
     for (let i = start; i < interaction.data.pages.length; i++) {
@@ -32,40 +36,54 @@ const InteractionScreen = ({route}: Props) => {
     return -1;
   };
 
-  const [page, setPage] = useState(findNextPage(0));
-
   useEffect(() => {
-    interaction.data.pages.forEach((int_page: {fields: any[]}) => {
-      int_page.fields.forEach(field => {
-        if (field.default) {
-          setDefaults((prev: any) => ({...prev, [field.key]: field.default}));
-          setAnswers((prev: any) => ({...prev, [field.key]: field.default}));
-        }
+    if (status === 'success') {
+      navigation.setOptions({title: interaction.name});
+      setPage(findNextPage(0));
+      interaction.data.pages.forEach((int_page: {fields: any[]}) => {
+        int_page.fields.forEach(field => {
+          if (field.default) {
+            setDefaults((prev: any) => ({...prev, [field.key]: field.default}));
+            answersRef.current[field.key] = field.default;
+          }
+        });
       });
-    });
+    }
   }, [interaction]);
 
-  const handleAnswer = (questionKey: string) => (answer: any) => {
-    if (missedKeys.includes(questionKey)) {
-      setMissedKeys(prev => prev.filter(key => key !== questionKey));
-    }
-    setAnswers({...answers, [questionKey]: answer});
-  };
+  const handleAnswer =
+    (questionKey: string) =>
+    async (answer: any, skip: boolean = false) => {
+      if (missedKeys.includes(questionKey)) {
+        setMissedKeys(prev => prev.filter(key => key !== questionKey));
+      }
+      answersRef.current[questionKey] = answer;
+      if (skip) {
+        handleSubmit();
+      }
+    };
 
   const isRequired = (key: string) => {
     return missedKeys.includes(key);
   };
 
-  const handleSubmit = () => {
+  const handleOptions = (page: number) => {
+    setHideNext(
+      interaction.data.pages[page]?.options?.hide_next_button ?? false,
+    );
+  };
+
+  const handleSubmit = async () => {
     const nextPage = findNextPage(page + 1);
     const requiredKeys = interaction.data.pages[page].fields
       .filter((field: {required: any}) => field.required)
       .map((field: {key: any}) => field.key);
     const missingKeys = requiredKeys.filter(
       (key: string) =>
-        answers[key] === undefined ||
-        answers[key] === '' ||
-        (Array.isArray(answers[key]) && answers[key].length === 0),
+        answersRef.current[key] === undefined ||
+        answersRef.current[key] === '' ||
+        (Array.isArray(answersRef.current[key]) &&
+          answersRef.current[key].length === 0),
     );
     setMissedKeys(missingKeys);
     if (missingKeys.length > 0) {
@@ -79,8 +97,9 @@ const InteractionScreen = ({route}: Props) => {
       });
       return;
     }
-    setDefaults((prev: any) => ({...prev, ...answers}));
+    setDefaults((prev: any) => ({...prev, ...answersRef.current}));
     if (nextPage === -1) {
+      await submitInteraction(id, answersRef.current);
       Notifier.showNotification({
         title: 'Interaction finished',
         description: 'You have finished the interaction',
@@ -89,54 +108,54 @@ const InteractionScreen = ({route}: Props) => {
           alertType: 'success',
         },
       });
+      navigation.navigate('tab');
     } else {
       setPage(nextPage);
+      handleOptions(nextPage);
     }
   };
 
   const findIndicators = () => {
     const indexArray: Array<number> = []
+    // const allItems: Array<any> = interaction.data.pages[page].fields
     for (let i = 0; i < interaction.data.pages[page].fields.length; ++i) {
-      if (interaction.data.pages[page].fields[i].type === "indicator" &&
-          interaction.data.pages[page].fields[i].sticky)
+      if (interaction.data.pages[page].fields[i].type === "indicator" && interaction.data.pages[page].fields[i].sticky)
         indexArray.push(i)
     }
     return indexArray
   }
-
+  
   return status === 'success' ? (
-
-    <View>
-      <ScrollView 
-        stickyHeaderIndices={ findIndicators() }
-        >
-          
-          {interaction.data.pages[page].fields.map(
-            (field: any, index: number) => {
-              field.id = field.key;
-              return (
-                <>
-                  <Question
-                    key={(index + 1).toString()}
-                    handleAnswer={handleAnswer}
-                    value={defaults[field.id]}
-                    {...field}
-                  />
-                  {isRequired(field.key) && (
-                    <HelperText
-                      type="error"
-                      key={(-1 * (index + 1)).toString()}>
-                      This field is required
-                    </HelperText>
-                  )}
-                </>
-              );
-            },
-          )}
-          <Button onPress={handleSubmit}>Next</Button>
-        
-      </ScrollView>
-    </View>
+    <ScrollView style={{flex: 1}} contentContainerStyle={{flexGrow: 1}} stickyHeaderIndices={findIndicators()}>
+      
+        {interaction.data.pages[page].fields.map(
+          (field: any, index: number) => {
+            field.id = field.key;
+            return (
+              <Fragment key={index.toString()}>
+                <Question
+                  handleAnswer={handleAnswer}
+                  value={defaults[field.id]}
+                  {...field}
+                />
+                {isRequired(field.id) && (
+                  <HelperText type="error">This field is required</HelperText>
+                )}
+                <View style={styles.fieldMargin} />
+              </Fragment>
+            );
+          },
+        )}
+   
+      {!hideNext && (
+        <Button mode="contained-tonal" onPress={handleSubmit}>
+          Next
+        </Button>
+      )}
+  
+    </ScrollView>
+  ) : status === 'loading' ? (
+    <Text>Loading</Text>
   ) : (
     <Text>Error</Text>
   );
@@ -150,17 +169,10 @@ const styles = ScaledSheet.create({
     paddingLeft: 20,
     paddingRight: 20,
   },
-  headerStyle : {
-    backgroundColor: '#e5e5e5',
-    height: 20
+  fieldsContainer: {
+    flex: 1,
   },
-  myShadowStyle: {
-    elevation: 3,
-    shadowOpacity: 0.2,
-    shadowRadius: 6,
-    shadowOffset: {
-      height: 3,
-      width: 0,
-    }
-  }
+  fieldMargin: {
+    marginBottom: '10@s',
+  },
 });
