@@ -5,12 +5,14 @@ import {View} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import {Notifier, NotifierComponents} from 'react-native-notifier';
 import {Button, HelperText, Text} from 'react-native-paper';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {ScaledSheet} from 'react-native-size-matters';
 
-import Question from '../../components/interaction-components/question/question';
-import {submitInteraction} from '../../modules/interactions/api';
-import {useInteraction} from '../../modules/interactions/service';
-import {NavigatorParams} from '../../navigation/navigator';
+import Question from '@app/components/interaction-components/question/question';
+import {submitInteraction} from '@app/modules/interactions/api';
+import {useInteraction} from '@app/modules/interactions/service';
+import {NavigatorParams} from '@app/navigation/navigator';
+
 import {useCondition} from './conditions';
 
 type Props = NativeStackScreenProps<NavigatorParams, 'interaction'>;
@@ -26,10 +28,20 @@ const InteractionScreen = ({route, navigation}: Props) => {
   const [missedKeys, setMissedKeys] = useState<string[]>([]);
   const [page, setPage] = useState(0);
   const [hideNext, setHideNext] = useState(false);
+  const insets = useSafeAreaInsets();
 
   const findNextPage = (start: number) => {
-    for (let i = start; i < interaction.data.pages.length; i++) {
-      if (checkConditions(interaction.data.pages[i].conditions)) {
+    for (let i = start; i < interaction?.data.pages.length; i++) {
+      if (checkConditions(interaction?.data.pages[i].conditions)) {
+        return i;
+      }
+    }
+    return -1;
+  };
+
+  const findPreviousPage = (start: number) => {
+    for (let i = start; i >= 0; i--) {
+      if (checkConditions(interaction?.data.pages[i].conditions)) {
         return i;
       }
     }
@@ -67,15 +79,26 @@ const InteractionScreen = ({route, navigation}: Props) => {
     return missedKeys.includes(key);
   };
 
-  const handleOptions = (page: number) => {
+  const showHeader = () => {
+    return !interaction?.data.pages[page]?.options?.hide_header ?? true;
+  };
+
+  const handleOptions = (nextPage: number) => {
     setHideNext(
-      interaction.data.pages[page]?.options?.hide_next_button ?? false,
+      interaction?.data.pages[nextPage]?.options?.hide_buttons ?? false,
     );
+    navigation.setOptions({
+      orientation:
+        interaction?.data.pages[nextPage]?.options?.screen_orientation ??
+        'default',
+      headerShown:
+        !interaction?.data.pages[nextPage]?.options?.hide_header ?? true,
+    });
   };
 
   const handleSubmit = async () => {
     const nextPage = findNextPage(page + 1);
-    const requiredKeys = interaction.data.pages[page].fields
+    const requiredKeys = interaction?.data.pages[page].fields
       .filter((field: {required: any}) => field.required)
       .map((field: {key: any}) => field.key);
     const missingKeys = requiredKeys.filter(
@@ -115,40 +138,91 @@ const InteractionScreen = ({route, navigation}: Props) => {
     }
   };
 
-  return status === 'success' ? (
-    <ScrollView style={{flex: 1}} contentContainerStyle={{flexGrow: 1}}>
-      <View style={styles.container}>
-        <View style={styles.fieldsContainer}>
-          {interaction.data.pages[page].fields.map(
-            (field: any, index: number) => {
-              field.id = field.key;
-              return (
-                <Fragment key={index.toString()}>
-                  <Question
-                    handleAnswer={handleAnswer}
-                    value={defaults[field.id]}
-                    {...field}
-                  />
-                  {isRequired(field.id) && (
-                    <HelperText type="error">This field is required</HelperText>
-                  )}
-                  <View style={styles.fieldMargin} />
-                </Fragment>
-              );
-            },
-          )}
-        </View>
-        {!hideNext && (
-          <Button mode="contained-tonal" onPress={handleSubmit}>
-            Next
-          </Button>
+  const handleBack = () => {
+    const prevPage = findPreviousPage(page - 1);
+    if (prevPage !== -1) {
+      setPage(prevPage);
+      handleOptions(prevPage);
+    } else {
+      navigation.goBack();
+    }
+  };
+
+  const findIndicators = () => {
+    const indexArray: Array<number> = [];
+
+    for (let i = 0; i < interaction?.data.pages[page].fields.length; ++i) {
+      if (
+        interaction?.data.pages[page].fields[i].type === 'indicator' &&
+        interaction?.data.pages[page].fields[i].sticky
+      ) {
+        indexArray.push(i);
+      }
+    }
+    return indexArray;
+  };
+
+  return (
+    <View
+      style={{
+        flex: 1,
+        paddingBottom: insets.bottom,
+        paddingTop: showHeader() ? 0 : insets.top,
+        paddingLeft: insets.left,
+        paddingRight: insets.right,
+      }}>
+      <View style={styles.paddedContainer}>
+        {status === 'success' ? (
+          <ScrollView
+            stickyHeaderIndices={findIndicators()}
+            contentContainerStyle={{flexGrow: 1}}>
+            {interaction.data.pages[page].fields.map(
+              (field: any, index: number) => {
+                field.id = field.key;
+                return (
+                  <Fragment key={index.toString()}>
+                    <Question
+                      handleAnswer={handleAnswer}
+                      value={defaults[field.id]}
+                      {...field}
+                    />
+                    {isRequired(field.id) && (
+                      <HelperText type="error">
+                        This field is required
+                      </HelperText>
+                    )}
+                    <View style={styles.fieldMargin} />
+                  </Fragment>
+                );
+              },
+            )}
+            <View style={styles.container} />
+            {!hideNext && (
+              <View style={styles.buttonsContainer}>
+                {interaction.back && (
+                  <Button
+                    onPress={handleBack}
+                    style={styles.backButton}
+                    mode="contained-tonal">
+                    Back
+                  </Button>
+                )}
+                <Button
+                  style={styles.nextButton}
+                  mode="contained"
+                  onPress={handleSubmit}>
+                  Next
+                </Button>
+              </View>
+            )}
+          </ScrollView>
+        ) : status === 'loading' ? (
+          <Text>Loading</Text>
+        ) : (
+          <Text>Error</Text>
         )}
       </View>
-    </ScrollView>
-  ) : status === 'loading' ? (
-    <Text>Loading</Text>
-  ) : (
-    <Text>Error</Text>
+    </View>
   );
 };
 
@@ -157,13 +231,25 @@ export default InteractionScreen;
 const styles = ScaledSheet.create({
   container: {
     flex: 1,
-    paddingLeft: 20,
-    paddingRight: 20,
+  },
+  paddedContainer: {
+    flex: 1,
+    paddingHorizontal: '10@s',
   },
   fieldsContainer: {
     flex: 1,
   },
   fieldMargin: {
     marginBottom: '10@s',
+  },
+  buttonsContainer: {
+    flexDirection: 'row',
+    gap: 10,
+  },
+  nextButton: {
+    flex: 2,
+  },
+  backButton: {
+    flex: 1,
   },
 });

@@ -4,6 +4,8 @@ import React, {useEffect, useState} from 'react';
 import {DeviceEventEmitter} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 
+import navigation_theme from '@app/constants/navigation_theme';
+
 import {SplashScreen} from '../components/SplashScreen';
 import {getDBToken, loadDataFromDB} from '../modules/auth/actions';
 import {getDBProfile} from '../modules/profile/actions';
@@ -41,6 +43,7 @@ export default () => {
 
   return (
     <NavigationContainer
+      theme={navigation_theme}
       ref={navigatorRef => {
         NavigationService.setTopLevelNavigator(navigatorRef);
       }}>
