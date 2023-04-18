@@ -1,7 +1,7 @@
+import Markdown from '@ronradtke/react-native-markdown-display';
 import PropTypes from 'prop-types';
 import React from 'react';
 import {Platform, View} from 'react-native';
-import Markdown from 'react-native-markdown-display';
 import {useTheme} from 'react-native-paper';
 
 type Props = {
@@ -19,7 +19,9 @@ const ThemedMarkdown = (props: Props) => {
         mergeStyle={true}
         style={{
           body: {
-            fontSize: theme.fonts.titleMedium.fontSize,
+            fontSize: theme.fonts.bodyLarge.fontSize,
+            fontWeight: theme.fonts.bodyLarge.fontWeight,
+            color: theme.colors.onBackground,
           },
           heading1: {
             flexDirection: 'row',

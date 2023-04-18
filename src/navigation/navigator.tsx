@@ -9,7 +9,6 @@ import navigation_theme from '@app/constants/navigation_theme';
 import {SplashScreen} from '../components/SplashScreen';
 import {getDBToken, loadDataFromDB} from '../modules/auth/actions';
 import {getDBProfile} from '../modules/profile/actions';
-import {getUUID} from '../modules/profile/selectors';
 import InteractionScreen from '../screens/Interaction/interaction-screen';
 import AuthStack from './auth-stack';
 import {NavigationService, TabStackNavigator} from './index';

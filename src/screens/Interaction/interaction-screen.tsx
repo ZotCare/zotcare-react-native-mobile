@@ -21,6 +21,7 @@ const InteractionScreen = ({route, navigation}: Props) => {
   const {id} = route.params;
   const {data: interaction, status} = useInteraction(id);
   const answersRef = useRef<any>({});
+  const metaRef = useRef<any>({page_advances: []});
   const [defaults, setDefaults] = useState<any>({});
   const {check_or_and_collection: checkConditions} = useCondition(
     answersRef.current,
@@ -29,6 +30,7 @@ const InteractionScreen = ({route, navigation}: Props) => {
   const [page, setPage] = useState(0);
   const [hideNext, setHideNext] = useState(false);
   const insets = useSafeAreaInsets();
+  const scrollViewRef = useRef<ScrollView>(null);
 
   const findNextPage = (start: number) => {
     for (let i = start; i < interaction?.data.pages.length; i++) {
@@ -60,6 +62,7 @@ const InteractionScreen = ({route, navigation}: Props) => {
           }
         });
       });
+      metaRef.current.started_at = new Date().getTime();
     }
   }, [interaction]);
 
@@ -94,6 +97,7 @@ const InteractionScreen = ({route, navigation}: Props) => {
       headerShown:
         !interaction?.data.pages[nextPage]?.options?.hide_header ?? true,
     });
+    scrollViewRef.current?.scrollTo({y: 0, animated: false});
   };
 
   const handleSubmit = async () => {
@@ -122,7 +126,8 @@ const InteractionScreen = ({route, navigation}: Props) => {
     }
     setDefaults((prev: any) => ({...prev, ...answersRef.current}));
     if (nextPage === -1) {
-      await submitInteraction(id, answersRef.current);
+      metaRef.current.finished_at = new Date().getTime();
+      await submitInteraction(id, answersRef.current, metaRef.current);
       Notifier.showNotification({
         title: 'Interaction finished',
         description: 'You have finished the interaction',
@@ -133,6 +138,11 @@ const InteractionScreen = ({route, navigation}: Props) => {
       });
       navigation.navigate('tab');
     } else {
+      metaRef.current.page_advances.push({
+        to: nextPage,
+        from: page,
+        time: new Date().getTime(),
+      });
       setPage(nextPage);
       handleOptions(nextPage);
     }
@@ -140,6 +150,11 @@ const InteractionScreen = ({route, navigation}: Props) => {
 
   const handleBack = () => {
     const prevPage = findPreviousPage(page - 1);
+    metaRef.current.page_advances.push({
+      to: prevPage,
+      from: page,
+      time: new Date().getTime(),
+    });
     if (prevPage !== -1) {
       setPage(prevPage);
       handleOptions(prevPage);
@@ -174,6 +189,7 @@ const InteractionScreen = ({route, navigation}: Props) => {
       <View style={styles.paddedContainer}>
         {status === 'success' ? (
           <ScrollView
+            ref={scrollViewRef}
             stickyHeaderIndices={findIndicators()}
             contentContainerStyle={{flexGrow: 1}}>
             {interaction.data.pages[page].fields.map(
@@ -196,7 +212,6 @@ const InteractionScreen = ({route, navigation}: Props) => {
                 );
               },
             )}
-            <View style={styles.container} />
             {!hideNext && (
               <View style={styles.buttonsContainer}>
                 {interaction.back && (
@@ -245,6 +260,7 @@ const styles = ScaledSheet.create({
   buttonsContainer: {
     flexDirection: 'row',
     gap: 10,
+    marginTop: 'auto',
   },
   nextButton: {
     flex: 2,

@@ -6,14 +6,14 @@ import {Button} from 'react-native-paper';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {ScaledSheet} from 'react-native-size-matters';
 
-import ProfileField from '../../components/interaction-components/profile-field/profile-field';
-import useLocalProfile from '../../modules/user_profile/local';
+import ProfileField from '@app/components/interaction-components/profile-field/profile-field';
+import useLocalProfile from '@app/modules/user_profile/local';
 import {
   useMutateProfile,
   useProfile,
   useProfileKeys,
-} from '../../modules/user_profile/service';
-import {TabNavigatorParams} from '../../navigation/tab-navigator';
+} from '@app/modules/user_profile/service';
+import {TabNavigatorParams} from '@app/navigation/tab-navigator';
 
 type Props = NativeStackScreenProps<TabNavigatorParams, 'Profile'>;
 
@@ -61,19 +61,21 @@ const ProfileScreen = ({navigation}: Props) => {
     navigation.navigate('Home');
   };
 
+  const isSuccess =
+    status === 'success' && profileStatus === 'success' && !localLoading;
+
   return (
     <SafeAreaView>
       <ScrollView>
         <View style={styles.container}>
-          {status === 'success' &&
-            profileStatus === 'success' &&
-            !localLoading &&
+          {isSuccess &&
             profileKeys.map((field: any, index: number) => {
               return (
                 <ProfileField
                   key={index.toString()}
                   handleAnswer={handleAnswer(field.key, field.local)}
                   value={getDefault(field.key)}
+                  title={field.title || field.key}
                   {...field}
                 />
               );

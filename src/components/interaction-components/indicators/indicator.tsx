@@ -4,7 +4,7 @@ import {Text, useTheme} from 'react-native-paper';
 import {ScaledSheet} from 'react-native-size-matters';
 
 type Props = {
-  items: Array<string | {value: string; label: string}>;
+  items: Array<string>;
   mode?: 'text' | 'image';
 };
 
@@ -40,7 +40,7 @@ const Indicator = (props: Props) => {
                   : styles.item
               }
               key={index.toString()}
-              source={item}
+              source={{uri: item}}
             />
           );
         }

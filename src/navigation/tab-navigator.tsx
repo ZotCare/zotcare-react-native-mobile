@@ -33,6 +33,7 @@ const TabStackNavigator = () => {
               )}
             </View>
           ),
+          title: 'ZotCare',
         }}
       />
       <Drawer.Screen

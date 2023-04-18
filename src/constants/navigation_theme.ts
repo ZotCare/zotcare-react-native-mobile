@@ -1,4 +1,4 @@
-import {DarkTheme, DefaultTheme, Theme} from '@react-navigation/native';
+import {DefaultTheme, Theme} from '@react-navigation/native';
 
 import paper_theme from '@app/constants/paper_theme';
 
