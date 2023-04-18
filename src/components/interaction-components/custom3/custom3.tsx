@@ -1,7 +1,8 @@
 import {useEffect, useRef, useState} from 'react';
 import {Text} from 'react-native-paper';
 
-import shuffle from '../../../utils/shuffle';
+import shuffle from '@app/utils/shuffle';
+
 import Ospan from './ospan';
 
 const Custom3 = (props: any) => {
@@ -17,7 +18,7 @@ const Custom3 = (props: any) => {
     }
     shuffle(roundsRef.current);
     setStage('ready');
-  }, []);
+  }, [trialsRange]);
 
   const onEvaluate = (result: any) => {
     resultRef.current.push(result);

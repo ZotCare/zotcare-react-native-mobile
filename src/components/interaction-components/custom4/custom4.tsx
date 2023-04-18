@@ -1,7 +1,8 @@
 import {useEffect, useRef, useState} from 'react';
-import {Button, Text} from 'react-native-paper';
+import {Text} from 'react-native-paper';
 
-import uniqueRandom from '../../../utils/unique-random';
+import uniqueRandom from '@app/utils/unique-random';
+
 import rstObjects from './rst-objects';
 import RuleSwitchTask from './rule-switch-task';
 

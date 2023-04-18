@@ -4,7 +4,8 @@ import {View} from 'react-native';
 import {Button, Text} from 'react-native-paper';
 import {ScaledSheet} from 'react-native-size-matters';
 
-import shuffle from '../../../utils/shuffle';
+import shuffle from '@app/utils/shuffle';
+
 import RstFeedback from './rst-feedback';
 import RstPresent from './rst-present';
 
@@ -47,17 +48,17 @@ const RuleSwitchTask = (props: any) => {
   }, [length, object1, object2, type]);
 
   const onDecisionEnd = (decision: 'left' | 'right') => () => {
+    const wasCorrect =
+      (decision === positioningSequenceRef.current[round].placement) ===
+      positioningSequenceRef.current[round].same;
     resultRef.current.push({
       time: new Date().getTime(),
       decision,
-      expected: positioningSequenceRef.current[round].placement,
+      isCorrect: wasCorrect,
       type,
       mode,
     });
-    setIsCorrect(
-      (decision === positioningSequenceRef.current[round].placement) ===
-        positioningSequenceRef.current[round].same,
-    );
+    setIsCorrect(wasCorrect);
     setStage('feedback');
   };
 

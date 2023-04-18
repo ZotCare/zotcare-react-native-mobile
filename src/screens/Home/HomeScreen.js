@@ -6,8 +6,8 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Octicons from 'react-native-vector-icons/Octicons';
 
-import CategoryItem from '../../components/CategoryItem/CategoryItem';
-import {NavigationService} from '../../navigation';
+import CategoryItem from '@app/components/CategoryItem/CategoryItem';
+import {NavigationService} from '@app/navigation';
 
 const categories = [
   {

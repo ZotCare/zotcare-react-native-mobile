@@ -17,10 +17,11 @@ export const fetchInteractionById = async (
 export const submitInteraction = async (
   id: string,
   submission: any,
+  metadata: any,
 ): Promise<any> => {
   const response = await request.post(
     `${Uris.interactions}/${id}/submissions`,
-    submission,
+    {data: submission, metadata},
   );
   return response.data;
 };

@@ -1,8 +1,9 @@
-import Slider from '@react-native-community/slider';
 import React from 'react';
 import {View} from 'react-native';
 import {TextInput} from 'react-native-paper';
 import {ScaledSheet} from 'react-native-size-matters';
+
+import Slider from '@app/components/interaction-components/slider/slider';
 
 import ThemedMarkdown from '../../themed-markdown/themed-markdown';
 import Checkboxes from '../checkboxes/checkboxes';
@@ -20,7 +21,7 @@ const Question = (props: any) => {
     switch (type) {
       case 'text':
         return (
-          <ThemedMarkdown align={rest.alignment || 'left'}>
+          <ThemedMarkdown alignment={rest.alignment || 'left'}>
             {rest.content}
           </ThemedMarkdown>
         );
@@ -75,17 +76,13 @@ const Question = (props: any) => {
             {rest.indicator && (
               <Indicator
                 items={rest.indicator.items}
-                // items={rest.indicator}
                 mode={rest.indicator.mode}
               />
             )}
             <Slider
-              tapToSeek={true}
-              minimumValue={rest.min || 0}
-              maximumValue={rest.max || 100}
-              step={rest.step || 1}
-              value={rest.value || rest.default}
-              onSlidingComplete={rest.handleAnswer(rest.id)}
+              default={rest.value || rest.default}
+              onValueChange={rest.handleAnswer(rest.id)}
+              {...rest}
             />
           </View>
         );

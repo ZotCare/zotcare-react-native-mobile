@@ -9,10 +9,10 @@ const WordPair = (props: any) => {
   let invert = swap ? 1 : 0;
   return (
     <View style={styles.container}>
-      <Text style={styles.text} variant="titleLarge">
+      <Text style={styles.text} variant="headlineMedium">
         {wordPair[invert]}
       </Text>
-      <Text style={styles.text} variant="titleLarge">
+      <Text style={styles.text} variant="headlineMedium">
         {wordPair[1 - invert]}
       </Text>
     </View>

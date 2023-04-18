@@ -61,13 +61,14 @@ const ProfileScreen = ({navigation}: Props) => {
     navigation.navigate('Home');
   };
 
+  const isSuccess =
+    status === 'success' && profileStatus === 'success' && !localLoading;
+
   return (
     <SafeAreaView>
       <ScrollView>
         <View style={styles.container}>
-          {status === 'success' &&
-            profileStatus === 'success' &&
-            !localLoading &&
+          {isSuccess &&
             profileKeys.map((field: any, index: number) => {
               return (
                 <ProfileField

@@ -1,8 +1,9 @@
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React, {useEffect, useState} from 'react';
-import {DeviceEventEmitter} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
+
+import navigation_theme from '@app/constants/navigation_theme';
 
 import {SplashScreen} from '../components/SplashScreen';
 import {getDBToken, loadDataFromDB} from '../modules/auth/actions';
@@ -26,8 +27,6 @@ export default () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    DeviceEventEmitter.addListener('Proximity', function () {});
-
     dispatch(getDBToken());
     dispatch(
       getDBProfile(() => {
@@ -42,6 +41,7 @@ export default () => {
 
   return (
     <NavigationContainer
+      theme={navigation_theme}
       ref={navigatorRef => {
         NavigationService.setTopLevelNavigator(navigatorRef);
       }}>

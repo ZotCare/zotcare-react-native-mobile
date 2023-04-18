@@ -28,7 +28,7 @@ function stateToList(selected: any) {
 type Props = {
   options: Array<string | {value: string; label: string}>;
   default?: Array<string>;
-  onChange?: (selected: Array<string>) => void;
+  onChange: (selected: Array<string>) => void;
   mode?: 'vertical' | 'matrix';
 };
 
@@ -47,23 +47,28 @@ const Checkboxes = (props: Props) => {
   };
 
   return mode === 'vertical' ? (
-    options.map((option, index: number) => {
-      return (
-        <Checkbox.Item
-          key={typeof option === 'string' ? option : option.value}
-          label={typeof option === 'string' ? option : option.label}
-          labelVariant="bodySmall"
-          status={isChecked(typeof option === 'string' ? option : option.value)}
-          mode="android"
-          style={{
-            backgroundColor: index % 2 ? theme.colors.backdrop : 'transparent',
-          }}
-          onPress={toggleOption(
-            typeof option === 'string' ? option : option.value,
-          )}
-        />
-      );
-    })
+    <>
+      {options.map((option, index: number) => {
+        return (
+          <Checkbox.Item
+            key={typeof option === 'string' ? option : option.value}
+            label={typeof option === 'string' ? option : option.label}
+            labelVariant="bodySmall"
+            status={isChecked(
+              typeof option === 'string' ? option : option.value,
+            )}
+            mode="android"
+            style={{
+              backgroundColor:
+                index % 2 ? theme.colors.backdrop : 'transparent',
+            }}
+            onPress={toggleOption(
+              typeof option === 'string' ? option : option.value,
+            )}
+          />
+        );
+      })}
+    </>
   ) : (
     <View style={styles.matrixContainer}>
       {options.map(option => {

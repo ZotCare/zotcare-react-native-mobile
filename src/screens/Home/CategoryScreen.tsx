@@ -8,8 +8,8 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Octicons from 'react-native-vector-icons/Octicons';
 
-import CategoryItem from '../../components/CategoryItem/CategoryItem';
-import {NavigatorParams} from '../../navigation/navigator';
+import CategoryItem from '@app/components/CategoryItem/CategoryItem';
+import {NavigatorParams} from '@app/navigation/navigator';
 
 const categories = {
   tasks: {
@@ -34,7 +34,7 @@ const categories = {
         icon: <Octicons name="number" size={45} />,
       },
       {
-        title: 'Shapes & Colors',
+        title: 'Rule Switching',
         type: 'interaction',
         id: '642c8c61cfa7eec6336ad49d',
         icon: <FontAwesome5 name="shapes" size={45} />,

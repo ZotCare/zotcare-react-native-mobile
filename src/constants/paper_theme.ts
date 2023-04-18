@@ -42,13 +42,39 @@ const theme: MD3Theme = {
     },
     surfaceDisabled: 'rgba(25, 28, 29, 0.12)',
     onSurfaceDisabled: 'rgba(25, 28, 29, 0.38)',
-    backdrop: 'rgba(41,50,53,0.2)',
+    backdrop: 'rgba(41, 50, 53, 0.2)',
   },
   fonts: configureFonts({
     config: {
       labelLarge: {
-        lineHeight: 22,
-        fontSize: 17,
+        letterSpacing: 0.1,
+        lineHeight: 20,
+        fontSize: 16,
+      },
+      labelMedium: {
+        letterSpacing: 0.5,
+        lineHeight: 16,
+        fontSize: 15,
+      },
+      labelSmall: {
+        letterSpacing: 0.5,
+        lineHeight: 16,
+        fontSize: 13,
+      },
+
+      bodyLarge: {
+        lineHeight: 24,
+        fontSize: 18,
+      },
+      bodyMedium: {
+        letterSpacing: 0.25,
+        lineHeight: 20,
+        fontSize: 16,
+      },
+      bodySmall: {
+        letterSpacing: 0.4,
+        lineHeight: 16,
+        fontSize: 14,
       },
     },
     isV3: true,

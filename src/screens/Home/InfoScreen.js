@@ -3,12 +3,12 @@ import React, {useState} from 'react';
 import {ScrollView} from 'react-native';
 import {Text} from 'react-native-paper';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {useDispatch, useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
 
-import CustomButton from '../../components/CustomButton';
-import CustomModal from '../../components/CustomModal';
-import Colors from '../../constants/Colors';
-import {signOut} from '../../modules/auth/actions';
+import CustomButton from '@app/components/CustomButton';
+import CustomModal from '@app/components/CustomModal';
+import Colors from '@app/constants/Colors';
+import {signOut} from '@app/modules/auth/actions';
 
 const HomeScreen = ({navigation}) => {
   const dispatch = useDispatch();

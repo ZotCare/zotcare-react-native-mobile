@@ -4,8 +4,9 @@ import {View} from 'react-native';
 import {Button, Text, TextInput} from 'react-native-paper';
 import {ScaledSheet} from 'react-native-size-matters';
 
-import shuffle from '../../../utils/shuffle';
-import Equation from '../../cognitive_tasks/ospan/equation';
+import shuffle from '@app/utils/shuffle';
+
+import Equation from './equation';
 
 const generateEquation = () => {
   let a = Math.floor(Math.random() * 15);
@@ -108,6 +109,14 @@ const Ospan = (props: Props) => {
     if (stageRef.current === 'input') {
       onEnd(resultRef.current);
     } else if (stageRef.current === 'equation') {
+      if (resultRef.current.length < roundRef.current + 1) {
+        resultRef.current.push({
+          equation: equationsRef.current[roundRef.current],
+          letter: lettersRef.current[roundRef.current],
+          correctAnswer: false,
+          missed: true,
+        });
+      }
       changeStage('letter');
     } else if (stageRef.current === 'letter') {
       if (roundRef.current >= rounds - 1) {
@@ -127,6 +136,7 @@ const Ospan = (props: Props) => {
       letter: lettersRef.current[roundRef.current],
       correctAnswer:
         equationsRef.current[roundRef.current].isCorrect === correct,
+      missed: false,
       time: new Date().getTime(),
     });
   };
@@ -175,9 +185,13 @@ const Ospan = (props: Props) => {
             placeholder="Enter the sequence of letters"
             mode="outlined"
             onChangeText={text => {
+              text = text.toUpperCase();
               setInput(text);
             }}
             value={input}
+            autoCapitalize="characters"
+            autoCorrect={false}
+            autoComplete="off"
           />
           <Button onPress={onInputSubmit} mode="contained">
             <Text variant="titleLarge" style={styles.actionLabel}>
@@ -227,6 +241,6 @@ const styles = ScaledSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    rowGap: '20@s',
+    rowGap: 20,
   },
 });

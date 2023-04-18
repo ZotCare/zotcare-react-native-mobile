@@ -3,8 +3,8 @@ import React, {useEffect, useRef, useState} from 'react';
 import {View} from 'react-native';
 import {Notifier, NotifierComponents} from 'react-native-notifier';
 
-import Countdown from '../../cognitive_tasks/finger-tapping/countdown';
-import FingerTapTest from '../../cognitive_tasks/finger-tapping/Finger-tap-test';
+import Countdown from './countdown';
+import FingerTapTest from './Finger-tap-test';
 import sequences from './sequences';
 
 enum State {
@@ -52,7 +52,6 @@ const Custom1 = (props: any) => {
         } else {
           randomSequenceIndex = (+sequenceIndex + 1) % sequences.length;
         }
-        console.log('randomSequenceIndex', randomSequenceIndex);
         await setSequenceIndex(randomSequenceIndex.toString());
         setFinalSequence(sequences[randomSequenceIndex]);
       } else if (sequence === 'testing') {

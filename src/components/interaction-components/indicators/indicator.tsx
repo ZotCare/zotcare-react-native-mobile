@@ -1,12 +1,19 @@
 import PropTypes from 'prop-types';
 import {Image, View} from 'react-native';
-import {Text} from 'react-native-paper';
+import {Text, useTheme} from 'react-native-paper';
 import {ScaledSheet} from 'react-native-size-matters';
 
-const Indicator = props => {
+type Props = {
+  items: Array<string>;
+  mode?: 'text' | 'image';
+};
+
+const Indicator = (props: Props) => {
   const {items, mode} = props;
+  const theme = useTheme();
+
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, {backgroundColor: theme.colors.surface}]}>
       {items.map((item, index) => {
         if (mode === 'text') {
           return (
@@ -33,7 +40,7 @@ const Indicator = props => {
                   : styles.item
               }
               key={index.toString()}
-              source={item}
+              source={{uri: item}}
             />
           );
         }

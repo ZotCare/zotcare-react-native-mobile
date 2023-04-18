@@ -1,10 +1,11 @@
 import {useAsyncStorage} from '@react-native-async-storage/async-storage';
-import {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 
-import shuffle from '../../../utils/shuffle';
-import Present from '../../cognitive_tasks/word-pair/present';
-import WpaTest from '../../cognitive_tasks/word-pair/wpa-test';
+import shuffle from '@app/utils/shuffle';
+
+import Present from './present';
 import words from './words';
+import WpaTest from './wpa-test';
 
 const getShuffleSequence = (length: number) => {
   const sequence = [];
@@ -27,13 +28,14 @@ const getPairs = (length: number, startIndex: number) => {
 };
 
 const Custom2 = (props: any) => {
-  const {mode, length, duration, onEnd, start, end} = props;
+  const {mode, length, duration, onEnd, rounds} = props;
   const {getItem: getStartIndex, setItem: setStartIndex} =
     useAsyncStorage('@wpa_start_index');
   const {getItem: getShuffleIndexes, setItem: setShuffleIndexes} =
     useAsyncStorage('@wpa_shuffle_indexes');
   const pairsRef = useRef<string[][]>([]);
   const [state, setState] = useState('loading');
+  const [round, setRound] = useState(0);
 
   useEffect(() => {
     (async () => {
@@ -49,13 +51,16 @@ const Custom2 = (props: any) => {
         setState('present');
         const shuffleSeq = getShuffleSequence(length);
         await setShuffleIndexes(JSON.stringify(shuffleSeq));
-      } else if (mode === 'test') {
+      } else if (mode.startsWith('test')) {
         const shuffleSeq = JSON.parse((await getShuffleIndexes()) || '[]');
         const startIndex = +((await getStartIndex()) || -1);
         const pairs = getPairs(length, startIndex);
         const shuffledPairs = [];
-        for (let i = start; i < end; i++) {
+        for (let i = 0; i < length; i++) {
           shuffledPairs.push(pairs[shuffleSeq[i]]);
+        }
+        if (mode === 'test2') {
+          shuffledPairs.reverse();
         }
         pairsRef.current = shuffledPairs;
         setState('test');
@@ -64,8 +69,13 @@ const Custom2 = (props: any) => {
   }, []);
 
   const onPresentEnd = () => {
-    setState('end');
-    onEnd({pairs: pairsRef.current}, true);
+    if (round < rounds - 1) {
+      setRound(round + 1);
+      setState('present');
+    } else {
+      setState('end');
+      onEnd({pairs: pairsRef.current}, true);
+    }
   };
 
   const onTestEnd = (result: any) => {
@@ -75,6 +85,7 @@ const Custom2 = (props: any) => {
 
   return state === 'present' ? (
     <Present
+      key={round.toString()}
       wordPairs={pairsRef.current}
       duration={duration}
       onEnd={onPresentEnd}
