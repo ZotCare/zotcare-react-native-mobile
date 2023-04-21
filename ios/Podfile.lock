@@ -9,25 +9,25 @@ PODS:
     - React-Core (= 0.71.2)
     - React-jsi (= 0.71.2)
     - ReactCommon/turbomodule/core (= 0.71.2)
-  - Firebase/CoreOnly (10.5.0):
-    - FirebaseCore (= 10.5.0)
-  - Firebase/Messaging (10.5.0):
+  - Firebase/CoreOnly (10.7.0):
+    - FirebaseCore (= 10.7.0)
+  - Firebase/Messaging (10.7.0):
     - Firebase/CoreOnly
-    - FirebaseMessaging (~> 10.5.0)
-  - FirebaseCore (10.5.0):
+    - FirebaseMessaging (~> 10.7.0)
+  - FirebaseCore (10.7.0):
     - FirebaseCoreInternal (~> 10.0)
     - GoogleUtilities/Environment (~> 7.8)
     - GoogleUtilities/Logger (~> 7.8)
-  - FirebaseCoreExtension (10.5.0):
+  - FirebaseCoreExtension (10.7.0):
     - FirebaseCore (~> 10.0)
-  - FirebaseCoreInternal (10.5.0):
+  - FirebaseCoreInternal (10.8.0):
     - "GoogleUtilities/NSData+zlib (~> 7.8)"
-  - FirebaseInstallations (10.5.0):
+  - FirebaseInstallations (10.8.0):
     - FirebaseCore (~> 10.0)
     - GoogleUtilities/Environment (~> 7.8)
     - GoogleUtilities/UserDefaults (~> 7.8)
     - PromisesObjC (~> 2.1)
-  - FirebaseMessaging (10.5.0):
+  - FirebaseMessaging (10.7.0):
     - FirebaseCore (~> 10.0)
     - FirebaseInstallations (~> 10.0)
     - GoogleDataTransport (~> 9.2)
@@ -38,26 +38,26 @@ PODS:
     - nanopb (< 2.30910.0, >= 2.30908.0)
   - fmt (6.2.1)
   - glog (0.3.5)
-  - GoogleDataTransport (9.2.1):
+  - GoogleDataTransport (9.2.2):
     - GoogleUtilities/Environment (~> 7.7)
     - nanopb (< 2.30910.0, >= 2.30908.0)
     - PromisesObjC (< 3.0, >= 1.2)
-  - GoogleUtilities/AppDelegateSwizzler (7.11.0):
+  - GoogleUtilities/AppDelegateSwizzler (7.11.1):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
     - GoogleUtilities/Network
-  - GoogleUtilities/Environment (7.11.0):
+  - GoogleUtilities/Environment (7.11.1):
     - PromisesObjC (< 3.0, >= 1.2)
-  - GoogleUtilities/Logger (7.11.0):
+  - GoogleUtilities/Logger (7.11.1):
     - GoogleUtilities/Environment
-  - GoogleUtilities/Network (7.11.0):
+  - GoogleUtilities/Network (7.11.1):
     - GoogleUtilities/Logger
     - "GoogleUtilities/NSData+zlib"
     - GoogleUtilities/Reachability
-  - "GoogleUtilities/NSData+zlib (7.11.0)"
-  - GoogleUtilities/Reachability (7.11.0):
+  - "GoogleUtilities/NSData+zlib (7.11.1)"
+  - GoogleUtilities/Reachability (7.11.1):
     - GoogleUtilities/Logger
-  - GoogleUtilities/UserDefaults (7.11.0):
+  - GoogleUtilities/UserDefaults (7.11.1):
     - GoogleUtilities/Logger
   - hermes-engine (0.71.2):
     - hermes-engine/Pre-built (= 0.71.2)
@@ -422,12 +422,12 @@ PODS:
     - React-Core
   - RNDeviceInfo (10.4.0):
     - React-Core
-  - RNFBApp (17.3.1):
-    - Firebase/CoreOnly (= 10.5.0)
+  - RNFBApp (17.4.2):
+    - Firebase/CoreOnly (= 10.7.0)
     - React-Core
-  - RNFBMessaging (17.3.1):
-    - Firebase/Messaging (= 10.5.0)
-    - FirebaseCoreExtension (= 10.5.0)
+  - RNFBMessaging (17.4.2):
+    - Firebase/Messaging (= 10.7.0)
+    - FirebaseCoreExtension (= 10.7.0)
     - React-Core
     - RNFBApp
   - RNGestureHandler (2.8.0):
@@ -647,16 +647,16 @@ SPEC CHECKSUMS:
   DoubleConversion: 5189b271737e1565bdce30deb4a08d647e3f5f54
   FBLazyVector: d58428b28fe1f5070fe993495b0e2eaf701d3820
   FBReactNativeSpec: 225fb0f0ab00493ce0731f954da3658638d9b191
-  Firebase: 3d6637234ab163e31852834617b4fe1df3b7af6d
-  FirebaseCore: 324b8d182d9ff7e3f6d1fa2f04b082d1c7a3e366
-  FirebaseCoreExtension: d9fa427f1ae1edccf2368ce5e8d567e4c1f0ebc8
-  FirebaseCoreInternal: e463f41bb935cd049505bf7e9a5bdd7dcea90df6
-  FirebaseInstallations: 935bc4abb6f7a035cab7a0c31cb777b2be3dd254
-  FirebaseMessaging: 35ecbbc68ff547fca80f9326c9622e79288c7149
+  Firebase: 0219acf760880eeec8ce479895bd7767466d9f81
+  FirebaseCore: e317665b9d744727a97e623edbbed009320afdd7
+  FirebaseCoreExtension: f17247ba8c61e4d3c8d136b5e2de3cb4ac6a85b6
+  FirebaseCoreInternal: fa2899eb1f340054858d289e5a0fb935a0a74e52
+  FirebaseInstallations: b2a05a3fe707df764345d68685534d07d0664af3
+  FirebaseMessaging: ac9062bcc35ed56e15a0241d8fd317022499baf8
   fmt: ff9d55029c625d3757ed641535fd4a75fedc7ce9
   glog: 04b94705f318337d7ead9e6d17c019bd9b1f6b1b
-  GoogleDataTransport: ea169759df570f4e37bdee1623ec32a7e64e67c4
-  GoogleUtilities: c2bdc4cf2ce786c4d2e6b3bcfd599a25ca78f06f
+  GoogleDataTransport: 8378d1fa8ac49753ea6ce70d65a7cb70ce5f66e6
+  GoogleUtilities: 9aa0ad5a7bc171f8bae016300bfcfa3fb8425749
   hermes-engine: 6351580c827b3b03e5f25aadcf989f582d0b0a86
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
@@ -695,8 +695,8 @@ SPEC CHECKSUMS:
   RNCAsyncStorage: 8616bd5a58af409453ea4e1b246521bb76578d60
   RNDateTimePicker: 0530a73a6f3a1a85814cbde0802736993b9e675e
   RNDeviceInfo: 749f2e049dcd79e2e44f134f66b73a06951b5066
-  RNFBApp: 6210da3d32c005190647805e6ced236d9be5520f
-  RNFBMessaging: 97931c8e43df9382c3c8b5b2ea36d13d0eb59306
+  RNFBApp: 55dbfc574e5ae414f2984394934f79f87eb4b050
+  RNFBMessaging: d365361650cc697294227e1280923f35a31d2501
   RNGestureHandler: 62232ba8f562f7dea5ba1b3383494eb5bf97a4d3
   RNImageCropPicker: 648356d68fbf9911a1016b3e3723885d28373eda
   RNReanimated: cc5e3aa479cb9170bcccf8204291a6950a3be128
@@ -705,6 +705,6 @@ SPEC CHECKSUMS:
   TOCropViewController: edfd4f25713d56905ad1e0b9f5be3fbe0f59c863
   Yoga: 5b0304b3dbef2b52e078052138e23a19c7dacaef
 
-PODFILE CHECKSUM: bb8b6572d8d30ff823768d25112c01de4532744c
+PODFILE CHECKSUM: 91a6e7fef5d12317ffe709b029be179048f05f84
 
-COCOAPODS: 1.11.3
+COCOAPODS: 1.12.1

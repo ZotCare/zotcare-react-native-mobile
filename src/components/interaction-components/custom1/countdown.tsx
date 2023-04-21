@@ -86,7 +86,7 @@ const Countdown = (props: any) => {
   useEffect(() => {
     const timerId = setInterval(() => {
       timerRef.current -= 1;
-      if (timerRef.current <= 0) {
+      if (timerRef.current <= 1) {
         onCountdownEnd();
         clearInterval(timerId);
       } else {
@@ -96,7 +96,7 @@ const Countdown = (props: any) => {
     return () => {
       clearInterval(timerId);
     };
-  }, [onCountdownEnd]);
+  }, []);
 
   return (
     <View style={styles.container}>

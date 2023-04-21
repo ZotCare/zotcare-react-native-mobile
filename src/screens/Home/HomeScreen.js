@@ -32,7 +32,7 @@ const categories = [
   },
 ];
 
-const HomeScreen = ({navigation}) => {
+const HomeScreen = () => {
   const navigateCategories = id => () => {
     NavigationService.navigate('category', {id});
   };

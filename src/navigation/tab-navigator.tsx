@@ -3,10 +3,10 @@ import React from 'react';
 import {View} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-import DevicesScreen from '../screens/Home/DevicesScreen';
+import ProfileScreen from '@app/screens/Profile/profile-screen';
+
 import HomeScreen from '../screens/Home/HomeScreen';
 import InfoScreen from '../screens/Home/InfoScreen';
-import ProfileScreen from '../screens/Profile/profile-screen';
 
 export type TabNavigatorParams = {
   Home: undefined;
@@ -36,13 +36,13 @@ const TabStackNavigator = () => {
           title: 'HowRU',
         }}
       />
-      <Drawer.Screen
-        name={'Profile'}
-        component={ProfileScreen}
-        options={{
-          drawerIcon: () => <Icon name="person" size={35} />,
-        }}
-      />
+      {/*<Drawer.Screen*/}
+      {/*  name={'Profile'}*/}
+      {/*  component={ProfileScreen}*/}
+      {/*  options={{*/}
+      {/*    drawerIcon: () => <Icon name="person" size={35} />,*/}
+      {/*  }}*/}
+      {/*/>*/}
       <Drawer.Screen
         name="Info"
         component={InfoScreen}

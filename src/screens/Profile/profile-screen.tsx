@@ -18,7 +18,7 @@ import {TabNavigatorParams} from '@app/navigation/tab-navigator';
 type Props = NativeStackScreenProps<TabNavigatorParams, 'Profile'>;
 
 const ProfileScreen = ({navigation}: Props) => {
-  const {data: profileKeys, status} = useProfileKeys();
+  const {data: profileKeys, status: keysStatus} = useProfileKeys();
   const {data: profile, status: profileStatus} = useProfile();
   const {mutateAsync: mutateProfile} = useMutateProfile();
   const [newCloudProfile, setNewCloudProfile] = useState({});
@@ -31,11 +31,13 @@ const ProfileScreen = ({navigation}: Props) => {
 
   const handleAnswer = (key: string, local: boolean) => (value: any) => {
     if (local) {
-      setNewLocalProfile({...newLocalProfile, [key]: value});
+      setNewLocalProfile(prevState => ({prevState, [key]: value}));
     } else {
-      setNewCloudProfile({...newCloudProfile, [key]: value});
+      setNewCloudProfile(prevState => ({...prevState, [key]: value}));
     }
   };
+
+  console.log('rerender');
 
   const getDefault = (key: string) => {
     if (localProfile[key]) {
@@ -62,7 +64,9 @@ const ProfileScreen = ({navigation}: Props) => {
   };
 
   const isSuccess =
-    status === 'success' && profileStatus === 'success' && !localLoading;
+    keysStatus === 'success' && profileStatus === 'success' && !localLoading;
+
+  console.log('isSuccess', isSuccess);
 
   return (
     <SafeAreaView>
@@ -70,13 +74,15 @@ const ProfileScreen = ({navigation}: Props) => {
         <View style={styles.container}>
           {isSuccess &&
             profileKeys.map((field: any, index: number) => {
+              field.id = field.key;
+              delete field.key;
               return (
                 <ProfileField
-                  key={index.toString()}
-                  handleAnswer={handleAnswer(field.key, field.local)}
-                  value={getDefault(field.key)}
-                  title={field.title || field.key}
+                  handleAnswer={handleAnswer(field.id, field.local)}
+                  value={getDefault(field.id)}
+                  title={field.title || field.id}
                   {...field}
+                  key={index.toString()}
                 />
               );
             })}

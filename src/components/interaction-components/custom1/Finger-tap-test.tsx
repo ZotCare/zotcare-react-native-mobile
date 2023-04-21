@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, {useEffect, useRef, useState} from 'react';
-import {View} from 'react-native';
+import {Platform, StyleSheet, View} from 'react-native';
 import {Button, ProgressBar, Text} from 'react-native-paper';
 import {ScaledSheet} from 'react-native-size-matters';
 
@@ -19,7 +19,7 @@ const FingerTapTest = (props: any) => {
       onEnd(input.current, strokes.current);
     }, duration * 1000);
     return () => clearTimeout(timeout);
-  }, [duration, onEnd]);
+  }, []);
 
   const addValue = (value: number) => () => {
     input.current += value;
@@ -27,38 +27,44 @@ const FingerTapTest = (props: any) => {
     setProgress((input.current.length % 11) / 11);
   };
 
+  const dashSequence = stringToDashed(sequence);
+
   return (
     <View style={styles.container}>
       <View style={styles.sequenceArea}>
         <Text style={styles.sequenceText} variant={'displayMedium'}>
-          {stringToDashed(sequence)}
+          {dashSequence}
         </Text>
       </View>
       <ProgressBar style={styles.progress} progress={progress} />
       <View style={styles.tappingArea}>
         <Button
           style={styles.actionButton}
+          labelStyle={styles.actionLabel}
           mode={'elevated'}
           onPress={addValue(1)}>
-          <Text variant="titleLarge">1</Text>
+          <Text variant="displayMedium">1</Text>
         </Button>
         <Button
           style={styles.actionButton}
+          labelStyle={styles.actionLabel}
           mode={'elevated'}
           onPress={addValue(2)}>
-          <Text variant="titleLarge">2</Text>
+          <Text variant="displayMedium">2</Text>
         </Button>
         <Button
           style={styles.actionButton}
+          labelStyle={styles.actionLabel}
           mode={'elevated'}
           onPress={addValue(3)}>
-          <Text variant="titleLarge">3</Text>
+          <Text variant="displayMedium">3</Text>
         </Button>
         <Button
           style={styles.actionButton}
+          labelStyle={styles.actionLabel}
           mode={'elevated'}
           onPress={addValue(4)}>
-          <Text variant="titleLarge">4</Text>
+          <Text variant="displayMedium">4</Text>
         </Button>
       </View>
     </View>
@@ -71,24 +77,29 @@ FingerTapTest.propTypes = {
   onEnd: PropTypes.func.isRequired,
 };
 
-const styles = ScaledSheet.create({
+const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'green',
+    alignItems: 'center',
   },
   sequenceArea: {flex: 1, justifyContent: 'center', alignItems: 'center'},
   sequenceText: {textAlign: 'center'},
-  progress: {height: 10, marginHorizontal: 50},
+  progress: {height: 10, marginHorizontal: 50, maxWidth: 600, width: '100%'},
   tappingArea: {
     flex: 3,
     flexDirection: 'row',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     alignItems: 'center',
-    columnGap: '50@vs',
+    maxWidth: 550,
+    width: '100%',
   },
   actionButton: {
-    width: 100,
+    width: 120,
     textAlign: 'center',
+  },
+  actionLabel: {
+    lineHeight: Platform.OS === 'android' ? 52 : 60,
   },
 });
 

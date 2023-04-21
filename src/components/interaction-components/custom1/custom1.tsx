@@ -70,7 +70,7 @@ const Custom1 = (props: any) => {
         }
       }
     })();
-  }, [sequence]);
+  }, []);
 
   return (
     <>

@@ -33,6 +33,7 @@ import handleError from './utils/error';
 import {
   handleForegroundNotification,
   handlePress,
+  requestPermission,
   sendToken,
 } from './utils/firebase';
 
@@ -41,13 +42,15 @@ messaging().setBackgroundMessageHandler(async remoteMessage => {
 });
 
 setJSExceptionHandler((error, isFatal) => {
+  console.log('JS Exception Handler', error, isFatal);
   //postReq('/monitoring', { exceptionType: 0, exceptionString: JSON.parse(error) }, res => { });
 });
 setNativeExceptionHandler(exceptionString => {
+  console.log('Native Exception Handler', exceptionString);
   //postReq('/monitoring', { exceptionType: 1, exceptionString }, res => { });
 });
 LogBox.ignoreAllLogs(true);
-(window as any).navigator.userAgent = 'ReactNative';
+// Object.defineProperty(window.navigator, 'userAgent', {value: 'ReactNative'});
 
 const {store} = createStore(rootReducers, sagas);
 export {store};
@@ -127,23 +130,7 @@ const App = () => {
   }, [visible]);
 
   useEffect(() => {
-    if (Platform.OS === 'android') {
-      PermissionsAndroid.request(
-        PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS,
-      );
-    } else if (Platform.OS === 'ios') {
-      async function requestUserPermission() {
-        const authStatus = await messaging().requestPermission();
-        const enabled =
-          authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
-          authStatus === messaging.AuthorizationStatus.PROVISIONAL;
-
-        if (enabled) {
-          console.log('Authorization status:', authStatus);
-        }
-      }
-      requestUserPermission();
-    }
+    requestPermission();
   }, []);
 
   useEffect(() => {

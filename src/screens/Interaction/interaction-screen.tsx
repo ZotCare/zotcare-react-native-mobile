@@ -22,10 +22,10 @@ const InteractionScreen = ({route, navigation}: Props) => {
   const {data: interaction, status} = useInteraction(id);
   const answersRef = useRef<any>({});
   const metaRef = useRef<any>({page_advances: []});
-  const [defaults, setDefaults] = useState<any>({});
   const {check_or_and_collection: checkConditions} = useCondition(
     answersRef.current,
   );
+  const [defaults, setDefaults] = useState<any>({});
   const [missedKeys, setMissedKeys] = useState<string[]>([]);
   const [page, setPage] = useState(0);
   const [hideNext, setHideNext] = useState(false);
@@ -53,7 +53,9 @@ const InteractionScreen = ({route, navigation}: Props) => {
   useEffect(() => {
     if (status === 'success') {
       navigation.setOptions({title: interaction.name, gestureEnabled: false});
-      setPage(findNextPage(0));
+      if (page === 0) {
+        setPage(prevPage => findNextPage(prevPage));
+      }
       interaction.data.pages.forEach((int_page: {fields: any[]}) => {
         int_page.fields.forEach(field => {
           if (field.default) {

@@ -54,7 +54,6 @@ const WpaTest = (props: any) => {
       }
     }
     shuffle(randomPairs.current);
-    console.log(randomPairs.current);
     setIndex(0);
   }, [wordPairs]);
 
@@ -89,14 +88,16 @@ const WpaTest = (props: any) => {
         {!confidence ? (
           <View style={styles.questionBox}>
             <Text style={styles.textCenter} variant="titleMedium">
-              Were these two words belong to the same pair?
+              Did these words belong to the
+              <Text style={{fontWeight: 'bold'}}> same</Text> pair or
+              <Text style={{fontWeight: 'bold'}}> different</Text>?
             </Text>
             <View style={styles.buttons}>
               <Button key="OLD" onPress={onChoice(true)} mode="contained">
-                YES
+                SAME
               </Button>
               <Button key="NEW" onPress={onChoice(false)} mode="contained">
-                NO
+                DIFFERENT
               </Button>
             </View>
           </View>
