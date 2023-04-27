@@ -64,6 +64,16 @@ const categories = {
         type: 'interaction',
         id: '642a11b34e2ef8792f5c145d',
       },
+      {
+        title: "I forgot, here's yesterday's Sleep Morning Diary",
+        type: 'interaction',
+        id: '6442f90a525961a063724212',
+      },
+      {
+        title: "I forgot, here's yesterday's Sleep Evening Diary",
+        type: 'interaction',
+        id: '6442f8eb418d84dcaf38042c',
+      },
     ],
   },
   assessments: {
@@ -179,7 +189,7 @@ const CategoryScreen = ({route, navigation}: Props) => {
   }, []);
 
   return (
-    <ScrollView contentInsetAdjustmentBehavior="automatic">
+    <ScrollView bounces={false} contentInsetAdjustmentBehavior="automatic">
       <SafeAreaView style={styles.container}>
         <View style={styles.cardsWrapper}>
           {content.children.map((child: any, index: number) => {
@@ -195,7 +205,7 @@ const CategoryScreen = ({route, navigation}: Props) => {
             } else {
               return (
                 <Card key={index.toString()} style={styles.card}>
-                  <Card.Title titleNumberOfLines={2} title={child.title} />
+                  <Card.Title titleNumberOfLines={5} title={child.title} />
                   <Card.Actions>
                     <Button onPress={navigateTo(child.type, child.id)}>
                       Take

@@ -27,9 +27,17 @@ export const useCondition = (answers: any) => {
       case 'lte':
         return cmp <= condition.value;
       case 'in':
-        return condition.value.includes(cmp);
+        if (Array.isArray(condition.value)) {
+          return condition.value.includes(cmp);
+        } else {
+          return condition.value === cmp;
+        }
       case 'nin':
-        return !condition.value.includes(cmp);
+        if (Array.isArray(condition.value)) {
+          return !condition.value.includes(cmp);
+        } else {
+          return !condition.value === cmp;
+        }
       default:
         return condition.default || false;
     }

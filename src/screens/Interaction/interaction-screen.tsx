@@ -198,6 +198,8 @@ const InteractionScreen = ({route, navigation}: Props) => {
         {status === 'success' ? (
           <ScrollView
             ref={scrollViewRef}
+            bounces={false}
+            showsVerticalScrollIndicator={false}
             stickyHeaderIndices={findIndicators()}
             contentContainerStyle={{flexGrow: 1}}>
             {interaction.data.pages[page].fields.map(

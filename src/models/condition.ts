@@ -1,7 +1,7 @@
 export type Condition = {
-  on: string;
+  on?: string;
   key: string;
-  default: any;
+  default?: any;
   op: any;
   value: string | number | any[];
 };

@@ -6,7 +6,6 @@ import LoginScreen from '../screens/Auth/LoginScreen';
 const Stack = createNativeStackNavigator();
 
 export default () => {
-  //console.log('auth')
   return (
     <Stack.Navigator
       initialRouteName="Login"

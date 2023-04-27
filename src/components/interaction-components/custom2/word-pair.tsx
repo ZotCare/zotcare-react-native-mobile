@@ -6,11 +6,16 @@ import {ScaledSheet} from 'react-native-size-matters';
 
 const WordPair = (props: any) => {
   const {wordPair, swap} = props;
+
   let invert = swap ? 1 : 0;
+
   return (
     <View style={styles.container}>
       <Text style={styles.text} variant="headlineMedium">
         {wordPair[invert]}
+      </Text>
+      <Text style={styles.text} variant="headlineSmall">
+        +
       </Text>
       <Text style={styles.text} variant="headlineMedium">
         {wordPair[1 - invert]}
