@@ -45,7 +45,7 @@ const categories = {
     title: 'Mood',
     children: [
       {
-        title: 'EMA',
+        title: 'Mood Check',
         type: 'interaction',
         id: '642a0d8d4e2ef8792f5c1458',
       },
