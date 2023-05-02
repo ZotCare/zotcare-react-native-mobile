@@ -25,6 +25,7 @@ const Indicator = (props: Props) => {
                   ? styles.lastItem
                   : styles.item
               }
+              variant="labelLarge"
               key={index.toString()}>
               {item}
             </Text>
@@ -65,6 +66,7 @@ const styles = ScaledSheet.create({
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
+    paddingVertical: 10,
   },
   item: {
     flex: 1,

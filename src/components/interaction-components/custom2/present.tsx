@@ -7,37 +7,46 @@ import shuffle from '@app/utils/shuffle';
 
 import WordPair from './word-pair';
 
+type Stage = 'ready' | 'present' | 'seperator';
+
 const Present = (props: any) => {
-  const {wordPairs, duration, onEnd} = props;
-  const [index, setIndex] = useState<number>(-1);
+  const {wordPairs, duration, seperatorDuration, onEnd} = props;
+  const [index, setIndex] = useState<number>(0);
   const countRef = React.useRef(0);
   const [swapped, setSwapped] = useState<boolean>(false);
+  const [stage, setStage] = useState<Stage>('ready');
 
   useEffect(() => {
     shuffle(wordPairs);
   }, [wordPairs]);
 
   useEffect(() => {
-    if (index >= 0) {
-      const interval = setInterval(() => {
+    if (stage === 'present') {
+      setSwapped(Math.random() < 0.5);
+      const timer = setTimeout(() => {
         if (countRef.current < wordPairs.length - 1) {
-          countRef.current++;
-          setSwapped(Math.random() < 0.5);
-          setIndex(countRef.current);
+          setStage('seperator');
         } else {
           onEnd();
-          clearInterval(interval);
+          clearTimeout(timer);
         }
       }, duration * 1000);
-      return () => clearInterval(interval);
+      return () => clearTimeout(timer);
+    } else if (stage === 'seperator') {
+      const timer = setTimeout(() => {
+        countRef.current++;
+        setIndex(countRef.current);
+        setStage('present');
+      }, seperatorDuration * 1000);
+      return () => clearTimeout(timer);
     }
-  }, [index]);
+  }, [index, stage]);
 
   const onReady = () => {
-    setIndex(0);
+    setStage('present');
   };
 
-  return index < 0 ? (
+  return stage === 'ready' ? (
     <View style={styles.container}>
       <Text variant="titleLarge" style={styles.readyText}>
         Ready to learn the pairs....
@@ -46,15 +55,28 @@ const Present = (props: any) => {
         I am ready
       </Button>
     </View>
-  ) : (
+  ) : stage === 'present' ? (
     <WordPair wordPair={wordPairs[index]} swap={swapped} />
+  ) : (
+    <View style={styles.container}>
+      <Text style={styles.readyText} variant="headlineLarge">
+        +
+      </Text>
+    </View>
   );
 };
 
 Present.propTypes = {
   wordPairs: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)).isRequired,
-  duration: PropTypes.number.isRequired,
-  onEnd: PropTypes.func.isRequired,
+  duration: PropTypes.number,
+  seperatorDuration: PropTypes.number,
+  onEnd: PropTypes.func,
+};
+
+Present.defaultProps = {
+  duration: 5,
+  seperatorDuration: 1,
+  onEnd: () => {},
 };
 
 export default Present;

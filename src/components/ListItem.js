@@ -12,7 +12,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import Colors from '../constants/Colors';
 import Layout from '../constants/Layout';
-import Titles from '../constants/Titles';
+import Titles from '../constants/titles';
 import {numberWithCommas} from '../libs/utils';
 import AvatarImage from './Avatar';
 

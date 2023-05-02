@@ -14,9 +14,6 @@ const WordPair = (props: any) => {
       <Text style={styles.text} variant="headlineMedium">
         {wordPair[invert]}
       </Text>
-      <Text style={styles.text} variant="headlineSmall">
-        +
-      </Text>
       <Text style={styles.text} variant="headlineMedium">
         {wordPair[1 - invert]}
       </Text>

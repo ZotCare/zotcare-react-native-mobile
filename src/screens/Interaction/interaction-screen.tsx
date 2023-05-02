@@ -185,6 +185,10 @@ const InteractionScreen = ({route, navigation}: Props) => {
     return indexArray;
   };
 
+  const isLastPage = () => {
+    return findNextPage(page + 1) === -1;
+  };
+
   return (
     <View
       style={{
@@ -236,7 +240,7 @@ const InteractionScreen = ({route, navigation}: Props) => {
                   style={styles.nextButton}
                   mode="contained"
                   onPress={handleSubmit}>
-                  Next
+                  {isLastPage() ? 'Submit' : 'Next'}
                 </Button>
               </View>
             )}

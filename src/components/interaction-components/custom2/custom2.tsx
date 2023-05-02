@@ -28,7 +28,14 @@ const getPairs = (length: number, startIndex: number) => {
 };
 
 const Custom2 = (props: any) => {
-  const {mode, length, duration, onEnd, rounds} = props;
+  const {
+    mode,
+    length,
+    duration,
+    seperator_duration: seperatorDuration,
+    onEnd,
+    rounds,
+  } = props;
   const {getItem: getStartIndex, setItem: setStartIndex} =
     useAsyncStorage('@wpa_start_index');
   const {getItem: getShuffleIndexes, setItem: setShuffleIndexes} =
@@ -88,6 +95,7 @@ const Custom2 = (props: any) => {
       key={round.toString()}
       wordPairs={pairsRef.current}
       duration={duration}
+      seperatorDuration={seperatorDuration}
       onEnd={onPresentEnd}
     />
   ) : state === 'test' ? (

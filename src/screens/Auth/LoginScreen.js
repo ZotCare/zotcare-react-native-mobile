@@ -5,9 +5,10 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import {scale, ScaledSheet, verticalScale} from 'react-native-size-matters';
 import {useDispatch} from 'react-redux';
 
-import images from '../../assets/images';
-import Layout from '../../constants/Layout';
-import {signIn} from '../../modules/auth/actions';
+import images from '@app/assets/images';
+import Layout from '@app/constants/Layout';
+import titles from '@app/constants/titles';
+import {signIn} from '@app/modules/auth/actions';
 
 const LoginScreen = () => {
   const [username, setUsername] = useState('');
@@ -16,19 +17,19 @@ const LoginScreen = () => {
   const dispatch = useDispatch();
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.container}>
       <View style={[styles.topMargin, styles.topTextView]}>
-        <Text style={styles.topText}>{'ZotCare'}</Text>
+        <Text style={styles.topText}>{titles.appName}</Text>
         <Image
           source={images.logo}
           style={{
             marginTop: verticalScale(10),
-            height: scale(200),
+            height: scale(100),
             aspectRatio: 1,
           }}
         />
       </View>
-      <View style={[styles.topMargin]}>
+      <View style={[styles.topMargin, styles.inputArea]}>
         <TextInput
           label="Username"
           onChangeText={text => setUsername(text)}
@@ -58,6 +59,11 @@ const LoginScreen = () => {
 export default LoginScreen;
 
 const styles = ScaledSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   topTextView: {
     alignItems: 'center',
     justifyContent: 'center',
@@ -97,5 +103,9 @@ const styles = ScaledSheet.create({
   forgotText: {
     textAlign: 'right',
     fontWeight: '900',
+  },
+  inputArea: {
+    width: '100%',
+    maxWidth: 450,
   },
 });

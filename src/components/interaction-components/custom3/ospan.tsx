@@ -153,7 +153,9 @@ const Ospan = (props: Props) => {
     <View style={styles.container}>
       {stage === 'equation' && (
         <>
-          <Equation equation={equationsRef.current[round]} />
+          <View style={styles.container}>
+            <Equation equation={equationsRef.current[round]} />
+          </View>
           <View style={styles.buttons}>
             <Button
               disabled={!showButtons}
@@ -180,25 +182,27 @@ const Ospan = (props: Props) => {
         </Text>
       )}
       {stage === 'input' && (
-        <View style={styles.inputContainer}>
-          <TextInput
-            placeholder="Enter the sequence of letters"
-            mode="outlined"
-            onChangeText={text => {
-              text = text.toUpperCase();
-              setInput(text);
-            }}
-            value={input}
-            autoCapitalize="characters"
-            autoCorrect={false}
-            autoComplete="off"
-          />
+        <>
+          <View style={styles.inputContainer}>
+            <TextInput
+              placeholder="Enter the sequence of letters"
+              mode="outlined"
+              onChangeText={text => {
+                text = text.toUpperCase();
+                setInput(text);
+              }}
+              value={input}
+              autoCapitalize="characters"
+              autoCorrect={false}
+              autoComplete="off"
+            />
+          </View>
           <Button onPress={onInputSubmit} mode="contained">
             <Text variant="titleLarge" style={styles.actionLabel}>
               Submit
             </Text>
           </Button>
-        </View>
+        </>
       )}
     </View>
   );
@@ -233,6 +237,7 @@ const styles = ScaledSheet.create({
     justifyContent: 'space-evenly',
     alignContent: 'center',
     alignItems: 'center',
+    marginTop: 'auto',
   },
   actionLabel: {
     color: 'white',
@@ -241,6 +246,5 @@ const styles = ScaledSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    rowGap: 20,
   },
 });
