@@ -49,6 +49,7 @@ const DatetimePicker = (props: any) => {
           minimumDate={min ? new Date(min) : undefined}
           maximumDate={max ? new Date(max) : undefined}
           onChange={onChange}
+          disabled={disabled}
         />
       )}
     </View>

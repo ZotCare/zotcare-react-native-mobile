@@ -1,7 +1,7 @@
 export interface Interaction {
   name: string;
   id: string;
-  data: Object;
+  data: any;
   return_timeout_secs: number;
   back: boolean;
 }

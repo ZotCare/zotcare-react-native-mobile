@@ -1,7 +1,9 @@
-import Slider from '@react-native-community/slider';
 import React from 'react';
 import {View} from 'react-native';
 import {TextInput} from 'react-native-paper';
+import {ScaledSheet} from 'react-native-size-matters';
+
+import Slider from '@app/components/interaction-components/slider/slider';
 
 import ThemedMarkdown from '../../themed-markdown/themed-markdown';
 import Checkboxes from '../checkboxes/checkboxes';
@@ -17,11 +19,17 @@ const Question = (props: any) => {
   return ((): JSX.Element => {
     switch (type) {
       case 'text':
-        return <ThemedMarkdown>{rest.content}</ThemedMarkdown>;
+        return (
+          <ThemedMarkdown alignment={rest.alignment || 'left'}>
+            {rest.content}
+          </ThemedMarkdown>
+        );
       case 'checkboxes':
         return (
           <View>
-            {rest.title && <ThemedMarkdown>{rest.title}</ThemedMarkdown>}
+            {rest.title && (
+              <ThemedMarkdown style={styles.title}>{rest.title}</ThemedMarkdown>
+            )}
             <Checkboxes
               options={rest.options}
               default={rest.value || rest.default}
@@ -33,7 +41,9 @@ const Question = (props: any) => {
       case 'radiobutton':
         return (
           <View>
-            {rest.title && <ThemedMarkdown>{rest.title}</ThemedMarkdown>}
+            {rest.title && (
+              <ThemedMarkdown style={styles.title}>{rest.title}</ThemedMarkdown>
+            )}
             <Radiobuttons
               options={rest.options}
               default={rest.value || rest.default}
@@ -45,7 +55,9 @@ const Question = (props: any) => {
       case 'textbox':
         return (
           <View>
-            {rest.title && <ThemedMarkdown>{rest.title}</ThemedMarkdown>}
+            {rest.title && (
+              <ThemedMarkdown style={styles.title}>{rest.title}</ThemedMarkdown>
+            )}
             <TextInput
               placeholder={rest.placeholder}
               value={rest.value || rest.default}
@@ -57,7 +69,9 @@ const Question = (props: any) => {
       case 'slider':
         return (
           <View>
-            {rest.title && <ThemedMarkdown>{rest.title}</ThemedMarkdown>}
+            {rest.title && (
+              <ThemedMarkdown style={styles.title}>{rest.title}</ThemedMarkdown>
+            )}
             {rest.indicator && (
               <Indicator
                 items={rest.indicator.items}
@@ -65,19 +79,18 @@ const Question = (props: any) => {
               />
             )}
             <Slider
-              tapToSeek={true}
-              minimumValue={rest.min || 0}
-              maximumValue={rest.max || 100}
-              step={rest.step || 1}
-              value={rest.value || rest.default}
-              onSlidingComplete={rest.handleAnswer(rest.id)}
+              default={rest.value || rest.default}
+              onValueChange={rest.handleAnswer(rest.id)}
+              {...rest}
             />
           </View>
         );
       case 'datetime':
         return (
           <View>
-            {rest.title && <ThemedMarkdown>{rest.title}</ThemedMarkdown>}
+            {rest.title && (
+              <ThemedMarkdown style={styles.title}>{rest.title}</ThemedMarkdown>
+            )}
             <DatetimePicker
               mode={rest.mode}
               default={rest.value || rest.default}
@@ -86,9 +99,7 @@ const Question = (props: any) => {
           </View>
         );
       case 'indicator':
-        return <Indicator items={rest.items} />
-      case 'custom1':
-        return <ImageImport title={rest.title} />
+        return <Indicator items={rest.items} mode={rest.mode} />;
       default:
         return <></>;
     }
@@ -96,3 +107,9 @@ const Question = (props: any) => {
 };
 
 export default Question;
+
+const styles = ScaledSheet.create({
+  title: {
+    marginBottom: '5@s',
+  },
+});
