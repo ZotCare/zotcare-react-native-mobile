@@ -94,7 +94,7 @@ const categories = {
     ],
   },
   parent: {
-    title: "Parent's assessments",
+    title: 'Parent Assessment',
     children: [
       {
         title: 'APQ',
@@ -102,29 +102,29 @@ const categories = {
         id: '642a05a508e298bd4bcea59e',
       },
       {
-        title: 'Child Sleep Behavior',
+        title: 'CSB',
         type: 'interaction',
         id: '642a0c054e2ef8792f5c1457',
       },
       {
-        title: 'COVID-19 Family Stressor Scale',
+        title: 'FSS',
         type: 'interaction',
         id: '642a0c9c08e298bd4bcea5a1',
       },
       {
-        title: 'Family Inventory',
+        title: 'VGE',
         type: 'interaction',
         id: '642a0e274e2ef8792f5c1459',
       },
       {
-        title: 'Parenting Self-Agency Measure',
+        title: 'PSAM',
         type: 'interaction',
         id: '642a0f2f4e2ef8792f5c145b',
       },
     ],
   },
   youth: {
-    title: 'Child assessments',
+    title: 'Child Assessments',
     children: [
       {
         title: 'APQ',
@@ -137,12 +137,12 @@ const categories = {
         id: '642a064d08e298bd4bcea59f',
       },
       {
-        title: 'Self-Report Child Form',
+        title: 'SRCF',
         type: 'interaction',
         id: '642a112108e298bd4bcea5a4',
       },
       {
-        title: 'Child and Adolescent Support',
+        title: 'CASSS',
         type: 'interaction',
         id: '642a08db08e298bd4bcea5a0',
       },
@@ -162,7 +162,7 @@ const categories = {
         id: '642a0ee908e298bd4bcea5a2',
       },
       {
-        title: 'Perceived Stress Scale',
+        title: 'PSS',
         type: 'interaction',
         id: '642a0fd04e2ef8792f5c145c',
       },

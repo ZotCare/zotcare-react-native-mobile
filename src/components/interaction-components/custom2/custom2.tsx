@@ -1,5 +1,6 @@
 import {useAsyncStorage} from '@react-native-async-storage/async-storage';
 import React, {useEffect, useRef, useState} from 'react';
+import {Notifier, NotifierComponents} from 'react-native-notifier';
 
 import shuffle from '@app/utils/shuffle';
 
@@ -61,6 +62,17 @@ const Custom2 = (props: any) => {
       } else if (mode.startsWith('test')) {
         const shuffleSeq = JSON.parse((await getShuffleIndexes()) || '[]');
         const startIndex = +((await getStartIndex()) || -1);
+        if (!startIndex || startIndex <= -1) {
+          Notifier.showNotification({
+            title: 'No trained sequence found',
+            description: 'You need to have a training sequence to test',
+            Component: NotifierComponents.Alert,
+            componentProps: {
+              alertType: 'error',
+            },
+          });
+          return;
+        }
         const pairs = getPairs(length, startIndex);
         const shuffledPairs = [];
         for (let i = 0; i < length; i++) {

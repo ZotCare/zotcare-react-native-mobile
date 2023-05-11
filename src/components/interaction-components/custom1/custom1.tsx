@@ -8,13 +8,14 @@ import FingerTapTest from './Finger-tap-test';
 import sequences from './sequences';
 
 enum State {
+  loading,
   off,
   on,
 }
 
 const Custom1 = (props: any) => {
   const {sequence, repeat, duration, onEnd} = props;
-  const [state, setState] = useState<State>(State.off);
+  const [state, setState] = useState<State>(State.loading);
   const count = useRef<number>(1);
   const allInputsRef = useRef<string[]>([]);
   const allStrokesRef = useRef<number[][]>([]);
@@ -69,6 +70,7 @@ const Custom1 = (props: any) => {
           });
         }
       }
+      setState(State.on);
     })();
   }, []);
 
