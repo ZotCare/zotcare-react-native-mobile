@@ -6,7 +6,6 @@ import {
   AppState,
   AppStateStatus,
   LogBox,
-  PermissionsAndroid,
   Platform,
   Text,
   View,
@@ -15,6 +14,7 @@ import {
   setJSExceptionHandler,
   setNativeExceptionHandler,
 } from 'react-native-exception-handler';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {NotifierWrapper} from 'react-native-notifier';
 import {DefaultTheme, Provider as PaperProvider} from 'react-native-paper';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
@@ -154,36 +154,38 @@ const App = () => {
 
   return (
     <SafeAreaProvider>
-      <Provider store={store}>
-        <NotifierWrapper>
-          <PaperProvider theme={theme}>
-            <QueryClientProvider client={queryClient}>
-              <RootNavigator />
-              <CustomModal
-                visible={visible}
-                onBackdropPress={() => setVisible(false)}
-                component={
-                  <View style={{justifyContent: 'center'}}>
-                    <Text
-                      style={{
-                        textAlign: 'center',
-                      }}>
-                      {'OOPS!'}
-                    </Text>
-                    <Text
-                      style={{
-                        fontSize: 14,
-                        textAlign: 'center',
-                      }}>
-                      {text}
-                    </Text>
-                  </View>
-                }
-              />
-            </QueryClientProvider>
-          </PaperProvider>
-        </NotifierWrapper>
-      </Provider>
+      <GestureHandlerRootView style={{flex: 1}}>
+        <Provider store={store}>
+          <NotifierWrapper>
+            <PaperProvider theme={theme}>
+              <QueryClientProvider client={queryClient}>
+                <RootNavigator />
+                <CustomModal
+                  visible={visible}
+                  onBackdropPress={() => setVisible(false)}
+                  component={
+                    <View style={{justifyContent: 'center'}}>
+                      <Text
+                        style={{
+                          textAlign: 'center',
+                        }}>
+                        {'OOPS!'}
+                      </Text>
+                      <Text
+                        style={{
+                          fontSize: 14,
+                          textAlign: 'center',
+                        }}>
+                        {text}
+                      </Text>
+                    </View>
+                  }
+                />
+              </QueryClientProvider>
+            </PaperProvider>
+          </NotifierWrapper>
+        </Provider>
+      </GestureHandlerRootView>
     </SafeAreaProvider>
   );
 };

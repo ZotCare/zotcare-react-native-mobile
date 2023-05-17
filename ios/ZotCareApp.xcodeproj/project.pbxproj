@@ -47,6 +47,8 @@
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		9DCF7B546664A8784361F832 /* Pods_ZotCareApp_ZotCareAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF05D7CDF39261CA949CD03E /* Pods_ZotCareApp_ZotCareAppTests.framework */; };
 		B1C49F72D4473F20F59F5B13 /* Pods_ZotCareApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46D8CD0816E3CB088A1813C3 /* Pods_ZotCareApp.framework */; };
+		E69BBA3EB5C9381084931322 /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2757C6D6F7A18D74B770AE /* ExpoModulesProvider.swift */; };
+		F1D585AAC3E892B18F2F5978 /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23396FCEE9943A8315B22A6A /* ExpoModulesProvider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +71,7 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = ZotCareApp/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = ZotCareApp/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = ZotCareApp/main.m; sourceTree = "<group>"; };
+		23396FCEE9943A8315B22A6A /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-ZotCareApp/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
 		270E6D3E29A82F630090AE36 /* ZotCareApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = ZotCareApp.entitlements; path = ZotCareApp/ZotCareApp.entitlements; sourceTree = "<group>"; };
 		270E6D4229A838100090AE36 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		27C318DF296DFD1C003ED874 /* Fontisto.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Fontisto.ttf; sourceTree = "<group>"; };
@@ -93,6 +96,7 @@
 		5B7EB9410499542E8C5724F5 /* Pods-ZotCareApp-ZotCareAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZotCareApp-ZotCareAppTests.debug.xcconfig"; path = "Target Support Files/Pods-ZotCareApp-ZotCareAppTests/Pods-ZotCareApp-ZotCareAppTests.debug.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = ZotCareApp/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-ZotCareApp-ZotCareAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZotCareApp-ZotCareAppTests.release.xcconfig"; path = "Target Support Files/Pods-ZotCareApp-ZotCareAppTests/Pods-ZotCareApp-ZotCareAppTests.release.xcconfig"; sourceTree = "<group>"; };
+		ED2757C6D6F7A18D74B770AE /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-ZotCareApp-ZotCareAppTests/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		EF05D7CDF39261CA949CD03E /* Pods_ZotCareApp_ZotCareAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZotCareApp_ZotCareAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -172,6 +176,14 @@
 			path = "../node_modules/react-native-vector-icons/Fonts";
 			sourceTree = "<group>";
 		};
+		28430DBB9842252FAB746213 /* ZotCareAppTests */ = {
+			isa = PBXGroup;
+			children = (
+				ED2757C6D6F7A18D74B770AE /* ExpoModulesProvider.swift */,
+			);
+			name = ZotCareAppTests;
+			sourceTree = "<group>";
+		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -200,6 +212,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
+				85C7010BEDC481A32D12BA72 /* ExpoModulesProviders */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -213,6 +226,23 @@
 				00E356EE1AD99517003FC87E /* ZotCareAppTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		85C7010BEDC481A32D12BA72 /* ExpoModulesProviders */ = {
+			isa = PBXGroup;
+			children = (
+				A64037FD09CC0E624F0D4C61 /* ZotCareApp */,
+				28430DBB9842252FAB746213 /* ZotCareAppTests */,
+			);
+			name = ExpoModulesProviders;
+			sourceTree = "<group>";
+		};
+		A64037FD09CC0E624F0D4C61 /* ZotCareApp */ = {
+			isa = PBXGroup;
+			children = (
+				23396FCEE9943A8315B22A6A /* ExpoModulesProvider.swift */,
+			);
+			name = ZotCareApp;
 			sourceTree = "<group>";
 		};
 		BBD78D7AC51CEA395F1C20DB /* Pods */ = {
@@ -530,6 +560,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				00E356F31AD99517003FC87E /* ZotCareAppTests.m in Sources */,
+				E69BBA3EB5C9381084931322 /* ExpoModulesProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -539,6 +570,7 @@
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				F1D585AAC3E892B18F2F5978 /* ExpoModulesProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -563,7 +595,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = ZotCareAppTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -575,6 +607,7 @@
 					"-lc++",
 					"$(inherited)",
 				);
+				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ZotCareApp.app/ZotCareApp";
@@ -588,7 +621,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
 				INFOPLIST_FILE = ZotCareAppTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -600,6 +633,7 @@
 					"-lc++",
 					"$(inherited)",
 				);
+				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_RELEASE";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ZotCareApp.app/ZotCareApp";
@@ -614,7 +648,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = ZotCareApp/ZotCareApp.entitlements;
-				CURRENT_PROJECT_VERSION = 2.2.3;
+				CURRENT_PROJECT_VERSION = 2.2.4;
 				DEVELOPMENT_TEAM = 575ASQ5J4D;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = ZotCareApp/Info.plist;
@@ -624,12 +658,13 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.2.3;
+				MARKETING_VERSION = 2.2.4;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
+				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = org.healthscitech.sleepin;
 				PRODUCT_NAME = ZotCareApp;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -651,7 +686,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = ZotCareApp/ZotCareApp.entitlements;
-				CURRENT_PROJECT_VERSION = 2.2.3;
+				CURRENT_PROJECT_VERSION = 2.2.4;
 				DEVELOPMENT_TEAM = 575ASQ5J4D;
 				INFOPLIST_FILE = ZotCareApp/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = HowRU;
@@ -660,12 +695,13 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.2.3;
+				MARKETING_VERSION = 2.2.4;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
+				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_RELEASE";
 				PRODUCT_BUNDLE_IDENTIFIER = org.healthscitech.sleepin;
 				PRODUCT_NAME = ZotCareApp;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -726,7 +762,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					/usr/lib/swift,
 					"$(inherited)",
@@ -791,7 +827,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					/usr/lib/swift,
 					"$(inherited)",

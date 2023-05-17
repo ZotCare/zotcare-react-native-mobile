@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import React, {useEffect, useRef, useState} from 'react';
 import {Platform, StyleSheet, View} from 'react-native';
 import {Button, ProgressBar, Text} from 'react-native-paper';
-import {ScaledSheet} from 'react-native-size-matters';
 
 const stringToDashed = (str: string) => {
   return str.split('').join('-');
@@ -13,10 +12,15 @@ const FingerTapTest = (props: any) => {
   const input = useRef<string>('');
   const strokes = useRef<number[]>([]);
   const [progress, setProgress] = useState<number>(0);
+  const startTimeRef = useRef<number>(new Date().getTime());
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      onEnd(input.current, strokes.current);
+      onEnd({
+        input: input.current,
+        strokes: strokes.current,
+        startTime: startTimeRef.current,
+      });
     }, duration * 1000);
     return () => clearTimeout(timeout);
   }, []);

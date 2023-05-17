@@ -1,7 +1,16 @@
 module.exports = {
-  presets: ['module:metro-react-native-babel-preset'],
+  presets: [
+    ['@babel/preset-env', {targets: {node: 'current'}}],
+    '@babel/preset-typescript',
+    'module:metro-react-native-babel-preset',
+  ],
+  env: {
+    production: {
+      plugins: ['react-native-paper/babel'],
+    },
+  },
   plugins: [
-    'react-native-reanimated/plugin',
+    '@babel/plugin-transform-runtime',
     [
       'module-resolver',
       {
@@ -12,5 +21,7 @@ module.exports = {
         },
       },
     ],
+    'react-native-reanimated/plugin',
   ],
+  exclude: ['**/*.png', '**/*.jpg', '**/*.gif', '**/*.svg'],
 };

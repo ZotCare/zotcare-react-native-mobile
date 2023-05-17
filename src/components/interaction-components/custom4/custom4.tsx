@@ -3,6 +3,7 @@ import {Text} from 'react-native-paper';
 
 import uniqueRandom from '@app/utils/unique-random';
 
+import RstContext from './rst-context';
 import rstObjects from './rst-objects';
 import RuleSwitchTask from './rule-switch-task';
 
@@ -22,6 +23,8 @@ const Custom4 = (props: any) => {
     singleTestRounds,
     bothSidesPracticeRounds,
     BothSideRounds,
+    practiceFeedbackDuration,
+    testingPauseDuration,
     onEnd,
   } = props;
   const [stage, setStage] = useState(StageType.Loading);
@@ -66,64 +69,72 @@ const Custom4 = (props: any) => {
     }
   };
 
-  return stage === StageType.Practice ? (
-    <RuleSwitchTask
-      key={StageType.Practice}
-      mode="practice"
-      length={practiceRounds}
-      object1={objectRef.current}
-      type="same"
-      onEnd={handleStageEnd}
-    />
-  ) : stage === StageType.Test ? (
-    <RuleSwitchTask
-      key={StageType.Test}
-      mode="test"
-      length={singleTestRounds}
-      object1={objectRef.current}
-      type="same"
-      onEnd={handleStageEnd}
-    />
-  ) : stage === StageType.OppositePractice ? (
-    <RuleSwitchTask
-      key={StageType.OppositePractice}
-      mode="practice"
-      length={practiceRounds}
-      object1={oppositeObjectRef.current}
-      type="different"
-      onEnd={handleStageEnd}
-    />
-  ) : stage === StageType.OppositeTest ? (
-    <RuleSwitchTask
-      key={StageType.OppositeTest}
-      mode="test"
-      length={singleTestRounds}
-      object1={oppositeObjectRef.current}
-      type="different"
-      onEnd={handleStageEnd}
-    />
-  ) : stage === StageType.BothSidesPractice ? (
-    <RuleSwitchTask
-      key={StageType.BothSidesPractice}
-      mode="practice"
-      length={bothSidesPracticeRounds}
-      object1={objectRef.current}
-      object2={oppositeObjectRef.current}
-      type="both"
-      onEnd={handleStageEnd}
-    />
-  ) : stage === StageType.BothSidesTest ? (
-    <RuleSwitchTask
-      key={StageType.BothSidesTest}
-      mode="test"
-      length={BothSideRounds}
-      object1={objectRef.current}
-      object2={oppositeObjectRef.current}
-      type="both"
-      onEnd={handleStageEnd}
-    />
-  ) : (
-    <Text> Loading </Text>
+  return (
+    <RstContext.Provider
+      value={{
+        testPauseDuration: testingPauseDuration || 1,
+        feedbackDuration: practiceFeedbackDuration || 3,
+      }}>
+      {stage === StageType.Practice ? (
+        <RuleSwitchTask
+          key={StageType.Practice}
+          mode="practice"
+          length={practiceRounds}
+          object1={objectRef.current}
+          type="same"
+          onEnd={handleStageEnd}
+        />
+      ) : stage === StageType.Test ? (
+        <RuleSwitchTask
+          key={StageType.Test}
+          mode="test"
+          length={singleTestRounds}
+          object1={objectRef.current}
+          type="same"
+          onEnd={handleStageEnd}
+        />
+      ) : stage === StageType.OppositePractice ? (
+        <RuleSwitchTask
+          key={StageType.OppositePractice}
+          mode="practice"
+          length={practiceRounds}
+          object1={oppositeObjectRef.current}
+          type="different"
+          onEnd={handleStageEnd}
+        />
+      ) : stage === StageType.OppositeTest ? (
+        <RuleSwitchTask
+          key={StageType.OppositeTest}
+          mode="test"
+          length={singleTestRounds}
+          object1={oppositeObjectRef.current}
+          type="different"
+          onEnd={handleStageEnd}
+        />
+      ) : stage === StageType.BothSidesPractice ? (
+        <RuleSwitchTask
+          key={StageType.BothSidesPractice}
+          mode="practice"
+          length={bothSidesPracticeRounds}
+          object1={objectRef.current}
+          object2={oppositeObjectRef.current}
+          type="both"
+          onEnd={handleStageEnd}
+        />
+      ) : stage === StageType.BothSidesTest ? (
+        <RuleSwitchTask
+          key={StageType.BothSidesTest}
+          mode="test"
+          length={BothSideRounds}
+          object1={objectRef.current}
+          object2={oppositeObjectRef.current}
+          type="both"
+          onEnd={handleStageEnd}
+        />
+      ) : (
+        <Text> Loading </Text>
+      )}
+    </RstContext.Provider>
   );
 };
 

@@ -70,6 +70,14 @@ type Props = {
   onEnd: (result: any) => void;
 };
 
+const stringArrayToString = (array: string[]) => {
+  let result = '';
+  array.forEach(element => {
+    result += element;
+  });
+  return result;
+};
+
 const Ospan = (props: Props) => {
   const {rounds, equationTime, letterTime, onEnd} = props;
   const [stage, setStage] = useState('loading');
@@ -81,6 +89,7 @@ const Ospan = (props: Props) => {
   const resultRef = useRef<any[]>([]);
   const [input, setInput] = useState<string>('');
   const [showButtons, setShowButtons] = useState<boolean>(true);
+  const startTimeRef = useRef<number>(0);
 
   useEffect(() => {
     lettersRef.current = generateLetters(rounds);
@@ -105,6 +114,13 @@ const Ospan = (props: Props) => {
       return () => clearTimeout(timeout);
     }
   };
+
+  useEffect(() => {
+    if (stage === 'equation' || stage === 'input') {
+      startTimeRef.current = new Date().getTime();
+    }
+  }, [stage]);
+
   const onStageEnd = () => {
     if (stageRef.current === 'input') {
       onEnd(resultRef.current);
@@ -115,6 +131,7 @@ const Ospan = (props: Props) => {
           letter: lettersRef.current[roundRef.current],
           correctAnswer: false,
           missed: true,
+          startTime: startTimeRef.current,
         });
       }
       changeStage('letter');
@@ -136,15 +153,19 @@ const Ospan = (props: Props) => {
       letter: lettersRef.current[roundRef.current],
       correctAnswer:
         equationsRef.current[roundRef.current].isCorrect === correct,
+      choice: correct,
       missed: false,
-      time: new Date().getTime(),
+      decisionTime: new Date().getTime(),
+      startTime: startTimeRef.current,
     });
   };
 
   const onInputSubmit = () => {
     resultRef.current.push({
       input,
-      time: new Date().getTime(),
+      letters: stringArrayToString(lettersRef.current),
+      inputTime: new Date().getTime(),
+      startTime: startTimeRef.current,
     });
     onEnd(resultRef.current);
   };

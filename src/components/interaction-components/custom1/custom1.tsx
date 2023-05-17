@@ -17,8 +17,7 @@ const Custom1 = (props: any) => {
   const {sequence, repeat, duration, onEnd} = props;
   const [state, setState] = useState<State>(State.loading);
   const count = useRef<number>(1);
-  const allInputsRef = useRef<string[]>([]);
-  const allStrokesRef = useRef<number[][]>([]);
+  const allResultRef = useRef<any>([]);
   const [isFinished, setIsFinished] = useState<boolean>(false);
   const {getItem: getSequenceIndex, setItem: setSequenceIndex} =
     useAsyncStorage('@ftt_trained_sequence_index');
@@ -28,17 +27,13 @@ const Custom1 = (props: any) => {
     setState(State.on);
   };
 
-  const onTappingEnd = (inputSequence: string, strokes: number[]) => {
-    allInputsRef.current.push(inputSequence);
-    allStrokesRef.current.push(strokes);
+  const onTappingEnd = (result: any) => {
+    allResultRef.current.push(result);
     if (count.current < repeat) {
       count.current++;
       setState(State.off);
     } else {
-      onEnd(
-        {input: allInputsRef.current, strokes: allStrokesRef.current},
-        true,
-      );
+      onEnd(allResultRef.current, true);
       setIsFinished(true);
     }
   };

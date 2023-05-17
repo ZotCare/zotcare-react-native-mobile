@@ -63,6 +63,7 @@ const WpaTest = (props: any) => {
       swapped: randomPairs.current[index].swapped,
       rearranged: randomPairs.current[index].rearranged,
       isCorrect: isOld === !randomPairs.current[index].rearranged,
+      choice: isOld ? 'SAME' : 'DIFFERENT',
       choiceTime: new Date().getTime(),
     });
     setConfidence(true);

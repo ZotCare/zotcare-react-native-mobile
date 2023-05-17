@@ -25,6 +25,7 @@ const RuleSwitchTask = (props: any) => {
   const positioningSequenceRef = useRef<Position[]>([]);
   const resultRef = useRef<any[]>([]);
   const [isCorrect, setIsCorrect] = useState<boolean>(false);
+  const startTime = useRef<number>(0);
 
   useEffect(() => {
     if (type === 'same' || type === 'different') {
@@ -52,11 +53,15 @@ const RuleSwitchTask = (props: any) => {
       (decision === positioningSequenceRef.current[round].placement) ===
       positioningSequenceRef.current[round].same;
     resultRef.current.push({
-      time: new Date().getTime(),
+      decisionTime: new Date().getTime(),
+      startTime: startTime.current,
       decision,
       isCorrect: wasCorrect,
       type,
       mode,
+      placementType: positioningSequenceRef.current[round].same
+        ? 'congruent'
+        : 'incongruent',
     });
     setIsCorrect(wasCorrect);
     setStage('feedback');
@@ -67,6 +72,7 @@ const RuleSwitchTask = (props: any) => {
     setRound(roundRef.current);
     if (roundRef.current < length) {
       setStage('decision');
+      startTime.current = new Date().getTime();
     } else {
       onEnd(resultRef.current);
     }
@@ -87,6 +93,7 @@ const RuleSwitchTask = (props: any) => {
       startTime: new Date().getTime(),
     });
     setStage('decision');
+    startTime.current = new Date().getTime();
   };
 
   return (
