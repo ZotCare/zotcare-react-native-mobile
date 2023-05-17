@@ -72,6 +72,34 @@ jest.mock('react-native-vector-icons', () => {
 });
 
 jest.mock('react-native-vector-icons/Feather', () => 'Icon');
+jest.mock('react-native-vector-icons/Feather', () => {
+  return {
+    loadFont: jest.fn(),
+  };
+});
 jest.mock('react-native-vector-icons/FontAwesome', () => 'FIcon');
+jest.mock('react-native-vector-icons/FontAwesome', () => {
+  return {
+    loadFont: jest.fn(),
+  };
+});
 jest.mock('react-native-vector-icons/MaterialIcons', () => 'Icon');
+jest.mock('react-native-vector-icons/MaterialIcons', () => {
+  return {
+    loadFont: jest.fn(),
+  };
+});
 jest.mock('react-native-vector-icons/Ionicons', () => 'Icon');
+jest.mock('react-native-vector-icons/Ionicons', () => {
+  return {
+    loadFont: jest.fn(),
+  };
+});
+
+// helpful sources:
+// https://chrisfrew.in/blog/a-production-ready-jest-setup-for-react-native-all-mocks/
+// https://github.com/FullStackCraft/DefinitelyTested/tree/master/mocks/jest/react-native/react-native-vector-icons
+
+// https://github.com/react-native-device-info/react-native-device-info/blob/cd60ebeeab28611dd122dff0a5ae1fdd40733a80/jest/react-native-device-info-mock.js
+// https://stackoverflow.com/questions/43609684/setting-reactnatives-nativemodules-rndeviceinfo-with-jest
+
