@@ -648,7 +648,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = ZotCareApp/ZotCareApp.entitlements;
-				CURRENT_PROJECT_VERSION = 2.2.4;
+				CURRENT_PROJECT_VERSION = 2.2.5;
 				DEVELOPMENT_TEAM = 575ASQ5J4D;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = ZotCareApp/Info.plist;
@@ -658,7 +658,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.2.4;
+				MARKETING_VERSION = 2.2.5;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -686,7 +686,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = ZotCareApp/ZotCareApp.entitlements;
-				CURRENT_PROJECT_VERSION = 2.2.4;
+				CURRENT_PROJECT_VERSION = 2.2.5;
 				DEVELOPMENT_TEAM = 575ASQ5J4D;
 				INFOPLIST_FILE = ZotCareApp/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = HowRU;
@@ -695,7 +695,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.2.4;
+				MARKETING_VERSION = 2.2.5;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
