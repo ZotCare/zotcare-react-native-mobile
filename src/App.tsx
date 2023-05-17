@@ -47,7 +47,7 @@ setNativeExceptionHandler(exceptionString => {
   //postReq('/monitoring', { exceptionType: 1, exceptionString }, res => { });
 });
 LogBox.ignoreAllLogs(true);
-(window as any).navigator.userAgent = 'ReactNative';
+// (window as any).navigator.userAgent = 'ReactNative';
 
 const {store} = createStore(rootReducers, sagas);
 export {store};

@@ -6,7 +6,11 @@ describe('<Checkbox />', () => {
   const onChange = jest.fn();
   const renderComponent = (props: any = {}) => {
     const defProps = {
-      options: ['1', {label: '2', value: 2}, '3'],
+      options: [
+        {label: '1', value: '1'},
+        {label: '2', value: '2'},
+        {label: '3', value: '3'},
+      ],
       default: ['1'],
       onChange,
       ...props,

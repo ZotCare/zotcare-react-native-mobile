@@ -2,16 +2,16 @@ import React from 'react';
 import {View} from 'react-native';
 import {TextInput} from 'react-native-paper';
 import {ScaledSheet} from 'react-native-size-matters';
+import {Image} from 'react-native-svg';
 
 import Slider from '@app/components/interaction-components/slider/slider';
 
 import ThemedMarkdown from '../../themed-markdown/themed-markdown';
 import Checkboxes from '../checkboxes/checkboxes';
 import DatetimePicker from '../datetime-picker/datetime-picker';
+import ImageImport from '../image-import/ImageImport';
 import Indicator from '../indicators/indicator';
 import Radiobuttons from '../radiobuttons/radiobuttons';
-import ImageImport from '../image-import/ImageImport';
-import { Image } from 'react-native-svg';
 
 const Question = (props: any) => {
   const {type, ...rest} = props;
