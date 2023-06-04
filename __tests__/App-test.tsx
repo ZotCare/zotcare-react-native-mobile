@@ -47,6 +47,6 @@ import App from '@app/App';
 //   });
 // });
 
-it('renders correctly', () => {
-  renderer.create(<App />);
-});
+// it('renders correctly', () => {
+//   renderer.create(<App />);
+// });

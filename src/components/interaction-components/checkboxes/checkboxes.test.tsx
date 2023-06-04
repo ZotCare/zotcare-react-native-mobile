@@ -1,4 +1,5 @@
 import {cleanup, render, screen} from '@testing-library/react-native';
+import React from 'react';
 
 import Checkboxes from '@app/components/interaction-components/checkboxes/checkboxes';
 
@@ -18,19 +19,22 @@ describe('<Checkbox />', () => {
     render(<Checkboxes {...defProps} />);
   };
   describe('Rendering', () => {
+    // beforeEach(() => {
+    //   renderComponent();
+    // });
     afterAll(() => {
       cleanup();
     });
     it('render in vertical', () => {
       renderComponent();
       screen.debug();
-      expect(screen.getByText('1')).toBeTruthy();
-      expect(screen.getByText('2')).toBeTruthy();
-      expect(screen.getByText('3')).toBeTruthy();
+      expect(screen.getByLabelText('1')).toBeTruthy();
+      expect(screen.getByLabelText('2')).toBeTruthy();
+      expect(screen.getByLabelText('3')).toBeTruthy();
     });
     it('should match to snapshot - matrix', () => {
       renderComponent({mode: 'matrix'});
-      expect(screen.getByText('1')).not.toBeTruthy();
+      expect(screen.queryByText('1')).toBeNull();
     });
   });
 });

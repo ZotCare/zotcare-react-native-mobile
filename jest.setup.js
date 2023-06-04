@@ -102,4 +102,3 @@ jest.mock('react-native-vector-icons/Ionicons', () => {
 
 // https://github.com/react-native-device-info/react-native-device-info/blob/cd60ebeeab28611dd122dff0a5ae1fdd40733a80/jest/react-native-device-info-mock.js
 // https://stackoverflow.com/questions/43609684/setting-reactnatives-nativemodules-rndeviceinfo-with-jest
-
