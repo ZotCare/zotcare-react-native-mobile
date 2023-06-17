@@ -8,7 +8,6 @@
     "start": "react-native start",
     "test": "jest",
     "lint": "eslint ."
-    
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.17.11",
@@ -23,6 +22,7 @@
     "@react-navigation/native-stack": "^6.9.2",
     "@ronradtke/react-native-markdown-display": "github:RonRadtke/react-native-markdown-display",
     "@testing-library/react-native": "^12.1.2",
+    "@testing-library/user-event": "^14.4.3",
     "@types/react-native-vector-icons": "^6.4.13",
     "axios": "^1.2.0",
     "moment": "^2.29.4",
@@ -74,7 +74,9 @@
   },
   "jest": {
     "preset": "react-native",
-    "setupFilesAfterEnv": ["<rootDir>/jest.setup.js"],
+    "setupFilesAfterEnv": [
+      "<rootDir>/jest.setup.js"
+    ],
     "transformIgnorePatterns": [
       "node_modules/(?!(jest-)?@?react-native|@react-native-community|@react-navigation|@ronradtke/react-native-markdown-display|react-native-paper)"
     ]

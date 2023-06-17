@@ -50,6 +50,7 @@ const DatetimePicker = (props: any) => {
           maximumDate={max ? new Date(max) : undefined}
           onChange={onChange}
           disabled={disabled}
+          testID={'dateTimePicker'}
         />
       )}
     </View>

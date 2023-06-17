@@ -21,6 +21,7 @@ const Slider = (props: Props) => {
       step={step || 1}
       value={def}
       onSlidingComplete={onValueChange}
+      testID={'slider'}
     />
   );
 };
