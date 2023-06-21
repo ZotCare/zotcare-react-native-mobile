@@ -49,9 +49,10 @@ const Checkboxes = (props: Props) => {
   return mode === 'vertical' ? (
     <>
       {options.map((option, index: number) => {
+        const value = typeof option === 'string' ? option : option.value;
         return (
           <Checkbox.Item
-            key={typeof option === 'string' ? option : option.value}
+            key={value}
             label={typeof option === 'string' ? option : option.label}
             labelVariant="bodySmall"
             status={isChecked(
@@ -62,9 +63,7 @@ const Checkboxes = (props: Props) => {
               backgroundColor:
                 index % 2 ? theme.colors.backdrop : 'transparent',
             }}
-            onPress={toggleOption(
-              typeof option === 'string' ? option : option.value,
-            )}
+            onPress={toggleOption(value)}
           />
         );
       })}

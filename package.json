@@ -32,8 +32,9 @@
     "prop-types": "^15.8.1",
     "react": "18.2.0",
     "react-native": "0.71.2",
-    "react-native-device-info": "^10.4.0",
+    "react-native-device-info": "^10.6.0",
     "react-native-exception-handler": "^2.10.10",
+    "react-native-flash-message": "^0.4.1",
     "react-native-gesture-handler": "^2.8.0",
     "react-native-image-crop-picker": "^0.38.1",
     "react-native-modal": "^13.0.1",
@@ -71,9 +72,18 @@
     "react-native-svg-transformer": "^1.0.0",
     "react-native-typescript-transformer": "^1.2.13",
     "react-test-renderer": "18.2.0",
-    "typescript": "4.8.4"
+    "typescript": "4.8.4",
+    "@testing-library/react-native": "^12.1.2",
+    "@testing-library/user-event": "^14.4.3",
+    "ts-jest": "^29.1.0"
   },
   "jest": {
-    "preset": "react-native"
+    "preset": "react-native",
+    "setupFilesAfterEnv": [
+      "<rootDir>/jest.setup.js"
+    ],
+    "transformIgnorePatterns": [
+      "node_modules/(?!(jest-)?@?react-native|@react-native-community|@react-navigation|@ronradtke/react-native-markdown-display|react-native-paper)"
+    ]
   }
 }

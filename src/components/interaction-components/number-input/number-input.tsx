@@ -2,11 +2,11 @@ import PropTypes from 'prop-types';
 import {useState} from 'react';
 import {TextInput} from 'react-native-paper';
 
-const NumberInput = props => {
+const NumberInput = (props: any) => {
   const {default: def, disabled, onChange} = props;
   const [value, setValue] = useState(def.toString());
 
-  const handleChange = text => {
+  const handleChange = (text: string) => {
     if (text.endsWith('.')) {
       if (text.match(/\./g).length <= 1) {
         setValue(text);

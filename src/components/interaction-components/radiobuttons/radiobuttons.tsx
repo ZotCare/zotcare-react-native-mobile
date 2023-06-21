@@ -6,7 +6,15 @@ import {Platform, View} from 'react-native';
 import {RadioButton, useTheme} from 'react-native-paper';
 import {ScaledSheet} from 'react-native-size-matters';
 
-const Radiobuttons = props => {
+type Props = {
+  options: Array<string | {label: string; value: string}>;
+  default?: string;
+  onChange?: (value: string) => void;
+  disabled?: boolean;
+  mode?: 'vertical' | 'matrix';
+};
+
+const Radiobuttons = (props: Props) => {
   const {options, default: def, onChange, disabled, mode} = props;
   const [value, setValue] = useState(def);
   const theme = useTheme();
