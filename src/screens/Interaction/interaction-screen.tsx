@@ -53,7 +53,9 @@ const InteractionScreen = ({route, navigation}: Props) => {
   useEffect(() => {
     if (status === 'success') {
       navigation.setOptions({title: interaction.name});
-      setPage(findNextPage(0));
+      if (page === 0) {
+        setPage(prevPage => findNextPage(prevPage));
+      }
       interaction.data.pages.forEach((int_page: {fields: any[]}) => {
         int_page.fields.forEach(field => {
           if (field.default) {
@@ -177,6 +179,10 @@ const InteractionScreen = ({route, navigation}: Props) => {
     return indexArray;
   };
 
+  const isLastPage = () => {
+    return findNextPage(page + 1) === -1;
+  };
+
   return (
     <View
       style={{
@@ -190,6 +196,8 @@ const InteractionScreen = ({route, navigation}: Props) => {
         {status === 'success' ? (
           <ScrollView
             ref={scrollViewRef}
+            bounces={false}
+            showsVerticalScrollIndicator={false}
             stickyHeaderIndices={findIndicators()}
             contentContainerStyle={{flexGrow: 1}}>
             {interaction.data.pages[page].fields.map(
@@ -226,7 +234,7 @@ const InteractionScreen = ({route, navigation}: Props) => {
                   style={styles.nextButton}
                   mode="contained"
                   onPress={handleSubmit}>
-                  Next
+                  {isLastPage() ? 'Submit' : 'Next'}
                 </Button>
               </View>
             )}

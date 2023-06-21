@@ -13,7 +13,7 @@ import {Header} from '../../components';
 import CustomButton from '../../components/CustomButton';
 import CustomTextInput from '../../components/CustomTextInput';
 import Colors from '../../constants/Colors';
-import Layout from '../../constants/Layout';
+import Layout from '../../constants/view';
 import {resetPassword} from '../../modules/auth/actions';
 import {getCode} from '../../modules/auth/selectors';
 import {NavigationService} from '../../navigation';

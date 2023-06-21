@@ -8,6 +8,5 @@ export default (rootReducer, rootSaga) => {
   const store = createStore(rootReducer, enhancer);
   sagaMiddleware.run(rootSaga);
 
-  //return { store, persistor }
   return {store};
 };

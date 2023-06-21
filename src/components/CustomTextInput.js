@@ -2,7 +2,7 @@ import React, {useEffect, useRef, useState} from 'react';
 import {Platform, StyleSheet, Text, TextInput, View} from 'react-native';
 import {ScaledSheet} from 'react-native-size-matters';
 
-import Layout from '../constants/Layout';
+import Layout from '../constants/view';
 
 export default CustomTextInput = ({
   placeholder,

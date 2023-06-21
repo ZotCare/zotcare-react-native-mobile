@@ -17,7 +17,7 @@ import {
 } from 'react-native-size-matters';
 import {NavigationService} from '../navigation';
 import images from '../assets/images';
-import Layout from '../constants/Layout';
+import Layout from '../constants/view';
 import {verifyCode} from '../modules/auth/actions';
 
 export default ImageHeader = ({text, image, haveBackBtn}) => {

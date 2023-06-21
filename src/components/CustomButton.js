@@ -3,7 +3,7 @@ import {TextInput, View} from 'react-native';
 import {Button} from 'react-native-paper';
 import {ScaledSheet} from 'react-native-size-matters';
 
-import Layout from '../constants/Layout';
+import Layout from '../constants/view';
 
 export default CustomButton = ({
   icon,

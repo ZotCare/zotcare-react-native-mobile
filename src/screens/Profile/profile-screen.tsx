@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 import {ScrollView, View} from 'react-native';
 import {Notifier, NotifierComponents} from 'react-native-notifier';
 import {Button} from 'react-native-paper';
-import {SafeAreaView} from 'react-native-safe-area-context';
+import {SafeAreaView, useSafeAreaInsets} from 'react-native-safe-area-context';
 import {ScaledSheet} from 'react-native-size-matters';
 
 import ProfileField from '@app/components/interaction-components/profile-field/profile-field';
@@ -18,7 +18,7 @@ import {TabNavigatorParams} from '@app/navigation/tab-navigator';
 type Props = NativeStackScreenProps<TabNavigatorParams, 'Profile'>;
 
 const ProfileScreen = ({navigation}: Props) => {
-  const {data: profileKeys, status} = useProfileKeys();
+  const {data: profileKeys, status: keysStatus} = useProfileKeys();
   const {data: profile, status: profileStatus} = useProfile();
   const {mutateAsync: mutateProfile} = useMutateProfile();
   const [newCloudProfile, setNewCloudProfile] = useState({});
@@ -28,12 +28,13 @@ const ProfileScreen = ({navigation}: Props) => {
     setProfile: setLocalProfile,
     loading: localLoading,
   } = useLocalProfile();
+  const insets = useSafeAreaInsets();
 
   const handleAnswer = (key: string, local: boolean) => (value: any) => {
     if (local) {
-      setNewLocalProfile({...newLocalProfile, [key]: value});
+      setNewLocalProfile(prevState => ({...prevState, [key]: value}));
     } else {
-      setNewCloudProfile({...newCloudProfile, [key]: value});
+      setNewCloudProfile(prevState => ({...prevState, [key]: value}));
     }
   };
 
@@ -62,11 +63,18 @@ const ProfileScreen = ({navigation}: Props) => {
   };
 
   const isSuccess =
-    status === 'success' && profileStatus === 'success' && !localLoading;
+    keysStatus === 'success' && profileStatus === 'success' && !localLoading;
 
   return (
-    <SafeAreaView>
-      <ScrollView>
+    <View
+      style={{
+        flex: 1,
+        paddingTop: 0,
+        paddingBottom: insets.bottom,
+        paddingLeft: insets.left,
+        paddingRight: insets.right,
+      }}>
+      <ScrollView contentContainerStyle={{flexGrow: 1}} bounces={false}>
         <View style={styles.container}>
           {isSuccess &&
             profileKeys.map((field: any, index: number) => {
@@ -80,16 +88,25 @@ const ProfileScreen = ({navigation}: Props) => {
                 />
               );
             })}
-          <Button onPress={handleSubmit}>Submit </Button>
+        </View>
+        <View style={styles.buttonContainer}>
+          <Button mode="contained" onPress={handleSubmit}>
+            Submit
+          </Button>
         </View>
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 };
 
 const styles = ScaledSheet.create({
   container: {
-    flex: 1,
+    paddingLeft: 20,
+    paddingRight: 20,
+    gap: 10,
+  },
+  buttonContainer: {
+    marginTop: 'auto',
     paddingLeft: 20,
     paddingRight: 20,
   },

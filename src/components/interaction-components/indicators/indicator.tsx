@@ -62,6 +62,7 @@ const styles = ScaledSheet.create({
   item: {
     flex: 1,
     textAlign: 'center',
+    maxWidth: 100,
   },
   firstItem: {
     flex: 1,
