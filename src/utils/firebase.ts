@@ -1,6 +1,7 @@
 import messaging, {
   FirebaseMessagingTypes,
 } from '@react-native-firebase/messaging';
+import {PermissionsAndroid, Platform} from 'react-native';
 import {getUniqueId} from 'react-native-device-info';
 import {Notifier} from 'react-native-notifier';
 
@@ -32,9 +33,31 @@ export const handleForegroundNotification = async (
 };
 
 export const sendToken = async () => {
-  await messaging().registerDeviceForRemoteMessages();
+  if (Platform.OS === 'android') {
+    await messaging().registerDeviceForRemoteMessages();
+  }
   const fcmToken = await messaging().getToken();
   const deviceId = await getUniqueId();
   const timezoneOffset = new Date().getTimezoneOffset();
   return await postFcmTokens(fcmToken, timezoneOffset, deviceId);
+};
+
+export const requestPermission = () => {
+  if (Platform.OS === 'android') {
+    PermissionsAndroid.request(
+      PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS,
+    );
+  } else if (Platform.OS === 'ios') {
+    async function requestUserPermission() {
+      const authStatus = await messaging().requestPermission();
+      const enabled =
+        authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
+        authStatus === messaging.AuthorizationStatus.PROVISIONAL;
+
+      if (enabled) {
+        console.log('Authorization status:', authStatus);
+      }
+    }
+    requestUserPermission();
+  }
 };

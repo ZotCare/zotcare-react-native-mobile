@@ -1,6 +1,6 @@
-import Uris from '../../constants/Uris';
-import type {Interaction} from '../../models/interaction';
-import request from '../../utils/request';
+import Uris from '@app/constants/Uris';
+import type {Interaction} from '@app/models/interaction';
+import request from '@app/utils/request';
 
 export const fetchInteractions = async (): Promise<Interaction[]> => {
   const response = await request.get(Uris.interactions);
@@ -17,10 +17,11 @@ export const fetchInteractionById = async (
 export const submitInteraction = async (
   id: string,
   submission: any,
+  metadata: any,
 ): Promise<any> => {
   const response = await request.post(
     `${Uris.interactions}/${id}/submissions`,
-    submission,
+    {data: submission, metadata},
   );
   return response.data;
 };

@@ -8,7 +8,7 @@ import {Header} from '../../components';
 import CustomButton from '../../components/CustomButton';
 import CustomTextInput from '../../components/CustomTextInput';
 import Colors from '../../constants/Colors';
-import Layout from '../../constants/Layout';
+import Layout from '../../constants/view';
 import {changePassword} from '../../modules/auth/actions';
 import mainStyles from '../../views/Styles';
 

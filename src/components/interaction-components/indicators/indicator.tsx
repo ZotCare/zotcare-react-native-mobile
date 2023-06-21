@@ -1,39 +1,39 @@
 import PropTypes from 'prop-types';
-import {Image, View} from 'react-native';
-import {Text} from 'react-native-paper';
+import {Dimensions, Image, View} from 'react-native';
+import {Text, useTheme} from 'react-native-paper';
 import {ScaledSheet} from 'react-native-size-matters';
 
-const Indicator = props => {
+type Props = {
+  items: Array<string>;
+  mode?: 'text' | 'image';
+};
+
+const Indicator = (props: Props) => {
   const {items, mode} = props;
+  const theme = useTheme();
+
+  const screenWidth = Dimensions.get('window').width;
+  const imageWidth = (screenWidth - 20) / items.length;
+
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, {backgroundColor: theme.colors.surface}]}>
       {items.map((item, index) => {
         if (mode === 'text') {
           return (
-            <Text
-              style={
-                index === 0
-                  ? styles.firstItem
-                  : index === items.length - 1
-                  ? styles.lastItem
-                  : styles.item
-              }
-              key={index.toString()}>
+            <Text style={styles.item} key={index.toString()}>
               {item}
             </Text>
           );
         } else if (mode === 'image') {
           return (
             <Image
-              style={
-                index === 0
-                  ? styles.firstItem
-                  : index === items.length - 1
-                  ? styles.lastItem
-                  : styles.item
-              }
+              style={{
+                width: imageWidth,
+                height: 40,
+                resizeMode: 'contain',
+              }}
               key={index.toString()}
-              source={item}
+              source={{uri: item}}
             />
           );
         }
@@ -63,6 +63,7 @@ const styles = ScaledSheet.create({
   item: {
     flex: 1,
     textAlign: 'center',
+    maxWidth: 100,
   },
   firstItem: {
     flex: 1,

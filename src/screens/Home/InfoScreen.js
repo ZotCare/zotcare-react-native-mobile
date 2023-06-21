@@ -1,31 +1,22 @@
-import {useFocusEffect} from '@react-navigation/native';
 import React, {useState} from 'react';
 import {ScrollView} from 'react-native';
 import {Text} from 'react-native-paper';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {useDispatch, useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
 
-import CustomButton from '../../components/CustomButton';
-import CustomModal from '../../components/CustomModal';
-import Colors from '../../constants/Colors';
-import {signOut} from '../../modules/auth/actions';
+import {signOut} from '@app/modules/auth/actions';
+import CustomButton from '@components/CustomButton';
+import CustomModal from '@components/CustomModal';
 
 const HomeScreen = ({navigation}) => {
   const dispatch = useDispatch();
   const [visibleLogout, setVisibleLogout] = useState(false);
-
-  useFocusEffect(
-    React.useCallback(() => {
-      return () => {};
-    }, []),
-  );
 
   return (
     <SafeAreaView>
       <ScrollView>
         <CustomButton
           text={'Logout'}
-          buttonColor={Colors.main_colors.secondaryColor}
           onPress={() => {
             setVisibleLogout(true);
           }}
@@ -43,10 +34,10 @@ const HomeScreen = ({navigation}) => {
             {'Are you sure you want to logout?'}
           </Text>
         }
-        whiteText={'No'}
-        pinkText={'Yes'}
-        onPinkButtonPress={() => dispatch(signOut())}
-        onWhiteButtonPress={() => setVisibleLogout(false)}
+        primaryText={'No'}
+        secondaryText={'Yes'}
+        onPrimaryButtonPress={() => dispatch(signOut())}
+        onSecondaryButtonPress={() => setVisibleLogout(false)}
       />
     </SafeAreaView>
   );

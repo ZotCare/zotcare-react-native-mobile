@@ -8,7 +8,7 @@ import {
 } from 'react-native-size-matters';
 
 import Colors from '../constants/Colors';
-import Layout from '../constants/Layout';
+import Layout from '../constants/view';
 
 export default CustomAvatar = ({name, image, size, fontSize, style = {}}) => {
   return (

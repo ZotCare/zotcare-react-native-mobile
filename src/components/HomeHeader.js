@@ -11,7 +11,7 @@ import {useSelector} from 'react-redux';
 
 import images from '../assets/images';
 import Colors from '../constants/Colors';
-import Layout from '../constants/Layout';
+import Layout from '../constants/view';
 import {getProfile} from '../modules/profile/selectors';
 import {NavigationService} from '../navigation';
 

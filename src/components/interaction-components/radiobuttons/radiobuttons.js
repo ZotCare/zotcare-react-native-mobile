@@ -26,6 +26,9 @@ const Radiobuttons = props => {
           labelVariant="bodySmall"
           value={typeof option === 'string' ? option : option.value}
           mode={'android'}
+          style={{
+            backgroundColor: index % 2 ? theme.colors.backdrop : 'transparent',
+          }}
         />
       ))}
     </RadioButton.Group>

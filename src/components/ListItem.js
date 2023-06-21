@@ -11,8 +11,8 @@ import {moderateScale} from 'react-native-size-matters';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import Colors from '../constants/Colors';
-import Layout from '../constants/Layout';
 import Titles from '../constants/Titles';
+import Layout from '../constants/view';
 import {numberWithCommas} from '../libs/utils';
 import AvatarImage from './Avatar';
 

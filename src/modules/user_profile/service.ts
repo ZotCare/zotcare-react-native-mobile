@@ -15,7 +15,7 @@ export const useMutateProfile = () => {
       return {previousProfile};
     },
     onError: (err, newProfile, context) => {
-      queryClient.setQueryData(['profile'], context.previousProfile);
+      queryClient.setQueryData(['profile'], context?.previousProfile);
     },
     onSuccess: profile => {
       queryClient.setQueriesData(['profile'], profile);
