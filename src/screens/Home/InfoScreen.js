@@ -1,11 +1,10 @@
 import React, {useState} from 'react';
 import {ScrollView} from 'react-native';
-import {Text} from 'react-native-paper';
+import {Button, Text} from 'react-native-paper';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {useDispatch} from 'react-redux';
 
 import {signOut} from '@app/modules/auth/actions';
-import CustomButton from '@components/CustomButton';
 import CustomModal from '@components/CustomModal';
 
 const HomeScreen = ({navigation}) => {
@@ -15,8 +14,9 @@ const HomeScreen = ({navigation}) => {
   return (
     <SafeAreaView>
       <ScrollView>
-        <CustomButton
+        <Button
           text={'Logout'}
+          mode="contained"
           onPress={() => {
             setVisibleLogout(true);
           }}
@@ -36,8 +36,8 @@ const HomeScreen = ({navigation}) => {
         }
         primaryText={'No'}
         secondaryText={'Yes'}
-        onPrimaryButtonPress={() => dispatch(signOut())}
-        onSecondaryButtonPress={() => setVisibleLogout(false)}
+        onPrimaryButtonPress={() => setVisibleLogout(false)}
+        onSecondaryButtonPress={() => dispatch(signOut())}
       />
     </SafeAreaView>
   );

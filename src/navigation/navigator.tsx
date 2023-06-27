@@ -5,13 +5,14 @@ import {DeviceEventEmitter} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 
 import navigation_theme from '@app/constants/navigation_theme';
+import {setTopLevelNavigator} from '@app/navigation/services';
+import {SplashScreen} from '@components/SplashScreen';
 
-import {SplashScreen} from '../components/SplashScreen';
 import {getDBToken, loadDataFromDB} from '../modules/auth/actions';
 import {getDBProfile} from '../modules/profile/actions';
 import InteractionScreen from '../screens/Interaction/interaction-screen';
 import AuthStack from './auth-stack';
-import {NavigationService, TabStackNavigator} from './index';
+import {TabStackNavigator} from './index';
 
 export type NavigatorParams = {
   tab: undefined;
@@ -44,7 +45,7 @@ export default () => {
     <NavigationContainer
       theme={navigation_theme}
       ref={navigatorRef => {
-        NavigationService.setTopLevelNavigator(navigatorRef);
+        setTopLevelNavigator(navigatorRef);
       }}>
       <SplashScreen isAppReady={isLoading}>
         {!token ? (

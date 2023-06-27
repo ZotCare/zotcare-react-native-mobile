@@ -5,13 +5,14 @@ import {PermissionsAndroid, Platform} from 'react-native';
 import {getUniqueId} from 'react-native-device-info';
 import {Notifier} from 'react-native-notifier';
 
+import {navigate} from '@app/navigation/services';
+
 import {postFcmTokens} from '../modules/fcm_tokens/api';
-import {NavigationService} from '../navigation';
 
 export const handlePress = (data?: {[key: string]: string}) => {
   switch (data?.action) {
     case 'navigate':
-      NavigationService.navigate(data?.screen, {id: data?.id});
+      navigate(data?.screen, {id: data?.id});
   }
 };
 

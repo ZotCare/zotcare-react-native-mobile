@@ -30,8 +30,12 @@ const CustomModal = ({
         {component}
         {hasButtons && (
           <View style={styles.buttonsView}>
-            <Button onPress={onSecondaryButtonPress}>{secondaryText}</Button>
-            <Button onPress={onPrimaryButtonPress}>{primaryText}</Button>
+            <Button mode="contained-tonal" onPress={onPrimaryButtonPress}>
+              {primaryText}
+            </Button>
+            <Button mode="contained" onPress={onSecondaryButtonPress}>
+              {secondaryText}
+            </Button>
           </View>
         )}
       </Surface>
@@ -51,6 +55,7 @@ const styles = ScaledSheet.create({
     flexDirection: 'row-reverse',
     alignItems: 'center',
     justifyContent: 'center',
+    gap: 20,
   },
 });
 

@@ -1,4 +1,5 @@
-import Uris from '../../constants/Uris';
+import Uris from '@constants/uris';
+
 import request from '../../utils/request';
 
 export const setProfile = user =>

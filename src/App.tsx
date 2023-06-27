@@ -140,14 +140,14 @@ const App = () => {
     );
   }, []);
 
-  const _handleAppStateChange = nextAppState => {
-    // if (appState.current.match(/inactive|background/) && nextAppState === "active") {
+  // const _handleAppStateChange = nextAppState => {
+  // if (appState.current.match(/inactive|background/) && nextAppState === "active") {
 
-    // }
-    appState.current = nextAppState;
-    setAppStateVisible(appState.current);
-    //console.log("AppState", appState.current);
-  };
+  // }
+  // appState.current = nextAppState;
+  // setAppStateVisible(appState.current);
+  //console.log("AppState", appState.current);
+  // };
 
   return (
     <SafeAreaProvider>

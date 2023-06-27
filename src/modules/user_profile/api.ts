@@ -1,5 +1,5 @@
-import Uris from '@app/constants/Uris';
 import request from '@app/utils/request';
+import Uris from '@constants/uris';
 
 export const fetchProfile = async (): Promise<any> => {
   const response = await request.get(`${Uris.profile}/my`);

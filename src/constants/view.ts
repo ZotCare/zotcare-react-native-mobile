@@ -10,9 +10,6 @@ export default {
     height,
   },
   isSmallDevice: width < 375,
-  font: {
-    //fontFamily: 'OpenSans-Regular'
-  },
   paddingHorizontal: scale(15),
   marginHorizontal: scale(15),
 };

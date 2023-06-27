@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
-import {Image, Text, View} from 'react-native';
+import {Text, View} from 'react-native';
 import {Button, TextInput} from 'react-native-paper';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {scale, ScaledSheet, verticalScale} from 'react-native-size-matters';
+import {ScaledSheet} from 'react-native-size-matters';
 import {useDispatch} from 'react-redux';
 
-import images from '@app/assets/images';
+import LogoSvg from '@app/assets/images/logo/logo.svg';
 import titles from '@app/constants/titles';
 import Layout from '@app/constants/view';
 import {signIn} from '@app/modules/auth/actions';
@@ -20,14 +20,7 @@ const LoginScreen = () => {
     <SafeAreaView style={styles.container}>
       <View style={[styles.topMargin, styles.topTextView]}>
         <Text style={styles.topText}>{titles.appName}</Text>
-        <Image
-          source={images.logo}
-          style={{
-            marginTop: verticalScale(10),
-            height: scale(100),
-            aspectRatio: 1,
-          }}
-        />
+        <LogoSvg width={200} height={200} />
       </View>
       <View style={[styles.topMargin, styles.inputArea]}>
         <TextInput
@@ -105,7 +98,7 @@ const styles = ScaledSheet.create({
     fontWeight: '900',
   },
   inputArea: {
+    maxWidth: 500,
     width: '100%',
-    maxWidth: 450,
   },
 });

@@ -3,10 +3,9 @@ import React, {useState} from 'react';
 import {ScrollView, View} from 'react-native';
 import {Notifier, NotifierComponents} from 'react-native-notifier';
 import {Button} from 'react-native-paper';
-import {SafeAreaView, useSafeAreaInsets} from 'react-native-safe-area-context';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {ScaledSheet} from 'react-native-size-matters';
 
-import ProfileField from '@app/components/interaction-components/profile-field/profile-field';
 import useLocalProfile from '@app/modules/user_profile/local';
 import {
   useMutateProfile,
@@ -14,6 +13,7 @@ import {
   useProfileKeys,
 } from '@app/modules/user_profile/service';
 import {TabNavigatorParams} from '@app/navigation/tab-navigator';
+import ProfileField from '@components/profile-field/profile-field';
 
 type Props = NativeStackScreenProps<TabNavigatorParams, 'Profile'>;
 

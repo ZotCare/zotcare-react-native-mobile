@@ -8,10 +8,10 @@ import {Button, HelperText, Text} from 'react-native-paper';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {ScaledSheet} from 'react-native-size-matters';
 
-import Question from '@app/components/interaction-components/question/question';
 import {submitInteraction} from '@app/modules/interactions/api';
 import {useInteraction} from '@app/modules/interactions/service';
 import {NavigatorParams} from '@app/navigation/navigator';
+import InteractionField from '@components/interaction-field/interaction-field';
 
 import {useCondition} from './conditions';
 
@@ -66,6 +66,7 @@ const InteractionScreen = ({route, navigation}: Props) => {
       });
       metaRef.current.started_at = new Date().getTime();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [interaction]);
 
   const handleAnswer =
@@ -205,7 +206,7 @@ const InteractionScreen = ({route, navigation}: Props) => {
                 field.id = field.key;
                 return (
                   <Fragment key={index.toString()}>
-                    <Question
+                    <InteractionField
                       handleAnswer={handleAnswer}
                       value={defaults[field.id]}
                       {...field}

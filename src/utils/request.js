@@ -1,8 +1,8 @@
 import axios from 'axios';
-import {useDispatch} from 'react-redux';
+
+import Uris from '@constants/uris';
 
 import {store} from '../App';
-import Uris from '../constants/Uris';
 import {signOut} from '../modules/auth/actions';
 import globalConfig from './global';
 

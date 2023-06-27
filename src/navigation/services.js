@@ -7,16 +7,11 @@ let activeRouteName = '';
 function setModal(modal) {
   modal = modal;
 }
-function showModal(visible) {
-  //alert(LogManager.parseJsonObjectToJsonString(modal));
-  // modal.open();
-}
-
-function setTopLevelNavigator(navigatorRef) {
+export function setTopLevelNavigator(navigatorRef) {
   _navigator = navigatorRef;
 }
 
-function navigate(routeName, params) {
+export function navigate(routeName, params) {
   _navigator && _navigator.navigate(routeName, params);
 }
 
@@ -63,20 +58,3 @@ function getActiveRouteName() {
 function getActiveRouteParams() {
   return _navigator && _navigator.getCurrentRoute().params;
 }
-
-export default {
-  navigate,
-  setTopLevelNavigator,
-  goBack,
-  setParams,
-  getNavigator,
-  pop,
-  popToTop,
-  setModal,
-  showModal,
-  getActiveRouteName,
-  getActiveRouteParams,
-  resetRoot,
-  reset,
-  replace,
-};
