@@ -11,9 +11,9 @@ import {ScaledSheet} from 'react-native-size-matters';
 import {submitInteraction} from '@app/modules/interactions/api';
 import {useInteraction} from '@app/modules/interactions/service';
 import {NavigatorParams} from '@app/navigation/navigator';
-import InteractionField from '@components/interaction-field/interaction-field';
 
 import {useCondition} from './conditions';
+import InteractionField from './interaction-field/interaction-field';
 
 type Props = NativeStackScreenProps<NavigatorParams, 'interaction'>;
 

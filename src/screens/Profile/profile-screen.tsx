@@ -13,7 +13,8 @@ import {
   useProfileKeys,
 } from '@app/modules/user_profile/service';
 import {TabNavigatorParams} from '@app/navigation/tab-navigator';
-import ProfileField from '@components/profile-field/profile-field';
+
+import ProfileField from './profile-field/profile-field';
 
 type Props = NativeStackScreenProps<TabNavigatorParams, 'Profile'>;
 
