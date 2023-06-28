@@ -4,7 +4,7 @@ import React from 'react';
 import Slider from '@components/input-components/slider/slider';
 
 describe('<Slider/>', () => {
-  const onValueChange = jest.fn();
+  let onValueChange = jest.fn();
   const renderComponent = (props: any = {}) => {
     const defProps = {
       min: 0,
@@ -17,18 +17,15 @@ describe('<Slider/>', () => {
     };
     render(<Slider {...defProps} />);
   };
-  describe('Check Slider rendering', () => {
+  describe('Rendering', () => {
     afterAll(() => {
       cleanup();
     });
-    it('Slider renders', () => {
-      renderComponent();
-    });
-
-    it('Slider renders with Correct Slider Component', async () => {
+    it('Renders with default', async () => {
       renderComponent();
       const slider = await screen.findByTestId('slider');
       expect(slider).toBeDefined();
+      expect(slider.props.value).toEqual(0);
     });
   });
 });
