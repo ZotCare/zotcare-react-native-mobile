@@ -13,7 +13,7 @@ describe('<DateTimePicker/>', () => {
   const renderComponent = (props: any = {}) => {
     const defProps = {
       mode: 'date',
-      default: 1686204936249, //June 8, 2023
+      default: new Date().getTime(),
       onValueChange,
       ...props,
     };
@@ -23,34 +23,37 @@ describe('<DateTimePicker/>', () => {
     afterAll(() => {
       cleanup();
     });
+
+    it('Renders default value', async () => {
+      renderComponent();
+      const timePicker = await screen.findByTestId('dateTimePicker');
+      const today = new Date();
+      const timePickerDate = new Date(timePicker.props.date).toDateString();
+      expect(timePickerDate).toEqual(today.toDateString());
+    });
+  });
+  describe('Selecting', () => {
     beforeEach(() => {
       onValueChange = jest.fn();
     });
     afterEach(() => {
       onValueChange.mockReset();
     });
-
-    it('DateTimePicker renders', () => {
-      renderComponent();
-      screen.debug();
-    });
-
-    it('Test Date Picker', async () => {
+    it('Initial Date', async () => {
       renderComponent();
       const today = new Date();
       const timePicker = await screen.findByTestId('dateTimePicker');
       fireEvent(timePicker, 'onChange', {nativeEvent: {timestamp: today}});
+      expect(timePicker.props.date).toEqual(today.getTime());
     });
-    // These are mainly for IOS (Andoid has additional Button - test later)
-    it('Test Date Picker Value Change', async () => {
+    it('Date Picker Value Change', async () => {
       renderComponent();
       const today = new Date();
       const timePicker = await screen.findByTestId('dateTimePicker');
       fireEvent(timePicker, 'onChange', {nativeEvent: {timestamp: today}});
-      expect(onValueChange).toHaveBeenCalledTimes(1);
       const newDate = new Date('2023-01-01');
       fireEvent(timePicker, 'onChange', {nativeEvent: {timestamp: newDate}});
-      expect(onValueChange).toHaveBeenCalledTimes(2);
+      expect(timePicker.props.date).toEqual(newDate.getTime());
     });
 
     it('Test Date Picker - Time', async () => {
@@ -59,9 +62,9 @@ describe('<DateTimePicker/>', () => {
       const timePicker = await screen.findByTestId('dateTimePicker');
       fireEvent(timePicker, 'onChange', {nativeEvent: {timestamp: time}});
       time.setHours(10);
-      time.setTime(20);
+      time.setMinutes(20);
       fireEvent(timePicker, 'onChange', {nativeEvent: {timestamp: time}});
-      expect(onValueChange).toHaveBeenCalledTimes(2);
+      expect(timePicker.props.date).toEqual(time.getTime());
     });
   });
 });

@@ -26,39 +26,35 @@ describe('<Radiobuttons/>', () => {
     afterAll(() => {
       cleanup();
     });
+    it('In vertical mode', () => {
+      renderComponent();
+      expect(screen.getByText('1')).toBeTruthy();
+      expect(screen.getByText('2')).toBeTruthy();
+    });
+    it('In matrix mode', () => {
+      renderComponent({mode: 'matrix'});
+      expect(screen.queryByText('1')).toBeNull();
+      expect(screen.queryByText('2')).toBeNull();
+    });
+  });
+  describe('Selecting', () => {
     beforeEach(() => {
       onChange = jest.fn();
     });
     afterEach(() => {
       onChange.mockReset();
     });
-
-    it('RadioButton renders with text', () => {
+    it('Vertical click event', () => {
       renderComponent();
-      expect(screen.getByText('1')).toBeTruthy();
-      expect(screen.getByText('2')).toBeTruthy();
-    });
-
-    it('radio clickable', () => {
-      renderComponent();
-      const item = screen.getByText('1');
+      const item = screen.getByText('2');
       fireEvent.press(item);
-      expect(onChange).toBeCalledTimes(1);
+      expect(onChange).toBeCalledWith('2');
     });
-
-    // test matrix
-    it('radiobuttons should match to snapshot - matrix', () => {
-      renderComponent({mode: 'matrix'});
-      expect(screen.queryByText('1')).toBeNull();
-      expect(screen.queryByText('2')).toBeNull();
-    });
-
-    // Since no text will appear in matrix mode, we rely on label text to search for component
-    it('checkboxes matrix clickable', () => {
+    it('Matrix click event', () => {
       renderComponent();
-      const item1 = screen.getByLabelText('1');
+      const item1 = screen.getByLabelText('2');
       fireEvent.press(item1);
-      expect(onChange).toBeCalledTimes(1);
+      expect(onChange).toBeCalledWith('2');
     });
   });
 });
