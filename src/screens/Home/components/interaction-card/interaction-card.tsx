@@ -1,11 +1,20 @@
 import {useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import PropTypes from 'prop-types';
 import React from 'react';
 import {Button, Card} from 'react-native-paper';
 
-const InteractionCard = props => {
+type Props = {
+  name: string;
+  id: string;
+  description?: string;
+  image?: string;
+  available?: boolean;
+};
+
+const InteractionCard = (props: Props) => {
   const {name, id, description, image, available} = props;
-  const navigation = useNavigation();
+  const navigation = useNavigation<NativeStackNavigationProp<any>>();
 
   return (
     <Card>

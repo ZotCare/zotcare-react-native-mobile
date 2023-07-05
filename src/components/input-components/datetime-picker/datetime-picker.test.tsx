@@ -6,7 +6,7 @@ import {
 } from '@testing-library/react-native';
 import React from 'react';
 
-import DateTimePicker from '@components/input-components/datetime-picker/datetime-picker';
+import DateTimePicker from './datetime-picker';
 
 describe('<DateTimePicker/>', () => {
   let onValueChange = jest.fn();

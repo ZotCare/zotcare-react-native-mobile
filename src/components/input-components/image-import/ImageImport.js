@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Alert, Button, Image, Text, View} from 'react-native';
+import {Button, Image, Text, View} from 'react-native';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {ScaledSheet} from 'react-native-size-matters';

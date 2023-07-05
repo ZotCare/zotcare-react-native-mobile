@@ -7,7 +7,7 @@ import {useDispatch} from 'react-redux';
 import {signOut} from '@app/modules/auth/actions';
 import CustomModal from '@components/CustomModal';
 
-const HomeScreen = ({navigation}) => {
+const HomeScreen = () => {
   const dispatch = useDispatch();
   const [visibleLogout, setVisibleLogout] = useState(false);
 
@@ -15,12 +15,12 @@ const HomeScreen = ({navigation}) => {
     <SafeAreaView>
       <ScrollView>
         <Button
-          text={'Logout'}
           mode="contained"
           onPress={() => {
             setVisibleLogout(true);
-          }}
-        />
+          }}>
+          Log Out
+        </Button>
       </ScrollView>
       <CustomModal
         visible={visibleLogout}

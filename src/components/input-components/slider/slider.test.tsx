@@ -11,7 +11,6 @@ describe('<Slider/>', () => {
       max: 100,
       step: 10,
       default: 0,
-      // indicator: {items: ['10', '100']},
       onValueChange,
       ...props,
     };

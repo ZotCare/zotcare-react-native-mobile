@@ -84,7 +84,7 @@
   },
   "jest": {
     "preset": "react-native",
-    "setupFilesAfterEnv": [
+    "setupFiles": [
       "<rootDir>/jest.setup.js"
     ],
     "transformIgnorePatterns": [

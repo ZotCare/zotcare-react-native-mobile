@@ -1,7 +1,7 @@
 import {cleanup, render, screen} from '@testing-library/react-native';
 import React from 'react';
 
-import Indicator from '@components/input-components/indicators/indicator';
+import Indicator from './indicator';
 
 describe('<Indicators/>', () => {
   const renderComponent = (props: any = {}) => {
@@ -12,6 +12,7 @@ describe('<Indicators/>', () => {
     };
     render(<Indicator {...defProps} />);
   };
+
   describe('Rendering', () => {
     afterAll(() => {
       cleanup();

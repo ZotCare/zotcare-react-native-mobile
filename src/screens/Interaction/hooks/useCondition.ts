@@ -1,7 +1,7 @@
 import {Condition} from '@app/models/condition';
 import useGeneralProfile from '@app/modules/user_profile/general-profile';
 
-export const useCondition = (answers: any) => {
+export default (answers: any) => {
   const {getItem: getProfileItem} = useGeneralProfile();
   const check_single = (condition: Condition) => {
     let cmp;
@@ -35,7 +35,7 @@ export const useCondition = (answers: any) => {
     }
   };
 
-  const check_or_and_collection = (collections: any[]) => {
+  const check_or_and_collection = (collections: Condition[][]) => {
     return collections
       ? collections.some(collection => collection.every(check_single))
       : true;

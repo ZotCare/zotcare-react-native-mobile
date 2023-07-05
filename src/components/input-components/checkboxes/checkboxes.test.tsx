@@ -4,10 +4,9 @@ import {
   render,
   screen,
 } from '@testing-library/react-native';
-// import userEvent from '@testing-library/user-event'
 import React from 'react';
 
-import Checkboxes from '@components/input-components/checkboxes/checkboxes';
+import Checkboxes from './checkboxes';
 
 describe('<Checkbox />', () => {
   let onChange = jest.fn();

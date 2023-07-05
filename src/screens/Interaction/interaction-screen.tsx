@@ -12,8 +12,8 @@ import {submitInteraction} from '@app/modules/interactions/api';
 import {useInteraction} from '@app/modules/interactions/service';
 import {NavigatorParams} from '@app/navigation/navigator';
 
-import {useCondition} from './conditions';
-import InteractionField from './interaction-field/interaction-field';
+import InteractionField from './components/interaction-field/interaction-field';
+import useCondition from './hooks/useCondition';
 
 type Props = NativeStackScreenProps<NavigatorParams, 'interaction'>;
 

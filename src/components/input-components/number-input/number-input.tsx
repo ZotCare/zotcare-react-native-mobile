@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import React from 'react';
 import {useState} from 'react';
 import {TextInput} from 'react-native-paper';
 
@@ -9,7 +10,7 @@ type Props = {
 };
 
 const NumberInput = (props: Props) => {
-  const {default: def, disabled, onChange} = {...props, default: 0};
+  const {default: def, disabled, onChange} = {default: 0, ...props};
   const [value, setValue] = useState(def.toString());
 
   const handleChange = (text: string) => {
@@ -37,6 +38,7 @@ const NumberInput = (props: Props) => {
       defaultValue={def.toString()}
       value={value}
       onChangeText={handleChange}
+      testID={'number-input'}
     />
   );
 };

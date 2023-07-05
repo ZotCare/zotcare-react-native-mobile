@@ -1,17 +1,19 @@
-import {cleanup, render, screen} from '@testing-library/react-native';
+import {cleanup, render} from '@testing-library/react-native';
 import React from 'react';
 
 import ThemedMarkdown from '@app/components/themed-markdown/themed-markdown';
 
 describe('<ThemedMarkdown/>', () => {
-  const renderComponent = (props: any = {}) => {
+  const renderComponent = (
+    props: any = {},
+    children: string = 'Hello World!',
+  ) => {
     const defProps = {
-      children: '1',
       alignment: 'left',
       style: {},
       ...props,
     };
-    render(<ThemedMarkdown {...defProps} />);
+    render(<ThemedMarkdown {...defProps}> {children} </ThemedMarkdown>);
   };
   describe('Check ThemedMarkdown rendering', () => {
     afterAll(() => {

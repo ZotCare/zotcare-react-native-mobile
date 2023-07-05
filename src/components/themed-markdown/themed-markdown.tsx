@@ -5,7 +5,7 @@ import {Platform, View} from 'react-native';
 import {useTheme} from 'react-native-paper';
 
 type Props = {
-  children: string;
+  children: string | string[];
   alignment?: 'left' | 'center' | 'right' | 'justify';
   style?: any;
 };
@@ -13,6 +13,9 @@ type Props = {
 const ThemedMarkdown = (props: Props) => {
   const theme = useTheme();
   const {children, alignment, style} = props;
+
+  const text = Array.isArray(children) ? ''.concat(...children) : children;
+
   return (
     <View style={style}>
       <Markdown
@@ -209,14 +212,17 @@ const ThemedMarkdown = (props: Props) => {
           inline: {},
           span: {},
         }}>
-        {children}
+        {text}
       </Markdown>
     </View>
   );
 };
 
 ThemedMarkdown.propTypes = {
-  children: PropTypes.string.isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.arrayOf(PropTypes.string),
+  ]).isRequired,
   alignment: PropTypes.oneOf(['left', 'center', 'right', 'justify']),
   style: PropTypes.object,
 };
