@@ -28,7 +28,7 @@ const Custom1 = (props: any) => {
   };
 
   const onTappingEnd = (result: any) => {
-    allResultRef.current.push(result);
+    allResultRef.current.push({target: finalSequence, ...result});
     if (count.current < repeat) {
       count.current++;
       setState(State.off);

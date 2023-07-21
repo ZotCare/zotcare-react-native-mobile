@@ -446,7 +446,7 @@ PODS:
     - FirebaseCoreExtension (= 10.7.0)
     - React-Core
     - RNFBApp
-  - RNGestureHandler (2.10.0):
+  - RNGestureHandler (2.9.0):
     - React-Core
   - RNImageCropPicker (0.38.1):
     - React-Core
@@ -741,7 +741,7 @@ SPEC CHECKSUMS:
   RNDeviceInfo: 749f2e049dcd79e2e44f134f66b73a06951b5066
   RNFBApp: 55dbfc574e5ae414f2984394934f79f87eb4b050
   RNFBMessaging: d365361650cc697294227e1280923f35a31d2501
-  RNGestureHandler: e145476da655f3dbc48ef2f0a08cf7a34338c02b
+  RNGestureHandler: 071d7a9ad81e8b83fe7663b303d132406a7d8f39
   RNImageCropPicker: 648356d68fbf9911a1016b3e3723885d28373eda
   RNReanimated: cc5e3aa479cb9170bcccf8204291a6950a3be128
   RNScreens: 34cc502acf1b916c582c60003dc3089fa01dc66d
@@ -751,4 +751,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 8ebea209e0ba88fcccd4d53e36f4b0740e00d240
 
-COCOAPODS: 1.12.1
+COCOAPODS: 1.11.3

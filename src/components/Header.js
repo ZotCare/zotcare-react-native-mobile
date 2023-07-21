@@ -1,10 +1,11 @@
 import * as React from 'react';
-import {View, Image, Pressable, Platform} from 'react-native';
-import {Appbar, Title, IconButton} from 'react-native-paper';
-import Colors from '../constants/Colors';
+import {Image, Platform, Pressable, View} from 'react-native';
+import {Appbar, IconButton, Title} from 'react-native-paper';
 import {scale, ScaledSheet, verticalScale} from 'react-native-size-matters';
-import {NavigationService} from '../navigation';
+
 import images from '../assets/images';
+import Colors from '../constants/Colors';
+import {NavigationService} from '../navigation';
 
 const Header = ({
   title,
@@ -23,12 +24,12 @@ const Header = ({
         style={styles.image}
         source={mode == 'dark' ? images.backIconWhite : images.backIcon}
       />
-    </Pressable>;
+    </Pressable>
   );
   const setting = haveSettingBtn && (
     <Pressable onPress={onMenuPress}>
       <Image style={styles.image} source={images.setting} />
-    </Pressable>;
+    </Pressable>
   );
   // <IconButton icon="chevron-left" size={24}
   //     onPress={() => NavigationService.getNavigator().goBack()} color={Colors.main_colors.backButtonIconColor} style={styles.icon}/>
@@ -77,16 +78,14 @@ const styles = ScaledSheet.create({
     backgroundColor: Colors.backgroundColor,
     elevation: 0,
     justifyContent: 'space-between',
-
-    },
+  },
   title: {
     color: Colors.main_colors.headerTextColor,
     fontWeight: Platform.OS == 'ios' ? '900' : 'bold',
     fontSize: '28@ms',
     marginTop: '20@vs',
-
-    },
+  },
   image: {
     marginHorizontal: '5@s',
   },
-})
+});

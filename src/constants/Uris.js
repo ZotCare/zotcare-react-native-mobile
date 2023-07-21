@@ -6,5 +6,6 @@ export default {
   profile: '/profile',
   my_group: 'groups/my',
   profile_keys: 'groups/my/profile-keys',
+  group_profile: 'groups/profile',
   phones: 'groups/user/phones',
 };

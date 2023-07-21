@@ -52,6 +52,8 @@ const InteractionScreen = ({route, navigation}: Props) => {
 
   useEffect(() => {
     if (status === 'success') {
+      console.log(interaction);
+
       navigation.setOptions({title: interaction.name, gestureEnabled: false});
       if (page === 0) {
         setPage(prevPage => findNextPage(prevPage));
@@ -91,7 +93,7 @@ const InteractionScreen = ({route, navigation}: Props) => {
   };
 
   const showHeader = () => {
-    return !interaction?.data.pages[page]?.options?.hide_header ?? true;
+    return !interaction?.data?.pages[page]?.options?.hide_header ?? true;
   };
 
   const handleOptions = (nextPage: number) => {
@@ -174,10 +176,10 @@ const InteractionScreen = ({route, navigation}: Props) => {
   const findIndicators = () => {
     const indexArray: Array<number> = [];
 
-    for (let i = 0; i < interaction?.data.pages[page].fields.length; ++i) {
+    for (let i = 0; i < interaction?.data?.pages[page].fields.length; ++i) {
       if (
-        interaction?.data.pages[page].fields[i].type === 'indicator' &&
-        interaction?.data.pages[page].fields[i].sticky
+        interaction?.data?.pages[page].fields[i].type === 'indicator' &&
+        interaction?.data?.pages[page].fields[i].sticky
       ) {
         indexArray.push(i);
       }
