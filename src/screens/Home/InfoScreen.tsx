@@ -4,7 +4,7 @@ import {Button, Text} from 'react-native-paper';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {useDispatch} from 'react-redux';
 
-import {signOut} from '@app/modules/auth/actions';
+import {signOut} from '@app/services/auth/actions';
 import CustomModal from '@components/CustomModal';
 
 const HomeScreen = () => {

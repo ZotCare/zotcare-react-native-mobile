@@ -1,5 +1,5 @@
 import {Condition} from '@app/models/condition';
-import useGeneralProfile from '@app/modules/user_profile/general-profile';
+import useGeneralProfile from '@app/services/user_profile/general-profile';
 
 export default (answers: any) => {
   const {getItem: getProfileItem} = useGeneralProfile();

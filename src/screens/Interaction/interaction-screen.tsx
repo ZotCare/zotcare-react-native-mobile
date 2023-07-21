@@ -8,9 +8,9 @@ import {Button, HelperText, Text} from 'react-native-paper';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {ScaledSheet} from 'react-native-size-matters';
 
-import {submitInteraction} from '@app/modules/interactions/api';
-import {useInteraction} from '@app/modules/interactions/service';
 import {NavigatorParams} from '@app/navigation/navigator';
+import {submitInteraction} from '@app/services/interactions/api';
+import {useInteraction} from '@app/services/interactions/service';
 
 import InteractionField from './components/interaction-field/interaction-field';
 import useCondition from './hooks/useCondition';

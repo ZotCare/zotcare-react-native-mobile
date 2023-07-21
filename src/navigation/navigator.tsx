@@ -6,8 +6,8 @@ import {useDispatch, useSelector} from 'react-redux';
 
 import navigation_theme from '@app/constants/navigation_theme';
 import {setTopLevelNavigator} from '@app/navigation/services';
+import {getDBToken, loadDataFromDB} from '@app/services/auth/actions';
 
-import {getDBToken, loadDataFromDB} from '../modules/auth/actions';
 import InteractionScreen from '../screens/Interaction/interaction-screen';
 import AuthStack from './auth-stack';
 import {SplashScreen} from './components/SplashScreen';

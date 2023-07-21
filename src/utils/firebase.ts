@@ -6,8 +6,7 @@ import {getUniqueId} from 'react-native-device-info';
 import {Notifier} from 'react-native-notifier';
 
 import {navigate} from '@app/navigation/services';
-
-import {postFcmTokens} from '../modules/fcm_tokens/api';
+import {postFcmTokens} from '@app/services/fcm_tokens/api';
 
 export const handlePress = (data?: {[key: string]: string}) => {
   switch (data?.action) {

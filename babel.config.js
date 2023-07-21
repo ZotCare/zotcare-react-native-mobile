@@ -20,6 +20,7 @@ module.exports = {
           '@assets': './src/assets',
           '@constants': './src/constants',
           '@components': './src/components',
+          '@services': './src/services',
         },
       },
     ],

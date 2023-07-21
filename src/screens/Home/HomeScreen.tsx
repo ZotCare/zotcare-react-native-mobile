@@ -1,9 +1,9 @@
 import React from 'react';
 import {ScrollView, View} from 'react-native';
-import {SafeAreaView, useSafeAreaInsets} from 'react-native-safe-area-context';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {ScaledSheet} from 'react-native-size-matters';
 
-import {useInteractions} from '@app/modules/interactions/service';
+import {useInteractions} from '@app/services/interactions/service';
 
 import InteractionCard from './components/interaction-card/interaction-card';
 

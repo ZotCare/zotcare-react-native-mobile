@@ -19,12 +19,12 @@ import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {focusManager, QueryClient, QueryClientProvider} from 'react-query';
 import {Provider} from 'react-redux';
 
+import * as authConstant from '@app/services/auth/constants';
 import CustomModal from '@components/CustomModal';
 import paper_theme from '@constants/paper_theme';
 
 import createStore from './createStore';
 import {getErrorMessages, getErrors, getLoadings} from './libs/utils';
-import * as authConstant from './modules/auth/constants';
 import RootNavigator from './navigation/navigator';
 import rootReducers from './reducers';
 import sagas from './sagas';

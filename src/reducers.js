@@ -1,6 +1,6 @@
 import {combineReducers} from 'redux';
 
-import authReducer from './modules/auth/reducer';
+import authReducer from '@app/services/auth/reducer';
 
 /**
  * Root reducer

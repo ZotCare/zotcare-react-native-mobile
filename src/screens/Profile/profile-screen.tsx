@@ -6,13 +6,13 @@ import {Button} from 'react-native-paper';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {ScaledSheet} from 'react-native-size-matters';
 
-import useLocalProfile from '@app/modules/user_profile/local';
+import {TabNavigatorParams} from '@app/navigation/tab-navigator';
+import useLocalProfile from '@app/services/user_profile/local';
 import {
   useMutateProfile,
   useProfile,
   useProfileKeys,
-} from '@app/modules/user_profile/service';
-import {TabNavigatorParams} from '@app/navigation/tab-navigator';
+} from '@app/services/user_profile/service';
 
 import ProfileField from './components/profile-field/profile-field';
 

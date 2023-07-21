@@ -8,7 +8,7 @@ import {useDispatch} from 'react-redux';
 import LogoSvg from '@app/assets/images/logo/logo.svg';
 import titles from '@app/constants/titles';
 import Layout from '@app/constants/view';
-import {signIn} from '@app/modules/auth/actions';
+import {signIn} from '@app/services/auth/actions';
 
 const LoginScreen = () => {
   const [username, setUsername] = useState('');
