@@ -52,8 +52,6 @@ const InteractionScreen = ({route, navigation}: Props) => {
 
   useEffect(() => {
     if (status === 'success') {
-      console.log(interaction);
-
       navigation.setOptions({title: interaction.name, gestureEnabled: false});
       if (page === 0) {
         setPage(prevPage => findNextPage(prevPage));

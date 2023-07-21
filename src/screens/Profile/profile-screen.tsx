@@ -66,8 +66,6 @@ const ProfileScreen = ({navigation}: Props) => {
   const isSuccess =
     keysStatus === 'success' && profileStatus === 'success' && !localLoading;
 
-  console.log('isSuccess', isSuccess);
-
   return (
     <SafeAreaView>
       <ScrollView>
