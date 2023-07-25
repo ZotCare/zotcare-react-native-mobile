@@ -105,6 +105,7 @@ const styles = ScaledSheet.create({
     paddingLeft: 20,
     paddingRight: 20,
     gap: 10,
+    marginBottom: 20,
   },
   buttonContainer: {
     marginTop: 'auto',
