@@ -1,22 +1,4 @@
 {
   "name": "HowRU",
-  "expo": {
-    "name": "HowRU",
-    "icon": "./src/assets/images/logo/logo.png",
-    "version": "2.3.4",
-    "slug": "sleepin",
-    "ios": {
-      "bundleIdentifier": "org.healthscitech.sleepin",
-      "buildNumber": "2.3.4"
-    },
-    "android": {
-      "package": "org.healthscitech.sleepin",
-      "versionCode": 1
-    },
-    "extra": {
-      "eas": {
-        "projectId": "b5685c27-5282-408e-98c4-e830cd8a0906"
-      }
-    }
-  }
+  "displayName": "HowRU Today"
 }
