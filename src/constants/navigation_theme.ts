@@ -1,6 +1,6 @@
 import {DefaultTheme, Theme} from '@react-navigation/native';
 
-import paper_theme from '@app/constants/paper_theme';
+import paper_theme from './paper_theme';
 
 const theme: Theme = {
   ...DefaultTheme,

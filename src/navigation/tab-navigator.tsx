@@ -3,8 +3,6 @@ import React from 'react';
 import {View} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-import ProfileScreen from '@app/screens/Profile/profile-screen';
-
 import HomeScreen from '../screens/Home/HomeScreen';
 import InfoScreen from '../screens/Home/InfoScreen';
 

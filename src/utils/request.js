@@ -1,9 +1,9 @@
 import axios from 'axios';
-import {useDispatch} from 'react-redux';
 
-import {store} from '../App';
-import Uris from '../constants/Uris';
-import {signOut} from '../modules/auth/actions';
+import {signOut} from '@app/services/auth/actions';
+import store from '@app/store';
+import Uris from '@constants/uris';
+
 import globalConfig from './global';
 
 const API_ENDPOINT = Uris.main_url;

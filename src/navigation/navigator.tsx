@@ -4,14 +4,14 @@ import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 
 import navigation_theme from '@app/constants/navigation_theme';
+import {setTopLevelNavigator} from '@app/navigation/services';
+import TabStackNavigator from '@app/navigation/tab-navigator';
+import CategoryScreen from '@app/screens/Home/CategoryScreen';
+import {getDBToken} from '@app/services/auth/actions';
 
-import {SplashScreen} from '../components/SplashScreen';
-import {getDBToken, loadDataFromDB} from '../modules/auth/actions';
-import {getDBProfile} from '../modules/profile/actions';
-import CategoryScreen from '../screens/Home/CategoryScreen';
 import InteractionScreen from '../screens/Interaction/interaction-screen';
 import AuthStack from './auth-stack';
-import {NavigationService, TabStackNavigator} from './index';
+import {SplashScreen} from './components/SplashScreen';
 
 export type NavigatorParams = {
   tab: undefined;
@@ -22,28 +22,19 @@ export type NavigatorParams = {
 const Stack = createNativeStackNavigator<NavigatorParams>();
 
 export default () => {
-  const token = useSelector(state => state.auth.token);
-  const [isLoading, setIsLoading] = useState(true);
+  const token = useSelector((state: any) => state.auth.token);
+  const [isLoading] = useState(true);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getDBToken());
-    dispatch(
-      getDBProfile(() => {
-        dispatch(
-          loadDataFromDB(() => {
-            setIsLoading(false);
-          }),
-        );
-      }),
-    );
   }, []);
 
   return (
     <NavigationContainer
       theme={navigation_theme}
       ref={navigatorRef => {
-        NavigationService.setTopLevelNavigator(navigatorRef);
+        setTopLevelNavigator(navigatorRef);
       }}>
       <SplashScreen isAppReady={isLoading}>
         {!token ? (

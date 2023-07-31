@@ -2,33 +2,33 @@ import 'react-native-gesture-handler';
 
 import messaging from '@react-native-firebase/messaging';
 import React, {useEffect, useRef, useState} from 'react';
-import {
-  AppState,
-  AppStateStatus,
-  LogBox,
-  Platform,
-  Text,
-  View,
-} from 'react-native';
+import {AppState, AppStateStatus, LogBox, Platform, View} from 'react-native';
 import {
   setJSExceptionHandler,
   setNativeExceptionHandler,
 } from 'react-native-exception-handler';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {NotifierWrapper} from 'react-native-notifier';
-import {DefaultTheme, Provider as PaperProvider} from 'react-native-paper';
+import {
+  DefaultTheme,
+  Portal,
+  Provider as PaperProvider,
+  Text,
+} from 'react-native-paper';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {focusManager, QueryClient, QueryClientProvider} from 'react-query';
 import {Provider} from 'react-redux';
 
-import CustomModal from './components/CustomModal';
-import paper_theme from './constants/paper_theme';
-import createStore from './createStore';
+import * as authConstant from '@app/services/auth/constants';
+import CustomModal from '@components/CustomModal';
+import paper_theme from '@constants/paper_theme';
+
 import {getErrorMessages, getErrors, getLoadings} from './libs/utils';
-import * as authConstant from './modules/auth/constants';
 import RootNavigator from './navigation/navigator';
 import rootReducers from './reducers';
 import sagas from './sagas';
+import createStore from './store';
+import store from './store';
 import handleError from './utils/error';
 import {
   handleForegroundNotification,
@@ -43,17 +43,15 @@ messaging().setBackgroundMessageHandler(async remoteMessage => {
 
 setJSExceptionHandler((error, isFatal) => {
   console.log('JS Exception Handler', error, isFatal);
-  //postReq('/monitoring', { exceptionType: 0, exceptionString: JSON.parse(error) }, res => { });
 });
 setNativeExceptionHandler(exceptionString => {
   console.log('Native Exception Handler', exceptionString);
-  //postReq('/monitoring', { exceptionType: 1, exceptionString }, res => { });
 });
 LogBox.ignoreAllLogs(true);
-// Object.defineProperty(window.navigator, 'userAgent', {value: 'ReactNative'});
+// (window as any).navigator.userAgent = 'ReactNative';
 
-const {store} = createStore(rootReducers, sagas);
-export {store};
+// const {store} = createStore(rootReducers, sagas);
+// export {store};
 
 let sentToken = false;
 store.subscribe(async () => {
@@ -143,14 +141,14 @@ const App = () => {
     );
   }, []);
 
-  const _handleAppStateChange = nextAppState => {
-    // if (appState.current.match(/inactive|background/) && nextAppState === "active") {
+  // const _handleAppStateChange = nextAppState => {
+  // if (appState.current.match(/inactive|background/) && nextAppState === "active") {
 
-    // }
-    appState.current = nextAppState;
-    setAppStateVisible(appState.current);
-    //console.log("AppState", appState.current);
-  };
+  // }
+  // appState.current = nextAppState;
+  // setAppStateVisible(appState.current);
+  //console.log("AppState", appState.current);
+  // };
 
   return (
     <SafeAreaProvider>
@@ -160,27 +158,22 @@ const App = () => {
             <PaperProvider theme={theme}>
               <QueryClientProvider client={queryClient}>
                 <RootNavigator />
-                <CustomModal
-                  visible={visible}
-                  onBackdropPress={() => setVisible(false)}
-                  component={
-                    <View style={{justifyContent: 'center'}}>
-                      <Text
-                        style={{
-                          textAlign: 'center',
-                        }}>
-                        {'OOPS!'}
-                      </Text>
-                      <Text
-                        style={{
-                          fontSize: 14,
-                          textAlign: 'center',
-                        }}>
-                        {text}
-                      </Text>
-                    </View>
-                  }
-                />
+                <Portal>
+                  <CustomModal
+                    visible={visible}
+                    onBackdropPress={() => setVisible(false)}
+                    component={
+                      <View style={{justifyContent: 'center'}}>
+                        <Text
+                          style={{
+                            textAlign: 'center',
+                          }}>
+                          {text}
+                        </Text>
+                      </View>
+                    }
+                  />
+                </Portal>
               </QueryClientProvider>
             </PaperProvider>
           </NotifierWrapper>

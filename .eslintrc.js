@@ -12,7 +12,7 @@ module.exports = {
           ['^node:'],
           ['^@?\\w'],
           ['^'],
-          ['^(@app|@assets)(/.*|$)'],
+          ['^(@app|@assets|@constants|@components)(/.*|$)'],
           ['^\\.'],
         ],
       },
