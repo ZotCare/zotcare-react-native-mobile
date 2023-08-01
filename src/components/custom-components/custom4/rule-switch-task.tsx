@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {View} from 'react-native';
 import {Button, Text} from 'react-native-paper';
 import {ScaledSheet} from 'react-native-size-matters';
@@ -91,6 +91,9 @@ const RuleSwitchTask = (props: any) => {
   const startTest = () => {
     resultRef.current.push({
       startTime: new Date().getTime(),
+      mode,
+      object1: object1.name,
+      object2: object2?.name ?? null,
     });
     setStage('decision');
     startTime.current = new Date().getTime();
