@@ -1,7 +1,7 @@
 import {cleanup, render, screen} from '@testing-library/react-native';
 import React from 'react';
 
-import Slider from '@components/input-components/slider/slider';
+import Slider from '@components/input/slider/slider';
 
 describe('<Slider/>', () => {
   let onValueChange = jest.fn();

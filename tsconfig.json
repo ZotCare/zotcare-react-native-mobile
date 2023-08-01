@@ -8,7 +8,11 @@
         "@assets/*": ["src/assets/*"],
         "@constants/*": ["src/constants/*"],
         "@components/*": ["src/components/*"],
-        "@services/*": ["src/services/*"]
+        "@services/*": ["src/services/*"],
+        "@test/*": ["test/*"],
       }
   },
+  "exclude": [
+    "jest.config.js"
+  ]
 }

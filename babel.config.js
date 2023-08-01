@@ -11,6 +11,8 @@ module.exports = {
   },
   plugins: [
     '@babel/plugin-transform-runtime',
+    ['@babel/plugin-transform-flow-strip-types'],
+    ['@babel/plugin-proposal-class-properties', {loose: true}],
     [
       'module-resolver',
       {
@@ -21,28 +23,11 @@ module.exports = {
           '@constants': './src/constants',
           '@components': './src/components',
           '@services': './src/services',
+          '@test': './test',
         },
       },
     ],
     'react-native-reanimated/plugin',
-    [
-      '@babel/plugin-proposal-private-property-in-object',
-      {
-        loose: true,
-      },
-    ],
-    [
-      '@babel/plugin-proposal-class-properties',
-      {
-        loose: true,
-      },
-    ],
-    [
-      '@babel/plugin-proposal-private-methods',
-      {
-        loose: true,
-      },
-    ],
   ],
   exclude: ['**/*.png', '**/*.jpg', '**/*.gif'],
 };

@@ -98,6 +98,9 @@ jest.mock('react-native-vector-icons/Ionicons', () => {
   };
 });
 
+import mockSafeAreaContext from 'react-native-safe-area-context/jest/mock';
+jest.mock('react-native-safe-area-context', () => mockSafeAreaContext);
+
 // helpful sources:
 // https://chrisfrew.in/blog/a-production-ready-jest-setup-for-react-native-all-mocks/
 // https://github.com/FullStackCraft/DefinitelyTested/tree/master/mocks/jest/react-native/react-native-vector-icons

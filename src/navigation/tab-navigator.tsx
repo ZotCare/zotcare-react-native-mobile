@@ -3,10 +3,10 @@ import React from 'react';
 import {View} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-import DevicesScreen from '../screens/Home/DevicesScreen';
-import HomeScreen from '../screens/Home/HomeScreen';
-import InfoScreen from '../screens/Home/InfoScreen';
-import ProfileScreen from '../screens/Profile/profile-screen';
+import DevicesScreen from '@app/screens/Home/DevicesScreen';
+import HomeScreen from '@app/screens/Home/HomeScreen';
+import InfoScreen from '@app/screens/info/info-screen';
+import ProfileScreen from '@app/screens/Profile/profile-screen';
 
 export type TabNavigatorParams = {
   Home: undefined;

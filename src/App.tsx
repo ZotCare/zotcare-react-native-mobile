@@ -20,14 +20,12 @@ import {focusManager, QueryClient, QueryClientProvider} from 'react-query';
 import {Provider} from 'react-redux';
 
 import * as authConstant from '@app/services/auth/constants';
+import store from '@app/store';
 import CustomModal from '@components/CustomModal';
 import paper_theme from '@constants/paper_theme';
 
-import createStore from './createStore';
 import {getErrorMessages, getErrors, getLoadings} from './libs/utils';
 import RootNavigator from './navigation/navigator';
-import rootReducers from './reducers';
-import sagas from './sagas';
 import handleError from './utils/error';
 import {
   handleForegroundNotification,
@@ -48,9 +46,6 @@ setNativeExceptionHandler(exceptionString => {
 });
 LogBox.ignoreAllLogs(true);
 // (window as any).navigator.userAgent = 'ReactNative';
-
-const {store} = createStore(rootReducers, sagas);
-export {store};
 
 let sentToken = false;
 store.subscribe(async () => {

@@ -3,11 +3,11 @@ import {View} from 'react-native';
 import {TextInput} from 'react-native-paper';
 import {ScaledSheet} from 'react-native-size-matters';
 
-import Checkboxes from '@components/input-components/checkboxes/checkboxes';
-import DatetimePicker from '@components/input-components/datetime-picker/datetime-picker';
-import Indicator from '@components/input-components/indicators/indicator';
-import RadioButtons from '@components/input-components/radio-buttons/radio-buttons';
-import Slider from '@components/input-components/slider/slider';
+import Checkboxes from '@components/input/checkboxes/checkboxes';
+import DatetimePicker from '@components/input/datetime-picker/datetime-picker';
+import Indicator from '@components/input/indicators/indicator';
+import RadioButtons from '@components/input/radio-buttons/radio-buttons';
+import Slider from '@components/input/slider/slider';
 import ThemedMarkdown from '@components/themed-markdown/themed-markdown';
 
 const InteractionField = (props: any) => {

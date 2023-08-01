@@ -1,27 +1,24 @@
 import React, {useState} from 'react';
-import {ScrollView} from 'react-native';
 import {Button, Text} from 'react-native-paper';
-import {SafeAreaView} from 'react-native-safe-area-context';
 import {useDispatch} from 'react-redux';
 
 import {signOut} from '@app/services/auth/actions';
 import CustomModal from '@components/CustomModal';
+import MainView from '@components/layout/main-view/main-view';
 
-const HomeScreen = () => {
+export default () => {
   const dispatch = useDispatch();
   const [visibleLogout, setVisibleLogout] = useState(false);
 
   return (
-    <SafeAreaView>
-      <ScrollView>
-        <Button
-          mode="contained"
-          onPress={() => {
-            setVisibleLogout(true);
-          }}>
-          Log Out
-        </Button>
-      </ScrollView>
+    <MainView>
+      <Button
+        mode="contained"
+        onPress={() => {
+          setVisibleLogout(true);
+        }}>
+        Log Out
+      </Button>
       <CustomModal
         visible={visibleLogout}
         hasButtons
@@ -39,8 +36,6 @@ const HomeScreen = () => {
         onPrimaryButtonPress={() => setVisibleLogout(false)}
         onSecondaryButtonPress={() => dispatch(signOut())}
       />
-    </SafeAreaView>
+    </MainView>
   );
 };
-
-export default HomeScreen;

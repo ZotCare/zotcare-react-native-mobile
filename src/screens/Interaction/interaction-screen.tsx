@@ -86,19 +86,19 @@ const InteractionScreen = ({route, navigation}: Props) => {
   };
 
   const showHeader = () => {
-    return !interaction?.data.pages[page]?.options?.hide_header ?? true;
+    return !interaction?.data?.pages[page]?.options?.hide_header ?? true;
   };
 
   const handleOptions = (nextPage: number) => {
     setHideNext(
-      interaction?.data.pages[nextPage]?.options?.hide_buttons ?? false,
+      interaction?.data?.pages[nextPage]?.options?.hide_buttons ?? false,
     );
     navigation.setOptions({
       orientation:
-        interaction?.data.pages[nextPage]?.options?.screen_orientation ??
+        interaction?.data?.pages[nextPage]?.options?.screen_orientation ??
         'default',
       headerShown:
-        !interaction?.data.pages[nextPage]?.options?.hide_header ?? true,
+        !interaction?.data?.pages[nextPage]?.options?.hide_header ?? true,
     });
     scrollViewRef.current?.scrollTo({y: 0, animated: false});
   };

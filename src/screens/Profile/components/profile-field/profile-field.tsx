@@ -1,9 +1,9 @@
 import {View} from 'react-native';
 import {TextInput} from 'react-native-paper';
 
-import DatetimePicker from '@components/input-components/datetime-picker/datetime-picker';
-import NumberInput from '@components/input-components/number-input/number-input';
-import RadioButtons from '@components/input-components/radio-buttons/radio-buttons';
+import DatetimePicker from '@components/input/datetime-picker/datetime-picker';
+import NumberInput from '@components/input/number-input/number-input';
+import RadioButtons from '@components/input/radio-buttons/radio-buttons';
 import ThemedMarkdown from '@components/themed-markdown/themed-markdown';
 
 const ProfileField = (props: any) => {
