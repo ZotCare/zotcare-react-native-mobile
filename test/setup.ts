@@ -2,7 +2,6 @@ import 'react-native-gesture-handler/jestSetup';
 import '@react-native-community/datetimepicker';
 
 import {jest} from '@jest/globals';
-import {Component} from 'react';
 
 jest.mock('react-native/Libraries/EventEmitter/NativeEventEmitter');
 jest.mock('@ronradtke/react-native-markdown-display');
