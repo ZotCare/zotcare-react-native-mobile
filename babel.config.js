@@ -24,7 +24,6 @@ module.exports = {
         },
       },
     ],
-    'react-native-reanimated/plugin',
     [
       '@babel/plugin-proposal-private-property-in-object',
       {
@@ -43,6 +42,7 @@ module.exports = {
         loose: true,
       },
     ],
+    'react-native-reanimated/plugin',
   ],
-  exclude: ['**/*.png', '**/*.jpg', '**/*.gif'],
+  exclude: ['**/*.png', '**/*.jpg', '**/*.jpeg', '**/*.gif'],
 };

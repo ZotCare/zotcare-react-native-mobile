@@ -7,6 +7,7 @@ import Custom1 from '@components/custom-components/custom1/custom1';
 import Custom2 from '@components/custom-components/custom2/custom2';
 import Custom3 from '@components/custom-components/custom3/custom3';
 import Custom4 from '@components/custom-components/custom4/custom4';
+import Custom5 from '@components/custom-components/custom5/custom5';
 import Checkboxes from '@components/input-components/checkboxes/checkboxes';
 import DatetimePicker from '@components/input-components/datetime-picker/datetime-picker';
 import Indicator from '@components/input-components/indicators/indicator';
@@ -108,6 +109,8 @@ const InteractionField = (props: any) => {
         return <Custom3 {...rest} onEnd={rest.handleAnswer(rest.id)} />;
       case 'custom4':
         return <Custom4 {...rest} onEnd={rest.handleAnswer(rest.id)} />;
+      case 'custom5':
+        return <Custom5 {...rest} onEnd={rest.handleAnswer(rest.id)} />;
       default:
         return <></>;
     }

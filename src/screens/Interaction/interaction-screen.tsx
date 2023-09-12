@@ -193,7 +193,7 @@ const InteractionScreen = ({route, navigation}: Props) => {
     <View
       style={{
         flex: 1,
-        paddingBottom: insets.bottom,
+        paddingBottom: Math.max(insets.bottom, 10),
         paddingTop: showHeader() ? 0 : insets.top,
         paddingLeft: insets.left,
         paddingRight: insets.right,

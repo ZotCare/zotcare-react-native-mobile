@@ -21,6 +21,7 @@ const HomeScreen = () => {
           return {
             name: category.name,
             id: category.to,
+            type: category.type ?? 'category',
             icon: getLogo(category.icon.type, category.icon.name),
           };
         }),
@@ -28,7 +29,7 @@ const HomeScreen = () => {
     }
   }, [groupProfile, isSuccess]);
 
-  const navigateCategories = (id: string) => () => {
+  const navigateCategories = (type: string, id: string) => () => {
     navigate('category', {id});
   };
 
@@ -50,7 +51,7 @@ const HomeScreen = () => {
                 key={index.toString()}
                 title={category.name}
                 Icon={category.icon}
-                onPress={navigateCategories(category.id)}
+                onPress={navigateCategories(category.type, category.id)}
               />
             );
           })}

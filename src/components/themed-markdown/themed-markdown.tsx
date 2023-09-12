@@ -192,6 +192,7 @@ const ThemedMarkdown = (props: Props) => {
           text: {},
           textgroup: {
             textAlign: alignment || 'left',
+            width: '100%',
           },
           paragraph: {
             marginTop: 10,
