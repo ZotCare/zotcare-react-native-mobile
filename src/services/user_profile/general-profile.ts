@@ -5,6 +5,7 @@ type GeneralProfile = {
   loading: boolean;
   getItem: (key: string) => any;
   setItem: (key: string, value: any) => Promise<void>;
+  formatText: (text: string) => string;
 };
 
 const useGeneralProfile = (): GeneralProfile => {
@@ -44,6 +45,17 @@ const useGeneralProfile = (): GeneralProfile => {
       });
   };
 
+  const formatText = (text: string): string => {
+    return text.replace(/\{\{.*}}/g, (match: string) => {
+      const key = match.split('|');
+      let defaultValue = '';
+      if (key.length > 1) {
+        defaultValue = key[1];
+      }
+      return getItem(key[0]) || defaultValue;
+    });
+  };
+
   return {
     loading: !(
       cloudProfileStatus === 'success' &&
@@ -52,6 +64,7 @@ const useGeneralProfile = (): GeneralProfile => {
     ),
     getItem,
     setItem,
+    formatText,
   };
 };
 

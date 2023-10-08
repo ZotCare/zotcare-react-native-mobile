@@ -1,10 +1,10 @@
 import axios from 'axios';
 
 import {signOut} from '@app/services/auth/actions';
+import store from '@app/store';
 import Uris from '@constants/uris';
 
 import globalConfig from './global';
-import store from "@app/store";
 
 const API_ENDPOINT = Uris.main_url;
 const request = axios.create();
