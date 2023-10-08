@@ -30,7 +30,11 @@ const HomeScreen = () => {
   }, [groupProfile, isSuccess]);
 
   const navigateCategories = (type: string, id: string) => () => {
-    navigate('category', {id});
+    if (type === 'interaction') {
+      navigate('interaction', {id});
+    } else if (type === 'category') {
+      navigate('category', {id});
+    }
   };
 
   return (
