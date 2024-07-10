@@ -595,7 +595,9 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = ZotCareApp/ZotCareApp.entitlements;
-				CURRENT_PROJECT_VERSION = 2.4.0;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2.4.6;
 				DEVELOPMENT_TEAM = 575ASQ5J4D;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = ZotCareApp/Info.plist;
@@ -605,7 +607,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.4.0;
+				MARKETING_VERSION = 2.4.6;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -613,6 +615,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.healthscitech.sleepin;
 				PRODUCT_NAME = ZotCareApp;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -632,7 +635,9 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = ZotCareApp/ZotCareApp.entitlements;
-				CURRENT_PROJECT_VERSION = 2.4.0;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2.4.6;
 				DEVELOPMENT_TEAM = 575ASQ5J4D;
 				INFOPLIST_FILE = ZotCareApp/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = HowRU;
@@ -641,7 +646,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.4.0;
+				MARKETING_VERSION = 2.4.6;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -649,6 +654,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.healthscitech.sleepin;
 				PRODUCT_NAME = ZotCareApp;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;

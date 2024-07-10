@@ -55,6 +55,7 @@ const InteractionScreen = ({route, navigation}: Props) => {
       navigation.setOptions({title: interaction.name, gestureEnabled: false});
       if (page === 0) {
         setPage(prevPage => findNextPage(prevPage));
+        handleOptions(page)
       }
       interaction.data.pages.forEach((int_page: {fields: any[]}) => {
         int_page.fields.forEach(field => {

@@ -101,8 +101,8 @@ android {
         applicationId "org.healthscitech.sleepin"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 20400
-        versionName "2.4.0"
+        versionCode 20403
+        versionName "2.4.3"
     }
 
     splits {

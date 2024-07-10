@@ -15,7 +15,7 @@ export function navigate(routeName, params) {
   _navigator && _navigator.navigate(routeName, params);
 }
 
-function goBack() {
+export function goBack() {
   _navigator && _navigator.goBack();
 }
 

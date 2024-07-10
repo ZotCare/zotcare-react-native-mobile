@@ -6,6 +6,7 @@ import {Notifier, NotifierComponents} from 'react-native-notifier';
 import Countdown from './countdown';
 import FingerTapTest from './Finger-tap-test';
 import sequences from './sequences';
+import {goBack} from '@app/navigation/services';
 
 enum State {
   loading,
@@ -21,6 +22,8 @@ const Custom1 = (props: any) => {
   const [isFinished, setIsFinished] = useState<boolean>(false);
   const {getItem: getSequenceIndex, setItem: setSequenceIndex} =
     useAsyncStorage('@ftt_trained_sequence_index');
+  const {getItem: getTestSequenceIndex, setItem: setTestSequenceIndex} =
+    useAsyncStorage('@ftt_test_sequence_index');
   const [finalSequence, setFinalSequence] = useState<string>(sequence);
 
   const onCounterFinish = () => {
@@ -52,8 +55,11 @@ const Custom1 = (props: any) => {
         setFinalSequence(sequences[randomSequenceIndex]);
       } else if (sequence === 'testing') {
         const trainedSequenceIndex = await getSequenceIndex();
-        if (trainedSequenceIndex) {
+        const testSequenceIndex = await getTestSequenceIndex();
+        console.log(trainedSequenceIndex, testSequenceIndex)
+        if (trainedSequenceIndex && (trainedSequenceIndex!=testSequenceIndex)) {
           setFinalSequence(sequences[+trainedSequenceIndex]);
+          setTestSequenceIndex(trainedSequenceIndex)       
         } else {
           Notifier.showNotification({
             title: 'No trained sequence found',
@@ -63,6 +69,7 @@ const Custom1 = (props: any) => {
               alertType: 'error',
             },
           });
+          goBack();
         }
       }
       setState(State.on);
